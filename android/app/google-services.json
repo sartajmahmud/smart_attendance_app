@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "588513514178",
+    "project_id": "foodaholictest",
+    "storage_bucket": "foodaholictest.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:588513514178:android:13705cb5a3e6ab7ed8615b",
+        "android_client_info": {
+          "package_name": "com.smartersvision.deliveryboyapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "588513514178-hef3r3nin0029p9bc6067rcvse8sdaa1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuPcGkJf2KAcjonR85zYjc33CrnlMIfzY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "588513514178-hef3r3nin0029p9bc6067rcvse8sdaa1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
