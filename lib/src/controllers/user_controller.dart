@@ -104,4 +104,17 @@ class UserController extends ControllerMVC {
       });
     }
   }
+
+  Future<String> duplicateAC() async{
+    final response=await repository.GetDuplicateAC(user);
+    String result=response.toString();
+    return result;
+  }
+
+  Future<String> resetPass() async{
+    final response=await repository.GetResetPass(user);
+    String result=response.toString();
+    return result;
+  }
+
 }

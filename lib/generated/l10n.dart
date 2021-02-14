@@ -54,6 +54,24 @@ class S {
     );
   }
 
+  String get password_update{
+    return Intl.message(
+      'Your password is updated back to login',
+      name: 'password_update',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get tapAgainToLeave {
+    return Intl.message(
+      'Tap again to leave',
+      name: 'tapAgainToLeave',
+      desc: '',
+      args: [],
+    );
+  }
+
   String get submit {
     return Intl.message(
       'Submit',

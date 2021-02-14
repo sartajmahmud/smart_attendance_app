@@ -218,3 +218,51 @@ Future<Address> removeDeliveryAddress(Address address) async {
     return new Address.fromJSON({});
   }
 }
+
+Future<bool> GetDuplicateAC(User user) async {
+  final String url = '${GlobalConfiguration().getString('api_base_url')}duplicate-ac';
+  final client = new http.Client();
+  final response = await client.post(
+    url,
+    headers: {HttpHeaders.contentTypeHeader: 'application/json'},
+    body: json.encode(user.DuplicateACMap()),
+  );
+  print("This is duplicate $url");
+  print("This is duplicate body ${json.encode(user.DuplicateACMap())}");
+  print("this is duplicate response ${response.body}");
+  print("this is duplicate response ${jsonDecode(response.body)['success']}");
+  if (response.statusCode == 200) {
+    return jsonDecode(response.body)['success'];
+    //setCurrentUser(response.body);
+    //currentUser.value = User.fromJSON(json.decode(response.body)['data']);
+  } else {
+    print(CustomTrace(StackTrace.current, message: response.body).toString());
+    throw new Exception(response.body);
+  }
+  // return currentUser.value;
+}
+
+Future<String> GetResetPass(User user) async {
+  final String url = '${GlobalConfiguration().getString('api_base_url')}reset-password';
+  final client = new http.Client();
+  final response = await client.post(
+    url,
+    headers: {HttpHeaders.contentTypeHeader: 'application/json'},
+    body: json.encode(user.ResetPasswordMap()),
+  );
+  print("This is reset $url");
+  print("This is reset body ${json.encode(user.ResetPasswordMap())}");
+  print("this is reset response ${response.body}");
+  print("this is reset response ${jsonDecode(response.body)['message']}");
+  if (response.statusCode == 200) {
+    return jsonDecode(response.body)['message'];
+    //setCurrentUser(response.body);
+    //currentUser.value = User.fromJSON(json.decode(response.body)['data']);
+  } else {
+    print(CustomTrace(StackTrace.current, message: response.body).toString());
+    throw new Exception(response.body);
+  }
+  // return currentUser.value;
+}
+
+

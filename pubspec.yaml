@@ -39,6 +39,9 @@ dependencies:
   cached_network_image: 2.2.0
   fluttertoast: 4.0.1
   map_launcher: ^1.1.1
+  vector_math: any
+  geodesy: ^0.3.2
+  toggle_switch: ^0.1.8
 
 dev_dependencies:
   flutter_test:

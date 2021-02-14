@@ -16,6 +16,10 @@ class Order {
   User user;
   Payment payment;
   Address deliveryAddress;
+  double latitude;
+  double longitude;
+  int cashbackusage;
+  bool active;
 
   Order();
 
@@ -25,6 +29,10 @@ class Order {
       tax = jsonMap['tax'] != null ? jsonMap['tax'].toDouble() : 0.0;
       deliveryFee = jsonMap['delivery_fee'] != null ? jsonMap['delivery_fee'].toDouble() : 0.0;
       hint = jsonMap['hint'].toString();
+      latitude=double.parse(jsonMap['latitude'])  != null ? double.parse(jsonMap['latitude'])  : 0.0;
+      longitude=double.parse(jsonMap['longitude'])  != null ? double.parse(jsonMap['longitude']) : 0.0;
+      //cashbackusage=int.parse(jsonMap['cashback_usage'])  != null ? int.parse(jsonMap['cashback_usage'])  : 0;
+      active = jsonMap['active'] ?? false;
       orderStatus = jsonMap['order_status'] != null ? OrderStatus.fromJSON(jsonMap['order_status']) : new OrderStatus();
       dateTime = DateTime.parse(jsonMap['updated_at']);
       user = jsonMap['user'] != null ? User.fromJSON(jsonMap['user']) : new User();
@@ -36,6 +44,10 @@ class Order {
       tax = 0.0;
       deliveryFee = 0.0;
       hint = '';
+      longitude=0.0;
+      latitude=0.0;
+      cashbackusage=0;
+      active = false;
       orderStatus = new OrderStatus();
       dateTime = DateTime(0);
       user = new User();

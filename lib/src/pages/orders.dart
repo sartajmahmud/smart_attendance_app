@@ -2,6 +2,7 @@ import 'package:deliveryboy/src/elements/OrderItemWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 import '../../generated/l10n.dart';
 import '../controllers/order_controller.dart';
@@ -19,6 +20,7 @@ class OrdersWidget extends StatefulWidget {
 
 class _OrdersWidgetState extends StateMVC<OrdersWidget> {
   OrderController _con;
+  int status=0;
 
   _OrdersWidgetState() : super(OrderController()) {
     _con = controller;
@@ -27,6 +29,7 @@ class _OrdersWidgetState extends StateMVC<OrdersWidget> {
   @override
   void initState() {
     _con.listenForOrders();
+    _con.listenForStatus().then((value) =>status=int.parse(_con.driver.status) );
     super.initState();
   }
 
@@ -56,6 +59,34 @@ class _OrdersWidgetState extends StateMVC<OrdersWidget> {
         child: ListView(
           padding: EdgeInsets.symmetric(vertical: 10),
           children: <Widget>[
+            ListTile(title: Text("Status"),
+              trailing: ToggleSwitch(
+                minWidth: 90.0,
+                initialLabelIndex: status,
+                cornerRadius: 20.0,
+                activeFgColor: Colors.white,
+                inactiveBgColor: Colors.grey,
+                inactiveFgColor: Colors.white,
+                labels: ['Active', 'Inactive'],
+                icons: [Icons.check,Icons.close],
+                activeBgColors: [Colors.green, Colors.red],
+                onToggle: (index) {
+                  print('switched to: $index');
+                  if(index==0){
+                    _con.driver.status="0";
+                    _con.updateStatus();
+                    status=int.parse(_con.driver.status);
+                  }
+                  else {
+                    _con.driver.status="1";
+                    _con.updateStatus();
+                    status=int.parse(_con.driver.status);
+                  }
+                },
+              ),
+
+
+            ),
             _con.orders.isEmpty
                 ? EmptyOrdersWidget()
                 : ListView.separated(

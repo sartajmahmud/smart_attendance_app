@@ -13,6 +13,8 @@ class User {
   String bio;
   Media image;
   String mobile;
+  String ConfirmPassword;
+  bool status;
 
   // used for indicate if client logged in or not
   bool auth;
@@ -25,6 +27,7 @@ class User {
     try {
       id = jsonMap['id'].toString();
       name = jsonMap['name'] != null ? jsonMap['name'] : '';
+      mobile = jsonMap['mobile'] != null ? jsonMap['mobile'] : '';
       email = jsonMap['email'] != null ? jsonMap['email'] : '';
       apiToken = jsonMap['api_token'];
       deviceToken = jsonMap['device_token'];
@@ -66,6 +69,22 @@ class User {
     map["media"] = image?.toMap();
     return map;
   }
+
+  Map ResetPasswordMap(){
+    var map = new Map<String, dynamic>();
+    map['phone_number']=mobile;
+    map["password"] = password;
+    map['password_confirmation']=ConfirmPassword;
+    return map;
+  }
+
+  Map DuplicateACMap(){
+    var map = new Map<String, dynamic>();
+    map['phone_number']=mobile;
+    return map;
+  }
+
+
 
   @override
   String toString() {

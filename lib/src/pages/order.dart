@@ -410,7 +410,7 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                                         MapType.google)) {
                                       await MapLauncher.showMarker(
                                         mapType: MapType.google,
-                                        coords: Coords(_con.order.deliveryAddress.latitude, _con.order.deliveryAddress.longitude),
+                                        coords: Coords(_con.order.latitude, _con.order.longitude),
                                         //title: title,
                                         //description: description,
                                       );
@@ -444,7 +444,7 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                                       style: Theme.of(context).textTheme.caption,
                                     ),
                                     Text(
-                                      _con.order.user.phone,
+                                      _con.order.user.mobile !=null ?_con.order.user.mobile : "",
                                       overflow: TextOverflow.ellipsis,
                                       style: Theme.of(context).textTheme.bodyText1,
                                     ),
@@ -458,7 +458,7 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                                 child: FlatButton(
                                   padding: EdgeInsets.all(0),
                                   onPressed: () {
-                                    launch("tel:${_con.order.user.phone}");
+                                    launch("tel:${_con.order.user.mobile}");
                                   },
                                   child: Icon(
                                     Icons.call,
@@ -483,6 +483,17 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                           title: Text(_con.order.foodOrders[0].food.restaurant.name),
                           trailing: Helper.getPrice(Helper.getRestaurantEarning(_con.order), context, style: Theme.of(context).textTheme.headline4),
                           subtitle: Text("Pay to Restaurant"),
+                        ),
+                        ListTile(
+                          title: Text("My Earning"),
+                          trailing: Helper.getPrice(_con.order.deliveryFee, context, style: Theme.of(context).textTheme.headline4),
+                        //  subtitle: Text("according to distance"),
+                        ),
+                        ListTile(
+                          title: Text("Company Earning"),
+                          subtitle: Text("Pay to Office"),
+                          trailing: Helper.getPrice(Helper.getCompanyEarning(_con.order), context, style: Theme.of(context).textTheme.headline4),
+                          //  subtitle: Text("according to distance"),
                         ),
                       ],
                     ),

@@ -26,6 +26,7 @@ Future<Stream<Order>> getOrders() async {
   _queryParams['orderBy'] = 'id';
   _queryParams['sortedBy'] = 'asc';
   uri = uri.replace(queryParameters: _queryParams);
+  print("this is get orders $uri");
   try {
     final client = new http.Client();
     final streamedRest = await client.send(http.Request('get', uri));
@@ -56,6 +57,7 @@ Future<Stream<Order>> getNearOrders(Address myAddress, Address areaAddress) asyn
   _queryParams['orderBy'] = 'id';
   _queryParams['sortedBy'] = 'desc';
   uri = uri.replace(queryParameters: _queryParams);
+  print("this is get near orders $uri");
 
   //final String url = '${GlobalConfiguration().getString('api_base_url')}orders?${_apiToken}with=driver;foodOrders;foodOrders.food;foodOrders.extras;orderStatus;deliveryAddress&search=driver.id:${_user.id};order_status_id:$orderStatusId&searchFields=driver.id:=;order_status_id:=&searchJoin=and&orderBy=id&sortedBy=desc';
   try {
@@ -84,6 +86,7 @@ Future<Stream<Order>> getOrdersHistory() async {
   _queryParams['orderBy'] = 'id';
   _queryParams['sortedBy'] = 'desc';
   uri = uri.replace(queryParameters: _queryParams);
+  print("this is order history $uri");
 
   //final String url = '${GlobalConfiguration().getString('api_base_url')}orders?${_apiToken}with=driver;foodOrders;foodOrders.food;foodOrders.extras;orderStatus;deliveryAddress&search=driver.id:${_user.id};order_status_id:$orderStatusId&searchFields=driver.id:=;order_status_id:=&searchJoin=and&orderBy=id&sortedBy=desc';
   try {
@@ -107,6 +110,7 @@ Future<Stream<Order>> getOrder(orderId) async {
   final String url =
       '${GlobalConfiguration().getString('api_base_url')}orders/$orderId?${_apiToken}with=user;foodOrders;foodOrders.food;foodOrders.food.restaurant;foodOrders.extras;orderStatus;deliveryAddress;payment';
   final client = new http.Client();
+  print("this is get specific order $url");
   final streamedRest = await client.send(http.Request('get', Uri.parse(url)));
 
   return streamedRest.stream.transform(utf8.decoder).transform(json.decoder).map((data) => Helper.getObjectData(data)).map((data) {
@@ -172,8 +176,8 @@ Future<Order> deliveredOrder(Order order) async {
     headers: {HttpHeaders.contentTypeHeader: 'application/json'},
     body: json.encode(order.deliveredMap()),
   );
-  print("This is Register $url");
-  print("This is Register body ${json.encode(json.encode(order.deliveredMap()))}");
-  print("this is Register response ${response.body}");
+  print("This is delivery status change $url");
+  print("This is delivery status change body ${json.encode(json.encode(order.deliveredMap()))}");
+  print("this is delivery status change response ${response.body}");
   return Order.fromJSON(json.decode(response.body)['data']);
 }

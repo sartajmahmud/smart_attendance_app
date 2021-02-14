@@ -1,3 +1,5 @@
+import 'package:deliveryboy/src/models/driver.dart';
+import 'package:deliveryboy/src/repository/RiderRepository.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
@@ -8,6 +10,8 @@ import '../repository/order_repository.dart';
 class OrderController extends ControllerMVC {
   List<Order> orders = <Order>[];
   GlobalKey<ScaffoldState> scaffoldKey;
+  Driver driver;
+  int RiderStatus;
 
   OrderController() {
     this.scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -62,4 +66,22 @@ class OrderController extends ControllerMVC {
     orders.clear();
     listenForOrders(message: S.of(context).order_refreshed_successfuly);
   }
+
+ Future <void> listenForStatus()async{
+   final Driver = await GetRider();
+    print(Driver.status);
+   setState((){
+     this.driver=Driver;
+   });
+  }
+
+  Future<void> updateStatus()async{
+    final response=await UpdateRiderStatus(driver: driver);
+    setState((){
+      this.RiderStatus=response;
+    });
+  }
+
 }
+
+

@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
-
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:vector_math/vector_math.dart';
+//import 'package:geodesy/geodesy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -20,6 +22,7 @@ import '../repository/settings_repository.dart';
 
 class Helper {
   BuildContext context;
+  DateTime currentBackPressTime;
   Helper.of(BuildContext _context) {
     this.context = _context;
   }
@@ -174,6 +177,47 @@ class Helper {
     return (100 - order.foodOrders[0].food.restaurant.adminCommission) * total/100;
   }
 
+  static double getCompanyEarning(Order order) {
+    double total = 0;
+    order.foodOrders.forEach((foodOrder) {
+      total += getTotalOrderPrice(foodOrder);
+    });
+    return  order.foodOrders[0].food.restaurant.adminCommission/100 * total;
+  }
+
+  static double getMyEarning(Order order) {
+    double restaurantLatitude= double.parse(order.foodOrders[0].food.restaurant.latitude);
+    double restaurantLongitude= double.parse(order.foodOrders[0].food.restaurant.longitude);
+    double userLatitude=order.deliveryAddress.latitude;
+    double userLongitude=order.deliveryAddress.longitude;
+    print("this is restaurant latitude $restaurantLatitude");
+    print("this is restaurant longitude $restaurantLongitude");
+    print("this is user latitude $userLatitude");
+    print("this is user longitude $userLongitude");
+    userLatitude=radians(userLatitude);
+    userLongitude=radians(userLongitude);
+    restaurantLatitude=radians(restaurantLatitude);
+    restaurantLongitude=radians(restaurantLongitude);
+    print("this is radian latitude $userLatitude");
+    double dlong = userLongitude - restaurantLatitude;
+    double dlat= userLatitude- restaurantLatitude;
+    double ans = pow(sin(dlat / 2), 2) +
+        cos(restaurantLatitude) * cos(userLatitude) *
+            pow(sin(dlong / 2), 2);
+    ans = 2 * asin(sqrt(ans));
+    // Radius of Earth in
+    // Kilometers, R = 6371
+    // Use R = 3956 for miles
+    double R = 6371;
+
+    // Calculate the result
+    double distance = ans * R;
+    print("this is distance $distance");
+
+    return 10 + (distance*9);
+
+  }
+
   static double getTaxOrder(Order order) {
     double total = 0;
     order.foodOrders.forEach((foodOrder) {
@@ -320,4 +364,18 @@ class Helper {
         return "";
     }
   }
+
+  Future<bool> onWillPop() {
+    DateTime now = DateTime.now();
+    if (currentBackPressTime == null || now.difference(currentBackPressTime) > Duration(seconds: 2)) {
+      currentBackPressTime = now;
+      Fluttertoast.showToast(msg: S.of(context).tapAgainToLeave);
+      return Future.value(false);
+    }
+    SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+    return Future.value(true);
+  }
+
 }
+
+
