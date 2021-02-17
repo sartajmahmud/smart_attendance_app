@@ -43,4 +43,12 @@ class Driver{
   }
 
 
+  Map UpdateLocationMap(){
+    var map = new Map<String, dynamic>();
+    map['latitude']=latitude;
+    map['longitude']=longitude;
+    return map;
+  }
+
+
 }

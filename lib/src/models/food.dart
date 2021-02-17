@@ -26,6 +26,7 @@ class Food {
   List<ExtraGroup> extraGroups;
   List<Review> foodReviews;
   List<Nutrition> nutritions;
+  double deliveryfee;
 
   Food();
 
@@ -35,6 +36,7 @@ class Food {
       name = jsonMap['name'];
       price = jsonMap['price'] != null ? jsonMap['price'].toDouble() : 0.0;
       discountPrice = jsonMap['discount_price'] != null ? jsonMap['discount_price'].toDouble() : 0.0;
+      deliveryfee = jsonMap['delivery_fee'] != null ? double.parse(jsonMap['delivery_fee']) : 0.0;
       price = discountPrice != 0 ? discountPrice : price;
       discountPrice = discountPrice == 0 ? discountPrice : jsonMap['price'] != null ? jsonMap['price'].toDouble() : 0.0;
       description = jsonMap['description'];

@@ -101,20 +101,20 @@ class MapController extends ControllerMVC {
     }
   }
 
-  Future<void> goCurrentLocation() async {
-    final GoogleMapController controller = await mapController.future;
-
-    sett.setCurrentLocation().then((_currentAddress) {
-      setState(() {
-        sett.myAddress.value = _currentAddress;
-        currentAddress = _currentAddress;
-      });
-      controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-        target: LatLng(_currentAddress.latitude, _currentAddress.longitude),
-        zoom: 14.4746,
-      )));
-    });
-  }
+  // Future<void> goCurrentLocation() async {
+  //   final GoogleMapController controller = await mapController.future;
+  //
+  //   sett.setCurrentLocation().then((_currentAddress) {
+  //     setState(() {
+  //       sett.myAddress.value = _currentAddress;
+  //       currentAddress = _currentAddress;
+  //     });
+  //     controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+  //       target: LatLng(_currentAddress.latitude, _currentAddress.longitude),
+  //       zoom: 14.4746,
+  //     )));
+  //   });
+  // }
 
   void getOrdersOfArea() async {
     setState(() {

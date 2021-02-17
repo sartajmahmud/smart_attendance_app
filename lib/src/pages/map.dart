@@ -68,7 +68,7 @@ class _MapWidgetState extends StateMVC<MapWidget> {
               color: Theme.of(context).hintColor,
             ),
             onPressed: () {
-              _con.goCurrentLocation();
+              //_con.goCurrentLocation();
             },
           ),
         ],

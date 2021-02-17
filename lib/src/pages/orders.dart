@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:deliveryboy/src/elements/OrderItemWidget.dart';
+import 'package:deliveryboy/src/repository/RiderRepository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:toggle_switch/toggle_switch.dart';
-
+import 'dart:async';
 import '../../generated/l10n.dart';
 import '../controllers/order_controller.dart';
 import '../elements/EmptyOrdersWidget.dart';
@@ -20,7 +23,10 @@ class OrdersWidget extends StatefulWidget {
 
 class _OrdersWidgetState extends StateMVC<OrdersWidget> {
   OrderController _con;
-  int status=0;
+  int status=1;
+  bool isStopped = true; //global
+  Timer timer;
+
 
   _OrdersWidgetState() : super(OrderController()) {
     _con = controller;
@@ -29,8 +35,18 @@ class _OrdersWidgetState extends StateMVC<OrdersWidget> {
   @override
   void initState() {
     _con.listenForOrders();
+    // Timer.periodic(Duration(seconds: 5), (timer) {
+    //   print(DateTime.now());
+    // });
     _con.listenForStatus().then((value) =>status=int.parse(_con.driver.status) );
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    timer?.cancel();
+    // TODO: implement dispose
+    super.dispose();
   }
 
   @override
@@ -76,9 +92,14 @@ class _OrdersWidgetState extends StateMVC<OrdersWidget> {
                     _con.driver.status="0";
                     _con.updateStatus();
                     status=int.parse(_con.driver.status);
+                    timer = Timer.periodic(Duration(seconds: 5), (timer) {
+                      _con.updateRiderlocation();
+                    });
                   }
                   else {
+                    timer.cancel();
                     _con.driver.status="1";
+                    isStopped=true;
                     _con.updateStatus();
                     status=int.parse(_con.driver.status);
                   }

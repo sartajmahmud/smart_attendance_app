@@ -19,10 +19,10 @@ Future<Stream<Order>> getOrders() async {
   User _user = userRepo.currentUser.value;
 
   _queryParams['api_token'] = _user.apiToken;
-  _queryParams['with'] = 'driver;foodOrders;foodOrders.food;foodOrders.extras;orderStatus;deliveryAddress;payment';
+  _queryParams['with'] = 'cashbackUsage;foodOrders;foodOrders.food;foodOrders.extras;orderStatus;deliveryAddress;payment';
   _queryParams['search'] = 'driver.id:${_user.id};order_status_id:$orderStatusId;delivery_address_id:null';
   _queryParams['searchFields'] = 'driver.id:=;order_status_id:<>;delivery_address_id:<>';
-  _queryParams['searchJoin'] = 'and';
+ // _queryParams['searchJoin'] = 'and';
   _queryParams['orderBy'] = 'id';
   _queryParams['sortedBy'] = 'asc';
   uri = uri.replace(queryParameters: _queryParams);
@@ -53,7 +53,7 @@ Future<Stream<Order>> getNearOrders(Address myAddress, Address areaAddress) asyn
   _queryParams['with'] = 'driver;foodOrders;foodOrders.food;foodOrders.extras;orderStatus;deliveryAddress;payment';
   _queryParams['search'] = 'driver.id:${_user.id};delivery_address_id:null';
   _queryParams['searchFields'] = 'driver.id:=;delivery_address_id:<>';
-  _queryParams['searchJoin'] = 'and';
+  //_queryParams['searchJoin'] = 'and';
   _queryParams['orderBy'] = 'id';
   _queryParams['sortedBy'] = 'desc';
   uri = uri.replace(queryParameters: _queryParams);
@@ -82,7 +82,7 @@ Future<Stream<Order>> getOrdersHistory() async {
   _queryParams['with'] = 'driver;foodOrders;foodOrders.food;foodOrders.extras;orderStatus;deliveryAddress;payment';
   _queryParams['search'] = 'driver.id:${_user.id};order_status_id:$orderStatusId;delivery_address_id:null';
   _queryParams['searchFields'] = 'driver.id:=;order_status_id:=;delivery_address_id:<>';
-  _queryParams['searchJoin'] = 'and';
+  //_queryParams['searchJoin'] = 'and';
   _queryParams['orderBy'] = 'id';
   _queryParams['sortedBy'] = 'desc';
   uri = uri.replace(queryParameters: _queryParams);
@@ -128,7 +128,7 @@ Future<Stream<Order>> getRecentOrders() async {
   _queryParams['with'] = 'driver;foodOrders;foodOrders.food;foodOrders.extras;orderStatus;deliveryAddress;payment';
   _queryParams['search'] = 'driver.id:${_user.id};delivery_address_id:null';
   _queryParams['searchFields'] = 'driver.id:=;delivery_address_id:<>';
-  _queryParams['searchJoin'] = 'and';
+  //_queryParams['searchJoin'] = 'and';
   _queryParams['orderBy'] = 'id';
   _queryParams['sortedBy'] = 'desc';
   uri = uri.replace(queryParameters: _queryParams);

@@ -37,6 +37,8 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
   @override
   void initState() {
     _con.listenForOrder(id: widget.routeArgument.id);
+    //_con.listenForOrder(id: widget.routeArgument.id).then((value) async{await _con.getdistance();}).then((value) async{await _con.ListenForDeliveryFeeSettings();}).then((value) async{await _con.CalculateDeliveryfee();});
+    //_con.listenForOrder(id: widget.routeArgument.id).then((value) async{await _con.ListenForDeliveryFeeSettings();}).then((value) =>_con.CalculateDeliveryfee());
     _tabController = TabController(length: 3, initialIndex: _tabIndex, vsync: this);
     _tabController.addListener(_handleTabSelection);
     super.initState();
@@ -486,7 +488,7 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                         ),
                         ListTile(
                           title: Text("My Earning"),
-                          trailing: Helper.getPrice(_con.order.deliveryFee, context, style: Theme.of(context).textTheme.headline4),
+                          trailing: Helper.getPrice(_con.deliveryfee, context, style: Theme.of(context).textTheme.headline4),
                         //  subtitle: Text("according to distance"),
                         ),
                         ListTile(

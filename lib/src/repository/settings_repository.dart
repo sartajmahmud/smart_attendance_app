@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:deliveryboy/src/models/driver.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:global_configuration/global_configuration.dart';
@@ -46,27 +47,28 @@ Future<Setting> initSettings() async {
   return setting.value;
 }
 
-Future<dynamic> setCurrentLocation() async {
+Future<Driver> setCurrentLocation() async {
   var location = new Location();
   final whenDone = new Completer();
-  Address _address = new Address();
+  Driver driver=new Driver();
+  //Address _address = new Address();
   location.requestService().then((value) async {
     location.getLocation().then((_locationData) async {
-      String _addressName = '';
-      _address = Address.fromJSON({'address': _addressName, 'latitude': _locationData?.latitude, 'longitude': _locationData?.longitude});
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setString('my_address', json.encode(_address.toMap()));
-      whenDone.complete(_address);
+      driver.latitude=_locationData.latitude.toString();
+      driver.longitude=_locationData.longitude.toString();
+      // _address = Address.fromJSON({'address': _addressName, 'latitude': _locationData?.latitude, 'longitude': _locationData?.longitude});
+      // whenDone.complete(_address);
     }).timeout(Duration(seconds: 10), onTimeout: () async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setString('my_address', json.encode(_address.toMap()));
-      whenDone.complete(_address);
+      // SharedPreferences prefs = await SharedPreferences.getInstance();
+      // await prefs.setString('my_address', json.encode(_address.toMap()));
+      // whenDone.complete(_address);
       return null;
     }).catchError((e) {
-      whenDone.complete(_address);
+      //whenDone.complete(_address);
     });
   });
-  return whenDone.future;
+  return driver;
+  //return whenDone.future;
 }
 
 Future<Address> changeCurrentLocation(Address _address) async {
