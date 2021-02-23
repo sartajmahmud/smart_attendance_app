@@ -1,4 +1,4 @@
-package com.smartersvision.deliveryboyapp
+package com.foodaholic.rider_app
 import io.flutter.plugin.common.PluginRegistry
 import io.flutter.plugins.firebasemessaging.FirebaseMessagingPlugin
 

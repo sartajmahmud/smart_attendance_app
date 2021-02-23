@@ -1,4 +1,4 @@
-import 'package:deliveryboy/src/models/driver.dart';
+import 'package:foodaholic_rider_app/src/models/driver.dart';
 import 'package:geolocator/geolocator.dart';
 
 /// Determine the current position of the device.

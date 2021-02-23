@@ -1,6 +1,6 @@
 
 
-import 'package:deliveryboy/src/helpers/custom_trace.dart';
+import 'package:foodaholic_rider_app/src/helpers/custom_trace.dart';
 
 class Driver{
   String id;

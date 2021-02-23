@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:deliveryboy/src/elements/OrderItemWidget.dart';
-import 'package:deliveryboy/src/repository/RiderRepository.dart';
+import 'package:foodaholic_rider_app/src/elements/OrderItemWidget.dart';
+import 'package:foodaholic_rider_app/src/repository/RiderRepository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';

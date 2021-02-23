@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 
-import 'package:deliveryboy/src/models/variableDeliveryFee.dart';
+import 'package:foodaholic_rider_app/src/models/variableDeliveryFee.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';

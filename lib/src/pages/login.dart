@@ -1,4 +1,4 @@
-import 'package:deliveryboy/src/helpers/helper.dart';
+import 'package:foodaholic_rider_app/src/helpers/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 

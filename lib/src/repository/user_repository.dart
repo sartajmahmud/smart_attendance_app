@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:deliveryboy/src/models/driver.dart';
+import 'package:foodaholic_rider_app/src/models/driver.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:geodesy/geodesy.dart';
 import 'package:global_configuration/global_configuration.dart';

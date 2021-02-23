@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:deliveryboy/src/controllers/user_controller.dart';
-import 'package:deliveryboy/src/elements/OtpScreen.dart';
+import 'package:foodaholic_rider_app/src/controllers/user_controller.dart';
+import 'package:foodaholic_rider_app/src/elements/OtpScreen.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 

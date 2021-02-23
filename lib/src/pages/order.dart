@@ -1,5 +1,5 @@
-import 'package:deliveryboy/src/elements/CircularLoadingWidget.dart';
-import 'package:deliveryboy/src/elements/FoodOrderItemWidget.dart';
+import 'package:foodaholic_rider_app/src/elements/CircularLoadingWidget.dart';
+import 'package:foodaholic_rider_app/src/elements/FoodOrderItemWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';

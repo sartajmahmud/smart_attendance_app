@@ -2,10 +2,10 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:deliveryboy/src/helpers/custom_trace.dart';
-import 'package:deliveryboy/src/models/driver.dart';
-import 'package:deliveryboy/src/models/user.dart';
-import 'package:deliveryboy/src/repository/user_repository.dart';
+import 'package:foodaholic_rider_app/src/helpers/custom_trace.dart';
+import 'package:foodaholic_rider_app/src/models/driver.dart';
+import 'package:foodaholic_rider_app/src/models/user.dart';
+import 'package:foodaholic_rider_app/src/repository/user_repository.dart';
 import 'package:geodesy/geodesy.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:http/http.dart' as http;

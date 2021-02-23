@@ -1,8 +1,8 @@
-import 'package:deliveryboy/src/helpers/GeoLocator.dart';
-import 'package:deliveryboy/src/models/driver.dart';
-import 'package:deliveryboy/src/repository/DeliveryFee_repository.dart';
-import 'package:deliveryboy/src/repository/RiderRepository.dart';
-import 'package:deliveryboy/src/repository/settings_repository.dart';
+import 'package:foodaholic_rider_app/src/helpers/GeoLocator.dart';
+import 'package:foodaholic_rider_app/src/models/driver.dart';
+import 'package:foodaholic_rider_app/src/repository/DeliveryFee_repository.dart';
+import 'package:foodaholic_rider_app/src/repository/RiderRepository.dart';
+import 'package:foodaholic_rider_app/src/repository/settings_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
