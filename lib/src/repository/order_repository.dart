@@ -24,7 +24,7 @@ Future<Stream<Order>> getOrders() async {
   _queryParams['searchFields'] = 'driver.id:=;order_status_id:<>;delivery_address_id:<>';
  // _queryParams['searchJoin'] = 'and';
   _queryParams['orderBy'] = 'id';
-  _queryParams['sortedBy'] = 'asc';
+  _queryParams['sortedBy'] = 'desc';
   uri = uri.replace(queryParameters: _queryParams);
   print("this is get orders $uri");
   try {

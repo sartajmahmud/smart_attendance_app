@@ -141,12 +141,21 @@ class _OrderItemWidgetState extends State<OrderItemWidget> {
           padding: EdgeInsets.symmetric(horizontal: 10),
           height: 28,
           width: 140,
-          decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(100)), color: Theme.of(context).accentColor),
+          decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(100)), color: int.parse(widget.order.orderStatus.id)==1 ?
+          Color(0xFFFbb917) : int.parse(widget.order.orderStatus.id)==2 ? Color(0xFFFF8230) : int.parse(widget.order.orderStatus.id)==3 ? Color(0xFF0492c2) : int.parse(widget.order.orderStatus.id)==4 ? Color(0xFF6F2DA8) : Color(0xFF46BA46) )
+          ,
+          //decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(100)), color: Theme.of(context).accentColor),
           alignment: AlignmentDirectional.center,
           child: Text(
             '${widget.order.orderStatus.status}',
             maxLines: 1,
-            style: Theme.of(context).textTheme.caption.merge(TextStyle(height: 1, color: Theme.of(context).primaryColor)),
+            style: Theme.of(context).textTheme.caption.merge(TextStyle(height: 1,
+                color: Theme.of(context).primaryColor,
+                fontWeight: FontWeight.w500,
+                // color: int.parse(widget.order.orderStatus.id)==4 ? Theme.of(context).primaryColor : Colors.black,
+                fontSize: 13)
+            ),
+            //style: Theme.of(context).textTheme.caption.merge(TextStyle(height: 1, color: Theme.of(context).primaryColor)),
           ),
         ),
       ],
