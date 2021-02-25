@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +14,9 @@ class SplashScreenController extends ControllerMVC with ChangeNotifier {
   ValueNotifier<Map<String, double>> progress = new ValueNotifier(new Map());
   GlobalKey<ScaffoldState> scaffoldKey;
   final FirebaseMessaging firebaseMessaging = FirebaseMessaging();
+  bool playing = false;
+
+
 
   SplashScreenController() {
     this.scaffoldKey = new GlobalKey<ScaffoldState>();
