@@ -93,10 +93,14 @@ class OrderController extends ControllerMVC {
     });
   }
 
-  Future<void> updateRiderlocation()async{
-   final location=await determinePosition();
-   final update=await UpdateRiderLocation(driver: location);
-   print(location.latitude);
+  Future<void> updateRiderlocation(double latitude, double longitude)async{
+   //final location=await determinePosition();
+    Driver driver=new Driver();
+    driver.latitude=latitude.toString();
+    driver.longitude=longitude.toString();
+
+   final update=await UpdateRiderLocation(driver: driver);
+   print(driver.latitude);
   }
 
   Future ListenForDeliveryFeeSettings()async{

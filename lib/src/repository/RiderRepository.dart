@@ -68,9 +68,11 @@ Future<int> UpdateRiderStatus({Driver driver}) async {
 //   }
 // }
 
-Future<void> UpdateRiderLocation({Driver driver}) async {
-  final String _apiToken = 'api_token=${currentUser.value.apiToken}';
-  final String url = 'http://admin.food-aholic.com/api/driver-current-location/${currentUser.value.id}?$_apiToken';
+Future<void> UpdateRiderLocation({Driver driver, User user}) async {
+  //final String _apiToken = 'api_token=${currentUser.value.apiToken}';
+  final String _apiToken = 'api_token=${GlobalConfiguration().getString('api_token')}';
+  print(_apiToken);
+  final String url = 'http://admin.food-aholic.com/api/driver-current-location/39?api_token=IQyyJul4vjP6rdaKZrAU5ao33j6xO3YxIsj5Swvx21hJHD8QFAiMA0MeFivT';
   final client = new http.Client();
   final response = await client.put(
     url,
@@ -78,7 +80,7 @@ Future<void> UpdateRiderLocation({Driver driver}) async {
     body: json.encode(driver.UpdateLocationMap()),
   );
   print("this is update location $url");
-  // print("this is update user body ${json.encode(user.toMap())}");
+   print("this is update location body ${json.encode(driver.UpdateLocationMap())}");
   print("this is update location response body ${response.body}");
   //setCurrentUser(response.body);
   // int status = int.parse(json.decode(response.body)['data'].toString());
