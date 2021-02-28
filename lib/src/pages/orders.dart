@@ -83,25 +83,25 @@ class _OrdersWidgetState extends StateMVC<OrdersWidget> {
                 activeFgColor: Colors.white,
                 inactiveBgColor: Colors.grey,
                 inactiveFgColor: Colors.white,
-                labels: ['Active', 'Inactive'],
-                icons: [Icons.check,Icons.close],
-                activeBgColors: [Colors.green, Colors.red],
+                labels: ['Inactive', 'Active'],
+                icons: [Icons.close,Icons.check],
+                activeBgColors: [Colors.red, Colors.green],
                 onToggle: (index) {
                   print('switched to: $index');
                   if(index==0){
+                    timer.cancel();
+                    isStopped=true;
                     _con.driver.status="0";
+                    _con.updateStatus();
+                    status=int.parse(_con.driver.status);
+                  }
+                  else {
+                    _con.driver.status="1";
                     _con.updateStatus();
                     status=int.parse(_con.driver.status);
                     timer = Timer.periodic(Duration(seconds: 5), (timer) {
                       _con.updateRiderlocation();
                     });
-                  }
-                  else {
-                    timer.cancel();
-                    _con.driver.status="1";
-                    isStopped=true;
-                    _con.updateStatus();
-                    status=int.parse(_con.driver.status);
                   }
                 },
               ),
