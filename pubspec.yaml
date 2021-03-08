@@ -43,6 +43,9 @@ dependencies:
   geodesy: ^0.3.2
   toggle_switch: ^0.1.8
   geolocator: ^6.2.0
+  background_locator: ^1.4.0+1
+  path_provider: ^1.6.24
+  location_permissions: ^3.0.0+1
 
 dev_dependencies:
   flutter_test:

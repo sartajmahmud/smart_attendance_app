@@ -1,15 +1,15 @@
 import 'package:foodaholic_rider_app/src/helpers/GeoLocator.dart';
 import 'package:foodaholic_rider_app/src/models/driver.dart';
-import 'package:foodaholic_rider_app/src/repository/DeliveryFee_repository.dart';
+import 'package:foodaholic_rider_app/src/models/statistic.dart';
 import 'package:foodaholic_rider_app/src/repository/RiderRepository.dart';
-import 'package:foodaholic_rider_app/src/repository/settings_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-
+import '../repository/dashboard_repository.dart';
 import '../../generated/l10n.dart';
 import '../models/order.dart';
 import '../repository/order_repository.dart';
+
+
 
 class OrderController extends ControllerMVC {
   List<Order> orders = <Order>[];
@@ -23,9 +23,24 @@ class OrderController extends ControllerMVC {
   String FeeStatus;
   double distance;
   double deliveryfee=0;
+  List<Statistic> statistics = <Statistic>[];
 
   OrderController() {
     this.scaffoldKey = new GlobalKey<ScaffoldState>();
+  }
+
+  void listenForStatistics({String message}) async {
+    final Stream<Statistic> stream = await getStatistics();
+    stream.listen((Statistic _stat) {
+      setState(() {
+        statistics.add(_stat);
+      });
+    }, onError: (a) {
+      print(a);
+      scaffoldKey?.currentState?.showSnackBar(SnackBar(
+        content: Text(S.of(context).verify_your_internet_connection),
+      ));
+    }, onDone: () {});
   }
 
   void listenForOrders({String message}) async {
@@ -47,6 +62,7 @@ class OrderController extends ControllerMVC {
       }
     });
   }
+
 
   void listenForOrdersHistory({String message}) async {
     final Stream<Order> stream = await getOrdersHistory();
@@ -76,6 +92,7 @@ class OrderController extends ControllerMVC {
   Future<void> refreshOrders() async {
     orders.clear();
     listenForOrders(message: S.of(context).order_refreshed_successfuly);
+    listenForStatistics();
   }
 
  Future <void> listenForStatus()async{
@@ -99,30 +116,30 @@ class OrderController extends ControllerMVC {
    print(location.latitude);
   }
 
-  Future ListenForDeliveryFeeSettings()async{
-    final response=await getVariableFeeSettings();
-    setState((){
-      base=response.serviceCharge;
-      increament=response.perKiloFee;
-      FeeStatus=response.status;
-    });
-    print("this is base $base");
-  }
+  // Future ListenForDeliveryFeeSettings()async{
+  //   final response=await getVariableFeeSettings();
+  //   setState((){
+  //     base=response.serviceCharge;
+  //     increament=response.perKiloFee;
+  //     FeeStatus=response.status;
+  //   });
+  //   print("this is base $base");
+  // }
 
-  Future <void> getdistance()async{
-    LatLng Restaurant = LatLng(double.parse(orders.elementAt(0).foodOrders[0].food.restaurant.latitude), double.parse(orders.elementAt(0).foodOrders[0].food.restaurant.longitude));
-    LatLng User = LatLng(orders.elementAt(0).latitude, orders.elementAt(0).longitude);
-    print("this is lat ${orders.elementAt(0).foodOrders[0].food.restaurant.latitude}");
-    // print("this is  ${carts.elementAt(0).food.name}");
-    // LatLng l2 = LatLng(24.370525048488844, 88.6023110305566);
-    // LatLng l2 = LatLng(double.parse(carts[0].food.restaurant.latitude), double.parse(carts[0].food.restaurant.longitude));
-    double distanceresponse=await getRouteCoordinates(Restaurant,User);
-    print(distanceresponse);
-    setState((){
-      distance=distanceresponse;
-      print("this is distance $distance");
-    });
-  }
+  // Future <void> getdistance()async{
+  //   LatLng Restaurant = LatLng(double.parse(orders.elementAt(0).foodOrders[0].food.restaurant.latitude), double.parse(orders.elementAt(0).foodOrders[0].food.restaurant.longitude));
+  //   LatLng User = LatLng(orders.elementAt(0).latitude, orders.elementAt(0).longitude);
+  //   print("this is lat ${orders.elementAt(0).foodOrders[0].food.restaurant.latitude}");
+  //   // print("this is  ${carts.elementAt(0).food.name}");
+  //   // LatLng l2 = LatLng(24.370525048488844, 88.6023110305566);
+  //   // LatLng l2 = LatLng(double.parse(carts[0].food.restaurant.latitude), double.parse(carts[0].food.restaurant.longitude));
+  //   double distanceresponse=await getRouteCoordinates(Restaurant,User);
+  //   print(distanceresponse);
+  //   setState((){
+  //     distance=distanceresponse;
+  //     print("this is distance $distance");
+  //   });
+  // }
 
   void CalculateDeliveryfee(){
     setState((){
@@ -131,9 +148,6 @@ class OrderController extends ControllerMVC {
       print("this is delivery fee $deliveryfee");
     });
   }
-
-
-
 
 }
 

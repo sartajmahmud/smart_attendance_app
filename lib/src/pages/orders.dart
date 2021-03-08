@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:foodaholic_rider_app/src/elements/OrderItemWidget.dart';
+import 'package:foodaholic_rider_app/src/elements/StatisticsCarouselWidget.dart';
 import 'package:foodaholic_rider_app/src/repository/RiderRepository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +36,7 @@ class _OrdersWidgetState extends StateMVC<OrdersWidget> {
   @override
   void initState() {
     _con.listenForOrders();
+    _con.listenForStatistics();
     // Timer.periodic(Duration(seconds: 5), (timer) {
     //   print(DateTime.now());
     // });
@@ -108,6 +110,7 @@ class _OrdersWidgetState extends StateMVC<OrdersWidget> {
 
 
             ),
+            StatisticsCarouselWidget(statisticsList: _con.statistics),
             _con.orders.isEmpty
                 ? EmptyOrdersWidget()
                 : ListView.separated(

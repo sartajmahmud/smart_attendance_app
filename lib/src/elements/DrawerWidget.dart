@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodaholic_rider_app/src/testgps/testgps.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../generated/l10n.dart';
@@ -106,7 +107,8 @@ class _DrawerWidgetState extends StateMVC<DrawerWidget> {
                 ),
                 ListTile(
                   onTap: () {
-                    Navigator.of(context).pushNamed('/Help');
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>MyApp()));
+                   // Navigator.of(context).pushNamed('/Help');
                   },
                   leading: Icon(
                     Icons.help,
