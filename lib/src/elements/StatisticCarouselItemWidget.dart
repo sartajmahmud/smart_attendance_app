@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodaholic_rider_app/src/pages/Earning.dart';
 
 
 import '../helpers/helper.dart';
@@ -14,7 +15,7 @@ class StatisticCarouselItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        //Navigator.push(context, MaterialPageRoute(builder: (context)=>Earning()));
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>Earning()));
       },
       child: Container(
         margin: EdgeInsetsDirectional.only(start: this.marginLeft, end: 20, top: 25, bottom: 25),

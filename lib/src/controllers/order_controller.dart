@@ -24,6 +24,7 @@ class OrderController extends ControllerMVC {
   double distance;
   double deliveryfee=0;
   List<Statistic> statistics = <Statistic>[];
+  List<Statistic> statistics1 = <Statistic>[];
 
   OrderController() {
     this.scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -42,6 +43,25 @@ class OrderController extends ControllerMVC {
       ));
     }, onDone: () {});
   }
+
+
+  void listenForStatisticsFilter({String message,DateTime start,DateTime end}) async {
+    final Stream<Statistic> stream = await getStatisticsFilter(start, end);
+    statistics1.clear();
+    //statistics.removeAt(0);
+    stream.listen((Statistic _stat) {
+      setState(() {
+        statistics1.add(_stat);
+        print("this is lenght ${statistics1.length}");
+      });
+    }, onError: (a) {
+      print(a);
+      scaffoldKey?.currentState?.showSnackBar(SnackBar(
+        content: Text(S.of(context).verify_your_internet_connection),
+      ));
+    }, onDone: () {});
+  }
+
 
   void listenForOrders({String message}) async {
     final Stream<Order> stream = await getOrders();
@@ -148,6 +168,8 @@ class OrderController extends ControllerMVC {
       print("this is delivery fee $deliveryfee");
     });
   }
+
+
 
 }
 

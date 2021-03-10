@@ -2,11 +2,12 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:foodaholic_rider_app/src/BackgroundGPS/file_manager.dart';
 import 'package:foodaholic_rider_app/src/helpers/custom_trace.dart';
 import 'package:foodaholic_rider_app/src/models/driver.dart';
 import 'package:foodaholic_rider_app/src/models/user.dart';
 import 'package:foodaholic_rider_app/src/repository/user_repository.dart';
-import 'package:geodesy/geodesy.dart';
+
 import 'package:global_configuration/global_configuration.dart';
 import 'package:http/http.dart' as http;
 import '../repository/user_repository.dart' as userRepo;
@@ -69,8 +70,10 @@ Future<int> UpdateRiderStatus({Driver driver}) async {
 // }
 
 Future<void> UpdateRiderLocation({Driver driver}) async {
-  final String _apiToken = 'api_token=${currentUser.value.apiToken}';
-  final String url = 'http://admin.food-aholic.com/api/driver-current-location/${currentUser.value.id}?$_apiToken';
+  print("update rider location");
+  final apitoken=await FileManager.readLogFile();
+   print(apitoken);
+  final String url = 'http://admin.food-aholic.com/api/driver-current-location/$apitoken';
   final client = new http.Client();
   final response = await client.put(
     url,

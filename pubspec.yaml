@@ -46,6 +46,8 @@ dependencies:
   background_locator: ^1.4.0+1
   path_provider: ^1.6.24
   location_permissions: ^3.0.0+1
+  syncfusion_flutter_datepicker: ^18.4.44-beta
+
 
 dev_dependencies:
   flutter_test:

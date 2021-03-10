@@ -31,7 +31,7 @@ Future<Stream<Statistic>> getStatistics() async {
 Future<Stream<Statistic>> getStatisticsFilter(DateTime start,DateTime end) async {
   Map<String, dynamic> _queryParams = {};
   User _user = userRepo.currentUser.value;
-  Uri uri = Helper.getUri('api/manager/dashboard/${_user.id}');
+  Uri uri = Helper.getUri('api/driver/dashboard');
   _queryParams['api_token'] = _user.apiToken;
   _queryParams['from_date'] = start.toString();
   _queryParams['to_date'] = end.toString();
