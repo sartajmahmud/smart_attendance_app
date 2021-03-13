@@ -488,13 +488,13 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                         ),
                         ListTile(
                           title: Text("My Earning"),
-                          trailing: Helper.getPrice(double.parse(_con.order.earning.riderEarning), context,style: Theme.of(context).textTheme.headline4),
+                          trailing: Helper.getPrice(double.parse(_con.order.earning.riderEarning!=null ? _con.order.earning.riderEarning : "0"), context,style: Theme.of(context).textTheme.headline4),
                         //  subtitle: Text("according to distance"),
                         ),
                         ListTile(
                           title: Text("Company Earning"),
                           subtitle: Text("Pay to Office"),
-                          trailing: Helper.getPrice(double.parse(_con.order.earning.adminEarning), context,style: Theme.of(context).textTheme.headline4)
+                          trailing: Helper.getPrice(double.parse(_con.order.earning.adminEarning!=null ? _con.order.earning.adminEarning : "0"), context,style: Theme.of(context).textTheme.headline4)
                           //  subtitle: Text("according to distance"),
                         ),
                       ],
