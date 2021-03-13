@@ -19,9 +19,6 @@ class FoodOrderItemWidget extends StatelessWidget {
       splashColor: Theme.of(context).accentColor,
       focusColor: Theme.of(context).accentColor,
       highlightColor: Theme.of(context).primaryColor,
-      onTap: () {
-        Navigator.of(context).pushNamed('/OrderDetails', arguments: RouteArgument(id: order.id));
-      },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
         decoration: BoxDecoration(

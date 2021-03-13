@@ -31,221 +31,224 @@ class _ForgetPasswordWidgetState extends StateMVC<ForgetPasswordWidget> {
       onWillPop: Helper.of(context).onWillPop,
       child: Scaffold(
         key: _con.scaffoldKey,
-        resizeToAvoidBottomPadding: false,
-        body: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(
-                    "assets/img/log in bg.jpg",
-                  ), fit: BoxFit.cover)
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Expanded(
-                flex: 3,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(0,70,0,0),
-                  child: Column(
-                    children: [
-                      Container(
-                        alignment: Alignment.topLeft,
-                        child: Text("  Welcome to",
-                          style: TextStyle(fontFamily: "Comfortaa",
-                              fontWeight: FontWeight.bold,
-                              fontSize: 30,
-                              color: Colors.white
-                          ),
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          Text("  food-aholic",
+        body: SingleChildScrollView(
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(
+                      "assets/img/log in bg.jpg",
+                    ), fit: BoxFit.cover)
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(0,70,0,0),
+                    child: Column(
+                      children: [
+                        Container(
+                          alignment: Alignment.topLeft,
+                          child: Text("  Welcome to",
                             style: TextStyle(fontFamily: "Comfortaa",
-                                fontSize: 30,
                                 fontWeight: FontWeight.bold,
+                                fontSize: 30,
                                 color: Colors.white
                             ),
                           ),
-                          Container(
-                              height: 50,
-                              width: 50,
-                              child: Image.asset("assets/img/logo.png"))
-                        ],
-                      ),
-                    ],
+                        ),
+                        Row(
+                          children: [
+                            Text("  food-aholic",
+                              style: TextStyle(fontFamily: "Comfortaa",
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white
+                              ),
+                            ),
+                            Container(
+                                height: 50,
+                                width: 50,
+                                child: Image.asset("assets/img/logo.png"))
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
 
-              Expanded(
-                flex: 6,
-                child: Form(
-                  key: _con.loginFormKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(left: 60,right: 60),
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          decoration: kBoxDecorationStyle,
-                          height: 60.0,
-                          child: TextFormField(
-                            controller: myController,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'Comfortaa',
-                            ),
-                            keyboardType: TextInputType.phone,
-                            onChanged: (input) => _con.user.mobile = input,
-                            //validator: (input) => !input.contains('@') ? S.of(context).should_be_a_valid_email : null,
-                            decoration: InputDecoration(
-                              //labelText: S.of(context).email,
-                              //labelStyle: TextStyle(color: Theme.of(context).accentColor),
-                              contentPadding: EdgeInsets.only(top: 14.0),
-                              hintText: '01710000000',
-                              hintStyle: kHintTextStyle,
-                              prefixIcon: Icon(Icons.phone, color: Colors.white),
-                              border: InputBorder.none,
-                              //focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.5))),
-                              //enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.2))),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 30),
-                      // Padding(
-                      //   padding: const EdgeInsets.only(left: 60,right: 60),
-                      //   child: Container(
-                      //     alignment: Alignment.centerLeft,
-                      //     decoration: kBoxDecorationStyle,
-                      //     height: 60.0,
-                      //     child: TextFormField(
-                      //       style: TextStyle(
-                      //         color: Colors.white,
-                      //         fontFamily: 'Comfortaa',
-                      //       ),
-                      //       keyboardType: TextInputType.text,
-                      //       onSaved: (input) => _con.user.password = input,
-                      //       validator: (input) => input.length < 3 ? S.of(context).should_be_more_than_3_characters : null,
-                      //       obscureText: _con.hidePassword,
-                      //       decoration: InputDecoration(
-                      //         // labelText: S.of(context).password,
-                      //         //  labelStyle: TextStyle(color: Theme.of(context).accentColor),
-                      //         contentPadding: EdgeInsets.only(top: 14.0),
-                      //         hintText: '••••••••••••',
-                      //         hintStyle: kHintTextStyle,
-                      //         prefixIcon: Icon(Icons.lock_outline, color: Colors.white),
-                      //         suffixIcon: IconButton(
-                      //           onPressed: () {
-                      //             setState(() {
-                      //               _con.hidePassword = !_con.hidePassword;
-                      //             });
-                      //           },
-                      //           color: Colors.white,
-                      //           icon: Icon(_con.hidePassword ? Icons.visibility : Icons.visibility_off),
-                      //         ),
-                      //         border: InputBorder.none,
-                      //         //focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.5))),
-                      //         //enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.2))),
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
-                      // SizedBox(height: 20),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 60,right: 60),
-                        child: Container(
-                          padding: EdgeInsets.symmetric(vertical: 25.0),
-                          width: double.infinity,
-                          child: RaisedButton(
-                            elevation: 5.0,
-                            onPressed: () async{
-                              String result =await _con.duplicateAC();
-                              if(result=="true")
-                              {
-                                print("this is duplicate");
-                                Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => OTP2(myController.text.toString(),_con)));
-                              }
-                            },
-                            padding: EdgeInsets.all(15.0),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
-                            color: Colors.white,
-                            child: Text(
-                              'VERIFY',
+                Expanded(
+                  flex: 6,
+                  child: Form(
+                    key: _con.loginFormKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(left: 60,right: 60),
+                          child: Container(
+                            alignment: Alignment.centerLeft,
+                            decoration: kBoxDecorationStyle,
+                            height: 60.0,
+                            child: TextFormField(
+                              controller: myController,
                               style: TextStyle(
-                                color: Color(0xFFbf1e2e),
-                                letterSpacing: 1.5,
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
                                 fontFamily: 'Comfortaa',
+                              ),
+                              keyboardType: TextInputType.phone,
+                              onChanged: (input) => _con.user.mobile = input,
+                              //validator: (input) => !input.contains('@') ? S.of(context).should_be_a_valid_email : null,
+                              decoration: InputDecoration(
+                                //labelText: S.of(context).email,
+                                //labelStyle: TextStyle(color: Theme.of(context).accentColor),
+                                contentPadding: EdgeInsets.only(top: 14.0),
+                                hintText: '01710000000',
+                                hintStyle: kHintTextStyle,
+                                prefixIcon: Icon(Icons.phone, color: Colors.white),
+                                border: InputBorder.none,
+                                //focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.5))),
+                                //enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.2))),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                      SizedBox(height: 15),
-                      Container(
-                        alignment: Alignment.center,
-                        child: GestureDetector(
-                          onTap: () => Navigator.of(context).pushNamed('/Login'),
-                          //padding: EdgeInsets.only(right: 0.0),
-                          child: Text(
-                            'I remembered my password',
-                            style: TextStyle(
-                                decoration: TextDecoration.underline,
-                                fontSize: 15,
-                                fontFamily: "Comfortaa",
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold
-
+                        SizedBox(height: 30),
+                        // Padding(
+                        //   padding: const EdgeInsets.only(left: 60,right: 60),
+                        //   child: Container(
+                        //     alignment: Alignment.centerLeft,
+                        //     decoration: kBoxDecorationStyle,
+                        //     height: 60.0,
+                        //     child: TextFormField(
+                        //       style: TextStyle(
+                        //         color: Colors.white,
+                        //         fontFamily: 'Comfortaa',
+                        //       ),
+                        //       keyboardType: TextInputType.text,
+                        //       onSaved: (input) => _con.user.password = input,
+                        //       validator: (input) => input.length < 3 ? S.of(context).should_be_more_than_3_characters : null,
+                        //       obscureText: _con.hidePassword,
+                        //       decoration: InputDecoration(
+                        //         // labelText: S.of(context).password,
+                        //         //  labelStyle: TextStyle(color: Theme.of(context).accentColor),
+                        //         contentPadding: EdgeInsets.only(top: 14.0),
+                        //         hintText: '••••••••••••',
+                        //         hintStyle: kHintTextStyle,
+                        //         prefixIcon: Icon(Icons.lock_outline, color: Colors.white),
+                        //         suffixIcon: IconButton(
+                        //           onPressed: () {
+                        //             setState(() {
+                        //               _con.hidePassword = !_con.hidePassword;
+                        //             });
+                        //           },
+                        //           color: Colors.white,
+                        //           icon: Icon(_con.hidePassword ? Icons.visibility : Icons.visibility_off),
+                        //         ),
+                        //         border: InputBorder.none,
+                        //         //focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.5))),
+                        //         //enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.2))),
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
+                        // SizedBox(height: 20),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 60,right: 60),
+                          child: Container(
+                            padding: EdgeInsets.symmetric(vertical: 25.0),
+                            width: double.infinity,
+                            child: RaisedButton(
+                              elevation: 5.0,
+                              onPressed: () async{
+                                String result =await _con.duplicateAC();
+                                if(result=="true")
+                                {
+                                  print("this is duplicate");
+                                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => OTP2(myController.text.toString(),_con)));
+                                }
+                              },
+                              padding: EdgeInsets.all(15.0),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30.0),
+                              ),
+                              color: Colors.white,
+                              child: Text(
+                                'VERIFY',
+                                style: TextStyle(
+                                  color: Color(0xFFbf1e2e),
+                                  letterSpacing: 1.5,
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Comfortaa',
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      SizedBox(height: 15),
-                      Container(
-                        alignment: Alignment.center,
-                        child: GestureDetector(
-                          onTap: () => Navigator.of(context).pushReplacementNamed('/SignUp'),
-                          child: RichText(
-                            text: TextSpan(
-                              children: [
-                                TextSpan(
-                                  text: 'Don\'t have an Account? ',
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontFamily: "Comfortaa",
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold
+                        SizedBox(height: 15),
+                        Container(
+                          alignment: Alignment.center,
+                          child: GestureDetector(
+                            onTap: () => Navigator.of(context).pushNamed('/Login'),
+                            //padding: EdgeInsets.only(right: 0.0),
+                            child: Text(
+                              'I remembered my password',
+                              style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  fontSize: 15,
+                                  fontFamily: "Comfortaa",
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold
 
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: 'Sign Up',
-                                  style: TextStyle(
-                                      decoration: TextDecoration.underline,
-                                      fontSize: 15,
-                                      fontFamily: "Comfortaa",
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold
-
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
                           ),
                         ),
-                      )
-                    ],
+                        SizedBox(height: 15),
+                        Container(
+                          alignment: Alignment.center,
+                          child: GestureDetector(
+                            onTap: () => Navigator.of(context).pushReplacementNamed('/SignUp'),
+                            child: RichText(
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: 'Don\'t have an Account? ',
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontFamily: "Comfortaa",
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold
+
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: 'Sign Up',
+                                    style: TextStyle(
+                                        decoration: TextDecoration.underline,
+                                        fontSize: 15,
+                                        fontFamily: "Comfortaa",
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold
+
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

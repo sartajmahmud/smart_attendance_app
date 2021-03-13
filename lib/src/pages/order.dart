@@ -282,10 +282,16 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                           padding: EdgeInsets.symmetric(horizontal: 5),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(50), border: Border.all(color: Theme.of(context).accentColor.withOpacity(0.2), width: 1)),
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: Text(S.of(context).ordered_foods),
-                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 12),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text("Ordered"),
+                                Text("Foods")
+                              ],
+                            ),
+                          )
                         ),
                       ),
                       Tab(
