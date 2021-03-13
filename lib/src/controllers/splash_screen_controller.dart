@@ -62,10 +62,14 @@ class SplashScreenController extends ControllerMVC with ChangeNotifier {
   }
 
   Future notificationOnResume(Map<String, dynamic> message) async {
+    settingRepo.navigatorKey.currentState.pushReplacementNamed('/OrderRequestScreen');
+    print(message['screen']);
     print(CustomTrace(StackTrace.current, message: message['data']['id']));
     try {
       if (message['data']['id'] == "orders") {
-        settingRepo.navigatorKey.currentState.pushReplacementNamed('/Pages', arguments: 1);
+
+        //settingRepo.navigatorKey.currentState.pushReplacementNamed('/OrderRequestScreen');
+
       }
     } catch (e) {
       print(CustomTrace(StackTrace.current, message: e));
@@ -73,12 +77,15 @@ class SplashScreenController extends ControllerMVC with ChangeNotifier {
   }
 
   Future notificationOnLaunch(Map<String, dynamic> message) async {
+    settingRepo.navigatorKey.currentState.pushReplacementNamed('/OrderRequestScreen');
+    print(message['screen']);
     String messageId = await settingRepo.getMessageId();
     try {
       if (messageId != message['google.message_id']) {
         if (message['data']['id'] == "orders") {
           await settingRepo.saveMessageId(message['google.message_id']);
-          settingRepo.navigatorKey.currentState.pushReplacementNamed('/Pages', arguments: 1);
+
+         // settingRepo.navigatorKey.currentState.pushReplacementNamed('/OrderRequestScreen');
         }
       }
     } catch (e) {
@@ -87,36 +94,12 @@ class SplashScreenController extends ControllerMVC with ChangeNotifier {
   }
 
   Future notificationOnMessage(Map<String, dynamic> message) async {
-
-    Fluttertoast.showToast(
-      msg: message['notification']['title'],
-      toastLength: Toast.LENGTH_LONG,
-      gravity: ToastGravity.TOP,
-      timeInSecForIosWeb: 5,
-    );
+    // Fluttertoast.showToast(
+    //   msg: message['notification']['title'],
+    //   toastLength: Toast.LENGTH_LONG,
+    //   gravity: ToastGravity.TOP,
+    //   timeInSecForIosWeb: 5,
+    // );
+    settingRepo.navigatorKey.currentState.pushReplacementNamed('/OrderRequestScreen');
   }
-
-  void _showDialog() {
-    // flutter defined function
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        // return object of type Dialog
-        return AlertDialog(
-          title: new Text("Alert Dialog title"),
-          content: new Text("Alert Dialog body"),
-          actions: <Widget>[
-            // usually buttons at the bottom of the dialog
-            new FlatButton(
-              child: new Text("Close"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
 }

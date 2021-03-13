@@ -81,6 +81,15 @@ class S {
     );
   }
 
+  String get earning {
+    return Intl.message(
+      'Earning',
+      name: 'earning',
+      desc: '',
+      args: [],
+    );
+  }
+
   String get verify {
     return Intl.message(
       'Verify',

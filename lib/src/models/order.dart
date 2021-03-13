@@ -1,3 +1,5 @@
+import 'package:foodaholic_rider_app/src/models/Earning.dart';
+
 import '../helpers/custom_trace.dart';
 import '../models/address.dart';
 import '../models/food_order.dart';
@@ -20,6 +22,7 @@ class Order {
   double longitude;
   int cashbackusage;
   bool active;
+  Earning earning;
 
   Order();
 
@@ -38,6 +41,7 @@ class Order {
       user = jsonMap['user'] != null ? User.fromJSON(jsonMap['user']) : new User();
       payment = jsonMap['payment'] != null ? Payment.fromJSON(jsonMap['payment']) : new Payment.init();
       deliveryAddress = jsonMap['delivery_address'] != null ? Address.fromJSON(jsonMap['delivery_address']) : new Address();
+      earning = jsonMap['earring'] != null ? Earning.fromJSON(jsonMap['earring']) : new Earning();
       foodOrders = jsonMap['food_orders'] != null ? List.from(jsonMap['food_orders']).map((element) => FoodOrder.fromJSON(element)).toList() : [];
     } catch (e) {
       id = '';

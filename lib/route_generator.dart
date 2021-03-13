@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodaholic_rider_app/src/pages/OrderRequestScreen.dart';
 
 import 'src/models/route_argument.dart';
 import 'src/pages/forget_password.dart';
@@ -41,6 +42,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => HelpWidget());
       case '/Settings':
         return MaterialPageRoute(builder: (_) => SettingsWidget());
+      case '/OrderRequestScreen':
+        return MaterialPageRoute(builder: (_) => OrderRequestScreen());
       default:
         // If there is no such named route in the switch statement, e.g. /third
         return MaterialPageRoute(builder: (_) => Scaffold(body: SafeArea(child: Text('Route Error'))));

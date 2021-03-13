@@ -12,10 +12,15 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import io.flutter.app.FlutterActivity
+import io.flutter.view.FlutterMain
+import rekab.app.background_locator.IsolateHolderService
+import io.flutter.plugins.pathprovider.PathProviderPlugin
 
 class Application : FlutterApplication(), PluginRegistrantCallback {
     override fun onCreate() {
         super.onCreate()
+        IsolateHolderService.setPluginRegistrant(this)
+        FlutterMain.startInitialization(this)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
             val soundUri: Uri = Uri.parse(
@@ -42,6 +47,9 @@ class Application : FlutterApplication(), PluginRegistrantCallback {
     }
 
     override fun registerWith(registry: PluginRegistry?) {
+        if (!registry!!.hasPlugin("io.flutter.plugins.pathprovider")) {
+            PathProviderPlugin.registerWith(registry.registrarFor("io.flutter.plugins.pathprovider"))
+        }
         FirebaseCloudMessagingPluginRegistrant.registerWith(registry);
     }
 }

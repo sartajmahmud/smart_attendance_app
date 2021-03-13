@@ -177,13 +177,13 @@ class Helper {
     return (100 - order.foodOrders[0].food.restaurant.adminCommission) * total/100;
   }
 
-  static double getCompanyEarning(Order order) {
-    double total = 0;
-    order.foodOrders.forEach((foodOrder) {
-      total += getTotalOrderPrice(foodOrder);
-    });
-    return  order.foodOrders[0].food.restaurant.adminCommission/100 * total;
-  }
+  // static double getCompanyEarning(Order order) {
+  //   double total = 0;
+  //   order.foodOrders.forEach((foodOrder) {
+  //     total += getTotalOrderPrice(foodOrder);
+  //   });
+  //   return  order.foodOrders[0].food.restaurant.adminCommission/100 * total;
+  // }
 
   static double getMyEarning(Order order) {
     double restaurantLatitude= double.parse(order.foodOrders[0].food.restaurant.latitude);

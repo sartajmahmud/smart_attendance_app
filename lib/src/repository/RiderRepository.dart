@@ -2,11 +2,12 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:foodaholic_rider_app/src/BackgroundGPS/file_manager.dart';
 import 'package:foodaholic_rider_app/src/helpers/custom_trace.dart';
 import 'package:foodaholic_rider_app/src/models/driver.dart';
 import 'package:foodaholic_rider_app/src/models/user.dart';
 import 'package:foodaholic_rider_app/src/repository/user_repository.dart';
-import 'package:geodesy/geodesy.dart';
+
 import 'package:global_configuration/global_configuration.dart';
 import 'package:http/http.dart' as http;
 import '../repository/user_repository.dart' as userRepo;
@@ -68,11 +69,11 @@ Future<int> UpdateRiderStatus({Driver driver}) async {
 //   }
 // }
 
-Future<void> UpdateRiderLocation({Driver driver, User user}) async {
-  //final String _apiToken = 'api_token=${currentUser.value.apiToken}';
-  final String _apiToken = 'api_token=${GlobalConfiguration().getString('api_token')}';
-  print(_apiToken);
-  final String url = 'http://admin.food-aholic.com/api/driver-current-location/39?api_token=IQyyJul4vjP6rdaKZrAU5ao33j6xO3YxIsj5Swvx21hJHD8QFAiMA0MeFivT';
+Future<void> UpdateRiderLocation({Driver driver}) async {
+  print("update rider location");
+  final apitoken=await FileManager.readLogFile();
+   print(apitoken);
+  final String url = 'http://admin.food-aholic.com/api/driver-current-location/$apitoken';
   final client = new http.Client();
   final response = await client.put(
     url,
@@ -80,7 +81,7 @@ Future<void> UpdateRiderLocation({Driver driver, User user}) async {
     body: json.encode(driver.UpdateLocationMap()),
   );
   print("this is update location $url");
-   print("this is update location body ${json.encode(driver.UpdateLocationMap())}");
+  // print("this is update user body ${json.encode(user.toMap())}");
   print("this is update location response body ${response.body}");
   //setCurrentUser(response.body);
   // int status = int.parse(json.decode(response.body)['data'].toString());

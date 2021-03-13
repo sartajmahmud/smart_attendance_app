@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodaholic_rider_app/src/pages/Earning.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../generated/l10n.dart';
@@ -77,6 +78,19 @@ class _DrawerWidgetState extends StateMVC<DrawerWidget> {
                   ),
                   title: Text(
                     S.of(context).notifications,
+                    style: Theme.of(context).textTheme.subtitle1,
+                  ),
+                ),
+                ListTile(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Earning()));
+                  },
+                  leading: Icon(
+                    Icons.monetization_on,
+                    color: Theme.of(context).focusColor.withOpacity(1),
+                  ),
+                  title: Text(
+                    S.of(context).earning,
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
                 ),
