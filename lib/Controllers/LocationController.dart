@@ -5,7 +5,7 @@ import '../Repositories/LocationRepository.dart' as repository;
 import 'package:flutter/material.dart';
 
 class LocationController extends ControllerMVC{
-  Location location ;
+  OfficeLocation location ;
 
   void getLoc() async{
     location = await repository.getLocation();

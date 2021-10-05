@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:smart_attendance/Controllers/HomeScreenController.dart';
-import 'package:smart_attendance/Controllers/UserController.dart';
 import 'package:smart_attendance/Repositories/UserRepository.dart';
 import 'package:smart_attendance/Views/login_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  UserController con;
-  HomeScreen({this.con});
+  HomeScreen();
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -16,6 +14,23 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
   HomeScreenController _con;
   _HomeScreenState() : super(HomeScreenController()) {
     _con = controller;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await this.initialFunc();
+      setState(() { });
+    });
+
+    super.initState();
+  }
+
+  initialFunc() async {
+    await _con.getUserData();
+    await _con.getOfficeLocation();
+    await _con.getOfficeNetwork();
   }
 
   @override
@@ -42,7 +57,8 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
               ),
               onPressed: () {
                 logout().then((value) {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => LoginScreen()));
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (BuildContext context) => LoginScreen()));
                 });
               },
             ),
@@ -87,7 +103,9 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                             "Hello",
                             style: TextStyle(fontSize: 20),
                           ),
-                          SizedBox(height: 5,),
+                          SizedBox(
+                            height: 5,
+                          ),
                           Text(
                             "${currentUser.value.name}",
                             style: TextStyle(
@@ -107,8 +125,10 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                             'Your Attendance Type',
                             style: TextStyle(fontSize: 20),
                           ),
-                          SizedBox(height: 5,),
-                          currentUser.value.attendance_type == 1
+                          SizedBox(
+                            height: 5,
+                          ),
+                          currentUser.value.attendance_type == 2
                               ? Text(
                                   'Network Based',
                                   style: TextStyle(
@@ -124,92 +144,109 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                         ],
                       )),
                   Expanded(
-                      flex: 2,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex:3,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Center(
-                                  child: Text('Todays Entry Time',
-                                    style: TextStyle(fontSize: 20),),
+                    flex: 2,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 3,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Center(
+                                child: Text(
+                                  'Todays Entry Time',
+                                  style: TextStyle(fontSize: 20),
                                 ),
-                                Text('Time')
-                              ],
-                            ),
+                              ),
+                              SizedBox(height: 10,),
+                              _con.up.entry_time != null ? Text('${_con.up.entry_time}',
+                                style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold),) :Text ("Attendance not counted yet")
+                            ],
                           ),
-                          Expanded(
-                            flex: 1,
-                            child: Center(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.green,
-                                    borderRadius: BorderRadius.circular(60)
-                                ),
-                                child: FlatButton(
-                                  onPressed: () async {
-                                    await _con.Entry(currentUser.value.attendance_type);
-                                  },
-                                  child: Text("Entry"),
-                                ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Center(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.green,
+                                  borderRadius: BorderRadius.circular(60)),
+                              child: FlatButton(
+                                onPressed: () async {
+                                  //print(_con.location.radius);
+                                  print(_con.network.ssid);
+                                  await _con.Entry(_con.up.attendance_type,
+                                      _con.location, _con.network);
+                                  await _con.getUserData();
+                                  setState(() {});
+                                },
+                                child: Text("Entry"),
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
+                    ),
                   ),
                   Expanded(
-                      flex: 2,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex:3,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Center(
-                                  child: Text('Todays Exit Time',
-                                    style: TextStyle(fontSize: 20),),
+                    flex: 2,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 3,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Center(
+                                child: Text(
+                                  'Todays Exit Time',
+                                  style: TextStyle(fontSize: 20),
                                 ),
-                                Text('Time')
-                              ],
-                            ),
+                              ),
+                              SizedBox(height: 10,),
+                              _con.up.exit_time != null ?
+                              Text('${_con.up.exit_time}',
+                                style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold),) :Text("You have not exited yet")
+                            ],
                           ),
-                          Expanded(
-                            flex: 1,
-                            child: Center(
-                              child: Container(
-
-                                decoration: BoxDecoration(
-                                    color: Colors.red,
-                                  borderRadius: BorderRadius.circular(60)
-                                ),
-                                child: FlatButton(
-                                  onPressed: () async {
-                                    await _con.Exit(currentUser.value.attendance_type);
-                                  },
-                                  child: Text("Exit"),
-                                ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Center(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  borderRadius: BorderRadius.circular(60)),
+                              child: FlatButton(
+                                onPressed: () async {
+                                  await _con.Exit(_con.up.attendance_type);
+                                  await _con.getUserData();
+                                  setState(() {});
+                                },
+                                child: Text("Exit"),
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
+                    ),
                   ),
                   Expanded(
-                      flex: 2,
-                      child: FlatButton(
-                          onPressed: () async {
-                            await widget.con.login().then((value) {
-                              setState(() {
-
-                              });
-                            });
-                          },
-                          child: Text("Refresh"),
-                      ),
+                    flex: 2,
+                    child: FlatButton(
+                      onPressed: () async {
+                        setState(() {
+                          _con.getUserData();
+                          _con.getOfficeLocation(id:_con.up.location_id);
+                          _con.getOfficeNetwork(id:_con.up.network_id);
+                        });
+                      },
+                      child: Text("Refresh"),
+                    ),
                   ),
                 ],
               ),

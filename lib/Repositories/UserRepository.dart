@@ -4,9 +4,11 @@ import 'package:smart_attendance/Models/User.dart';
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:smart_attendance/Models/UserProfile.dart';
+import 'package:intl/intl.dart';
 
 ValueNotifier<User> currentUser = new ValueNotifier(User());
-String ServerUrl = "http://192.168.1.7:8080/api";
+String ServerUrl = "http://192.168.1.8:8080/api";
 
 Future<User> login(User user) async {
   final String url = '$ServerUrl/login';
@@ -34,21 +36,21 @@ Future<User> login(User user) async {
 Future<User> register(User user) async {
   final String url = '$ServerUrl/register';
   final client = new http.Client();
-
+  print("This is Register body ${json.encode(user.signUpMap())}");
   final response = await client.post(
     url,
     headers: {HttpHeaders.contentTypeHeader: 'application/json'},
-    body: json.encode(user.loginMap()),
+    body: json.encode(user.signUpMap()),
   );
   print("This is Register $url");
-  print("This is Register body ${json.encode(user.loginMap())}");
+  print("This is Register body ${json.encode(user.signUpMap())}");
   print("this is Register response ${response.body}");
   if (response.statusCode == 200) {
     setCurrentUser(response.body);
     currentUser.value = User.fromJSON(json.decode(response.body));
   } else {
     print(response.body.toString());
-    throw new Exception(response.body);
+    //throw new Exception(response.body);
   }
   return currentUser.value;
 }
@@ -88,3 +90,76 @@ Future<void> logout() async {
   await prefs.remove('current_user');
 }
 
+
+Future<UserProfile> getUserProfile() async {
+  final String url = '$ServerUrl/homescreendata/${currentUser.value.id}';
+  print(url);
+  final client = new http.Client();
+  final response = await client.get(
+    url,
+    headers: {HttpHeaders.contentTypeHeader: 'application/json'},
+  );
+
+  print("This is UserProfile $url");
+  print("this is UserProfile response ${response.body}");
+  if (response.statusCode == 200) {
+    return UserProfile.fromJSON(json.decode(response.body));
+  } else {
+    print(response.body.toString());
+    throw new Exception(response.body);
+  }
+}
+
+Future<void> entryAttendance() async {
+
+  DateTime now = DateTime.now();
+  String formattedDate = DateFormat('y-M-d kk:mm:ss').format(now);
+  Map toMap() {
+
+    var map = new Map<String, dynamic>();
+    map['user_id'] = currentUser.value.id;
+    map['entry_time'] = formattedDate;
+    return map;
+  }
+
+
+
+  final String url = '$ServerUrl/entry';
+  print("This is entry body ${json.encode(toMap())}");
+  final client = new http.Client();
+  final response = await client.post(
+    url,
+    headers: {HttpHeaders.contentTypeHeader: 'application/json'},
+    body: json.encode(toMap()),
+  );
+  print("This is entry $url");
+  print("This is entry body ${json.encode(toMap())}");
+  print("this is entry response ${response.body}");
+}
+
+Future<void> exitAttendance() async {
+
+  DateTime now = DateTime.now();
+  String formattedDate = DateFormat('y-M-d kk:mm:ss').format(now);
+  Map toMap() {
+
+    var map = new Map<String, dynamic>();
+    map['user_id'] = currentUser.value.id;
+    map['exit_time'] = formattedDate;
+    return map;
+  }
+
+
+
+  final String url = '$ServerUrl/exit';
+  print("This is exit body ${json.encode(toMap())}");
+  final client = new http.Client();
+  final response = await client.post(
+    url,
+    headers: {HttpHeaders.contentTypeHeader: 'application/json'},
+    body: json.encode(toMap()),
+  );
+  print("This is exit $url");
+  print("This is exit body ${json.encode(toMap())}");
+  print("this is exit response ${response.body}");
+}

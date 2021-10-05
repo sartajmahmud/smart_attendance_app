@@ -16,10 +16,10 @@ class UserController extends ControllerMVC{
   });
         }
 
-  Future<void> login({UserController con}) async{
+  Future<void> login() async{
     await repository.login(user).then((value) async{
       if (value != null) {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => HomeScreen(con: con,)));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => HomeScreen()));
       }
     }).catchError((e) async{
 
@@ -29,7 +29,7 @@ class UserController extends ControllerMVC{
     });
   }
 
-  void register() async {
+  Future<void> register() async {
 
       repository.register(user).then((value) {
         if (value != null ) {

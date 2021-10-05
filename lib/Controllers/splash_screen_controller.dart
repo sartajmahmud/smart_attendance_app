@@ -29,6 +29,8 @@ class SplashScreenController extends ControllerMVC {
     // });
   }
 
+
+
   void configureFirebase(FirebaseMessaging _firebaseMessaging) {
     try {
       _firebaseMessaging.configure(

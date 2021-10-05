@@ -1,23 +1,21 @@
+
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:smart_attendance/Controllers/UserController.dart';
-import 'package:smart_attendance/Repositories/UserRepository.dart';
-import 'package:smart_attendance/Views/signup_screen.dart';
 
-import 'home_screen.dart';
-
-class LoginScreen extends StatefulWidget {
+class SignUpScreen extends StatefulWidget {
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _SignUpScreenState createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends StateMVC<LoginScreen> {
+class _SignUpScreenState extends StateMVC<SignUpScreen> {
   UserController _con;
 
-  _LoginScreenState() : super(UserController()) {
+  _SignUpScreenState() : super(UserController()) {
     _con = controller;
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +44,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Expanded(flex: 1, child: Container()),
-                 Expanded(
+                Expanded(
                   flex: 3,
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(0,0,0,20),
@@ -56,12 +54,13 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                 const Expanded(
                   flex: 1,
                   child: Text("Smart Attendance System",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                  ),),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),),
                 ),
+
                 Expanded(
                   flex: 7,
                   child: Form(
@@ -82,13 +81,39 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                               style: const TextStyle(
                                 color: Colors.black,
                               ),
+                              keyboardType: TextInputType.text,
+                              onChanged: (input) => _con.user.name = input,
+                              decoration: const InputDecoration(
+                                contentPadding: EdgeInsets.only(top: 14.0),
+                                hintText: 'Name',
+                                prefixIcon:
+                                Icon(Icons.person, color: Color(0xFFbf1e2e)),
+                                border: InputBorder.none,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 60, right: 60),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.0),
+                              color: Colors.white,
+                            ),
+                            alignment: Alignment.centerLeft,
+                            height: 60.0,
+                            child: TextFormField(
+                              style: const TextStyle(
+                                color: Colors.black,
+                              ),
                               keyboardType: TextInputType.emailAddress,
                               onChanged: (input) => _con.user.email = input,
                               decoration: const InputDecoration(
                                 contentPadding: EdgeInsets.only(top: 14.0),
                                 hintText: 'Email',
                                 prefixIcon:
-                                    Icon(Icons.email, color: Color(0xFFbf1e2e)),
+                                Icon(Icons.email, color: Color(0xFFbf1e2e)),
                                 border: InputBorder.none,
                               ),
                             ),
@@ -131,11 +156,11 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                             child: RaisedButton(
                               elevation: 5.0,
                               onPressed: () async {
+                                print('${_con.user.name}');
                                 print('${_con.user.email}');
                                 print('${_con.user.password}');
-                                await _con.login().then((value) {
-                                });
-                               // print(currentUser.value.name);
+                                await _con.register();
+                                // print(currentUser.value.name);
 
 
                               },
@@ -145,7 +170,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                               ),
                               color: Colors.white,
                               child: const Text(
-                                'LOGIN',
+                                'Sign Up',
                                 style: TextStyle(
                                   color: Color(0xFFbf1e2e),
                                   letterSpacing: 1.5,
@@ -156,34 +181,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 15),
-                        Container(
-                          alignment: Alignment.center,
-                          child: GestureDetector(
-                            onTap: () => Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => SignUpScreen()) ),
-                            child: RichText(
-                              text: const TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: 'Don\'t have an Account? ',
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  TextSpan(
-                                    text: 'Sign Up',
-                                    style: TextStyle(
-                                        decoration: TextDecoration.underline,
-                                        fontSize: 15,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        )
+
                       ],
                     ),
                   ),

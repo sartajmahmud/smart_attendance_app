@@ -34,6 +34,10 @@ dependencies:
   fluttertoast: 4.0.1
   mvc_pattern: 6.3.0
   shared_preferences: ^0.5.12+2
+  google_maps_flutter: ^1.0.6
+  location: 3.0.2
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
