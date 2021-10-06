@@ -4,7 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:smart_attendance/Models/UserProfile.dart';
 import 'package:smart_attendance/Repositories/UserRepository.dart';
+import 'package:smart_attendance/Views/splash_screen.dart';
 
 class SplashScreenController extends ControllerMVC {
   //ValueNotifier<Map<String, double>> progress = new ValueNotifier(new Map());
@@ -13,6 +15,10 @@ class SplashScreenController extends ControllerMVC {
 
   SplashScreenController() {
    // this.scaffoldKey = new GlobalKey<ScaffoldState>();
+  }
+  UserProfile up;
+  Future<void> getUserData() async {
+    up = await getUserProfile();
   }
 
   @override
@@ -49,6 +55,7 @@ class SplashScreenController extends ControllerMVC {
   Future notificationOnResume(Map<String, dynamic> message) async {
 
     try {
+      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => SplashScreen()));
       // if (message['data']['id'] == "orders") {
       //   if(currentUser.value.apiToken!=null){
       //     Navigator.pushReplacementNamed('/Pages',arguments: 2);
@@ -73,6 +80,7 @@ class SplashScreenController extends ControllerMVC {
 
   Future notificationOnLaunch(Map<String, dynamic> message) async {
     try {
+      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => SplashScreen()));
      // // if (messageId != message['google.message_id']) {
      //    //await settingRepo.saveMessageId(message['google.message_id']);
      //    if (message['data']['id'] == "orders") {
@@ -100,11 +108,11 @@ class SplashScreenController extends ControllerMVC {
 
   Future notificationOnMessage(Map<String, dynamic> message) async {
     print(message['notification']['title']);
-    List parts = message['notification']['title'].toString().split(' ');
-    print(parts);
-    if(parts[0] == 'Your'){
-      // Navigator.pushReplacement('/Pages');
-    }
+    // List parts = message['notification']['title'].toString().split(' ');
+    // print(parts);
+    // if(parts[0] == 'Your'){
+    //   // Navigator.pushReplacement('/Pages');
+    // }
     Fluttertoast.showToast(
       msg: message['notification']['title'],
       toastLength: Toast.LENGTH_LONG,

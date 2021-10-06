@@ -110,7 +110,7 @@ Future<UserProfile> getUserProfile() async {
   }
 }
 
-Future<void> entryAttendance() async {
+Future<String> entryAttendance() async {
 
   DateTime now = DateTime.now();
   String formattedDate = DateFormat('y-M-d kk:mm:ss').format(now);
@@ -135,9 +135,10 @@ Future<void> entryAttendance() async {
   print("This is entry $url");
   print("This is entry body ${json.encode(toMap())}");
   print("this is entry response ${response.body}");
+  return jsonDecode(response.body)['message'];
 }
 
-Future<void> exitAttendance() async {
+Future<String> exitAttendance() async {
 
   DateTime now = DateTime.now();
   String formattedDate = DateFormat('y-M-d kk:mm:ss').format(now);
@@ -162,4 +163,5 @@ Future<void> exitAttendance() async {
   print("This is exit $url");
   print("This is exit body ${json.encode(toMap())}");
   print("this is exit response ${response.body}");
+  return jsonDecode(response.body)['message'];
 }

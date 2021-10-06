@@ -14,11 +14,9 @@ import 'package:smart_attendance/Repositories/LocationRepository.dart';
 class HomeScreenController extends ControllerMVC {
   HomeScreenController();
   OfficeLocation location;
-  UserProfile up;
+
   Network network;
-  Future<void> getUserData() async {
-    up = await getUserProfile();
-  }
+
   getOfficeLocation({int id}) async {
 if(id!=null){
   location = await getLocation(id: id);
@@ -26,6 +24,11 @@ if(id!=null){
   location = await getLocation();
 }
 
+  }
+
+  UserProfile up;
+  Future<void> getUserData() async {
+    up = await getUserProfile();
   }
 
   getOfficeNetwork({int id})async{
@@ -62,7 +65,11 @@ if(id!=null){
     return _locationData = await location.getLocation();
 
   }
-  Future<void> Entry(int attendance_type, OfficeLocation x, Network network) async {
+  Future<void> Entry(int attendance_type, OfficeLocation x, Network network , GlobalKey<ScaffoldState> ScaffoldKey) async {
+    // Scaffold.of(context).showSnackBar(new SnackBar(
+    //     content: new Text("entry")
+    // ));
+
     if(attendance_type==1){
       //entry with location logic
     LocationData userlocation = await getCurrentLocation();
@@ -71,8 +78,21 @@ if(id!=null){
     print(distance);
     print('radius ${x.radius}');
       if(distance < x.radius) {
-      await entryAttendance();
-    }else{
+        String response = await entryAttendance();
+        print(response);
+        if(response == "already exists"){
+          ScaffoldKey?.currentState
+              ?.showSnackBar(SnackBar(
+              content: Text("Entry Attendance already exists")));
+        }else{
+          ScaffoldKey?.currentState
+              ?.showSnackBar(SnackBar(
+              content: Text("Successfully entered your attendance")));
+        }
+      }else{
+        ScaffoldKey?.currentState
+            ?.showSnackBar(SnackBar(
+            content: Text("You are out of attendance area")));
       print('cant log in out of the area');
     }
     }else{
@@ -80,22 +100,56 @@ if(id!=null){
       var wifiName = await WifiInfo().getWifiName();
       print(wifiName);
       if(wifiName == network.ssid){
-        await entryAttendance();
+        String response =  await entryAttendance();
+        if(response == "already exists"){
+          ScaffoldKey?.currentState
+              ?.showSnackBar(SnackBar(
+              content: Text("Entry Attendance already exists")));
+        }else{
+          ScaffoldKey?.currentState
+              ?.showSnackBar(SnackBar(
+              content: Text("Successfully entered your attendance")));
+        }
       }else{
-        print('out of network');
+        ScaffoldKey?.currentState
+            ?.showSnackBar(SnackBar(
+            content: Text("You are out of your assigned Network")));
+        print('cant log in out of the area');
       }
 
 
     }
   }
-  Future<void> Exit(int attendance_type) async {
+  Future<void> Exit(int attendance_type , GlobalKey<ScaffoldState> ScaffoldKey) async {
     print(attendance_type);
     if(attendance_type==1){
 
-      await exitAttendance();
+      String response = await exitAttendance();
+      if(response == "already exists"){
+        ScaffoldKey?.currentState
+            ?.showSnackBar(SnackBar(
+            content: Text("Exit Attendance already exists")));
+      }else{
+        ScaffoldKey?.currentState
+            ?.showSnackBar(SnackBar(
+            content: Text("Successfully entered your exit attendance")));
+      }
+      print(response);
+
+
     }else{
 
-      await exitAttendance();
+      String response = await exitAttendance();
+      if(response == "already exists"){
+        ScaffoldKey?.currentState
+            ?.showSnackBar(SnackBar(
+            content: Text("Exit Attendance already exists")));
+      }else{
+        ScaffoldKey?.currentState
+            ?.showSnackBar(SnackBar(
+            content: Text("Successfully entered your exit attendance")));
+      }
+
     }
   }
 }

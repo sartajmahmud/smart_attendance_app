@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:smart_attendance/Controllers/HomeScreenController.dart';
+import 'package:smart_attendance/Models/UserProfile.dart';
 import 'package:smart_attendance/Repositories/UserRepository.dart';
 import 'package:smart_attendance/Views/login_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen();
+  UserProfile up;
+  HomeScreen(this.up);
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -27,8 +29,15 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
     super.initState();
   }
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
+  void showInSnackBar(String value) {
+    _scaffoldKey.currentState.showSnackBar(new SnackBar(content: new Text(value)));
+  }
+
   initialFunc() async {
-    await _con.getUserData();
+    _con.up= widget.up;
+    // await _con.getUserData();
     await _con.getOfficeLocation();
     await _con.getOfficeNetwork();
   }
@@ -36,17 +45,18 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.list_alt,
-            color: Colors.blue,
-          ),
-          onPressed: () {},
-        ),
+        // leading: IconButton(
+        //   icon: const Icon(
+        //     Icons.list_alt,
+        //     color: Colors.blue,
+        //   ),
+        //   onPressed: () {},
+        // ),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -107,7 +117,7 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                             height: 5,
                           ),
                           Text(
-                            "${currentUser.value.name}",
+                            "${_con.up.name}",
                             style: TextStyle(
                                 fontSize: 24, fontWeight: FontWeight.bold),
                           )
@@ -128,7 +138,7 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                           SizedBox(
                             height: 5,
                           ),
-                          currentUser.value.attendance_type == 2
+                          _con.up.attendance_type == 2
                               ? Text(
                                   'Network Based',
                                   style: TextStyle(
@@ -178,7 +188,7 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                                   //print(_con.location.radius);
                                   print(_con.network.ssid);
                                   await _con.Entry(_con.up.attendance_type,
-                                      _con.location, _con.network);
+                                      _con.location, _con.network, _scaffoldKey);
                                   await _con.getUserData();
                                   setState(() {});
                                 },
@@ -223,7 +233,7 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                                   borderRadius: BorderRadius.circular(60)),
                               child: FlatButton(
                                 onPressed: () async {
-                                  await _con.Exit(_con.up.attendance_type);
+                                  await _con.Exit(_con.up.attendance_type, _scaffoldKey);
                                   await _con.getUserData();
                                   setState(() {});
                                 },
@@ -239,10 +249,12 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                     flex: 2,
                     child: FlatButton(
                       onPressed: () async {
+                        await _con.getUserData();
+                        await _con.getOfficeLocation(id:_con.up.location_id);
+                        await _con.getOfficeNetwork(id:_con.up.network_id);
                         setState(() {
-                          _con.getUserData();
-                          _con.getOfficeLocation(id:_con.up.location_id);
-                          _con.getOfficeNetwork(id:_con.up.network_id);
+
+
                         });
                       },
                       child: Text("Refresh"),

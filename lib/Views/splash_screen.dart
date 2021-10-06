@@ -31,10 +31,12 @@ class _SplashScreenState extends StateMVC<SplashScreen> {
 
   initialFunc()async {
     WidgetsFlutterBinding.ensureInitialized();
+
     await getCurrentUser();
-    await Firebase.initializeApp().then((value) {
+    await Firebase.initializeApp().then((value) async {
       if(currentUser.value.name!=null){
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => HomeScreen()));
+        await _con.getUserData();
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => HomeScreen(_con.up)));
       }else{
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => LoginScreen()));
       }
