@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:smart_attendance/Configs/Server.dart';
 import 'package:smart_attendance/Models/Network.dart';
 import 'package:smart_attendance/Repositories/UserRepository.dart';
 
-String ServerUrl = "http://192.168.1.8:8080/api";
+String ServerUrl = getServerUrl();
 
 Future<Network> getNetwork({int id}) async {
   String url ;

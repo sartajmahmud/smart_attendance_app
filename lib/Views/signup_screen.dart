@@ -1,10 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:smart_attendance/Controllers/UserController.dart';
 
 class SignUpScreen extends StatefulWidget {
-
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
 }
@@ -22,21 +20,14 @@ class _SignUpScreenState extends StateMVC<SignUpScreen> {
       backgroundColor: Colors.deepOrangeAccent,
       body: SingleChildScrollView(
         child: Container(
-          decoration:  BoxDecoration(
+          decoration: BoxDecoration(
               gradient: LinearGradient(
-                begin: Alignment.bottomLeft,
-                end: Alignment.topRight,
-                // ignore: prefer_const_literals_to_create_immutables
-                stops: [
-                  0.0,
-                  1
-                ],
-                colors: [
-                  Colors.deepOrangeAccent,
-                  Colors.deepOrange.shade300
-                ],
-              )
-          ),
+            begin: Alignment.bottomLeft,
+            end: Alignment.topRight,
+            // ignore: prefer_const_literals_to_create_immutables
+            stops: [0.0, 1],
+            colors: [Colors.deepOrangeAccent, Colors.deepOrange.shade300],
+          )),
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: Column(
@@ -47,20 +38,24 @@ class _SignUpScreenState extends StateMVC<SignUpScreen> {
                 Expanded(
                   flex: 3,
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(0,0,0,20),
-                    child: Image.asset('assets/logo.png',scale: 5,),
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+                    child: Image.asset(
+                      'assets/logo.png',
+                      scale: 5,
+                    ),
                   ),
                 ),
                 const Expanded(
                   flex: 1,
-                  child: Text("Smart Attendance System",
+                  child: Text(
+                    "Smart Attendance System",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.white,
-                    ),),
+                    ),
+                  ),
                 ),
-
                 Expanded(
                   flex: 7,
                   child: Form(
@@ -86,8 +81,8 @@ class _SignUpScreenState extends StateMVC<SignUpScreen> {
                               decoration: const InputDecoration(
                                 contentPadding: EdgeInsets.only(top: 14.0),
                                 hintText: 'Name',
-                                prefixIcon:
-                                Icon(Icons.person, color: Color(0xFFbf1e2e)),
+                                prefixIcon: Icon(Icons.person,
+                                    color: Color(0xFFbf1e2e)),
                                 border: InputBorder.none,
                               ),
                             ),
@@ -113,7 +108,7 @@ class _SignUpScreenState extends StateMVC<SignUpScreen> {
                                 contentPadding: EdgeInsets.only(top: 14.0),
                                 hintText: 'Email',
                                 prefixIcon:
-                                Icon(Icons.email, color: Color(0xFFbf1e2e)),
+                                    Icon(Icons.email, color: Color(0xFFbf1e2e)),
                                 border: InputBorder.none,
                               ),
                             ),
@@ -127,7 +122,6 @@ class _SignUpScreenState extends StateMVC<SignUpScreen> {
                               borderRadius: BorderRadius.circular(10.0),
                               color: Colors.white,
                             ),
-
                             alignment: Alignment.centerLeft,
                             height: 60.0,
                             child: TextFormField(
@@ -160,9 +154,6 @@ class _SignUpScreenState extends StateMVC<SignUpScreen> {
                                 print('${_con.user.email}');
                                 print('${_con.user.password}');
                                 await _con.register();
-                                // print(currentUser.value.name);
-
-
                               },
                               padding: const EdgeInsets.all(15.0),
                               shape: RoundedRectangleBorder(
@@ -181,7 +172,6 @@ class _SignUpScreenState extends StateMVC<SignUpScreen> {
                             ),
                           ),
                         ),
-
                       ],
                     ),
                   ),

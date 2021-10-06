@@ -5,7 +5,7 @@ class Network {
 
   Network();
 
-  Network.fromJSON(Map<String, dynamic> jsonMap){
+  Network.fromJSON(Map<String, dynamic> jsonMap) {
     try {
       id = jsonMap['id'];
       ssid = jsonMap['ssid'];

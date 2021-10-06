@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:smart_attendance/Controllers/UserController.dart';
-import 'package:smart_attendance/Repositories/UserRepository.dart';
 import 'package:smart_attendance/Views/signup_screen.dart';
 
-import 'home_screen.dart';
-
 class LoginScreen extends StatefulWidget {
-
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -24,21 +20,14 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
       backgroundColor: Colors.deepOrangeAccent,
       body: SingleChildScrollView(
         child: Container(
-          decoration:  BoxDecoration(
+          decoration: BoxDecoration(
               gradient: LinearGradient(
-                begin: Alignment.bottomLeft,
-                end: Alignment.topRight,
-                // ignore: prefer_const_literals_to_create_immutables
-                stops: [
-                  0.0,
-                  1
-                ],
-                colors: [
-                  Colors.deepOrangeAccent,
-                  Colors.deepOrange.shade300
-                ],
-              )
-          ),
+            begin: Alignment.bottomLeft,
+            end: Alignment.topRight,
+            // ignore: prefer_const_literals_to_create_immutables
+            stops: [0.0, 1],
+            colors: [Colors.deepOrangeAccent, Colors.deepOrange.shade300],
+          )),
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: Column(
@@ -46,21 +35,26 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Expanded(flex: 1, child: Container()),
-                 Expanded(
+                Expanded(
                   flex: 3,
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(0,0,0,20),
-                    child: Image.asset('assets/logo.png',scale: 5,),
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+                    child: Image.asset(
+                      'assets/logo.png',
+                      scale: 5,
+                    ),
                   ),
                 ),
                 const Expanded(
                   flex: 1,
-                  child: Text("Smart Attendance System",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                  ),),
+                  child: Text(
+                    "Smart Attendance System",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
                 Expanded(
                   flex: 7,
@@ -102,7 +96,6 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                               borderRadius: BorderRadius.circular(10.0),
                               color: Colors.white,
                             ),
-
                             alignment: Alignment.centerLeft,
                             height: 60.0,
                             child: TextFormField(
@@ -133,11 +126,8 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                               onPressed: () async {
                                 print('${_con.user.email}');
                                 print('${_con.user.password}');
-                                await _con.login().then((value) {
-                                });
-                               // print(currentUser.value.name);
-
-
+                                await _con.login().then((value) {});
+                                // print(currentUser.value.name);
                               },
                               padding: const EdgeInsets.all(15.0),
                               shape: RoundedRectangleBorder(
@@ -160,7 +150,11 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                         Container(
                           alignment: Alignment.center,
                           child: GestureDetector(
-                            onTap: () => Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => SignUpScreen()) ),
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        SignUpScreen())),
                             child: RichText(
                               text: const TextSpan(
                                 children: [

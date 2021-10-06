@@ -7,7 +7,7 @@ class OfficeLocation {
 
   OfficeLocation();
 
-  OfficeLocation.fromJSON(Map<String, dynamic> jsonMap){
+  OfficeLocation.fromJSON(Map<String, dynamic> jsonMap) {
     try {
       id = jsonMap['id'];
       name = jsonMap['name'];

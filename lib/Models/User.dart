@@ -1,4 +1,4 @@
-class User{
+class User {
   int id;
   String name;
   String password;
@@ -19,8 +19,8 @@ class User{
     return map.toString();
   }
 
-  User.fromJSON(Map<String, dynamic> jsonMap){
-    try{
+  User.fromJSON(Map<String, dynamic> jsonMap) {
+    try {
       id = jsonMap['id'];
       name = jsonMap['name'];
       email = jsonMap['email'];
@@ -28,14 +28,12 @@ class User{
       location_id = jsonMap['location_id'];
       network_id = jsonMap['network_id'];
       device_token = jsonMap['device_token'];
-
-    }catch(e){
+    } catch (e) {
       print(e);
     }
   }
 
   Map loginMap() {
-
     var map = new Map<String, dynamic>();
     map['email'] = email;
     map['password'] = password;

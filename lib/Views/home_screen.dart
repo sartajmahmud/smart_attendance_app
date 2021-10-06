@@ -23,7 +23,7 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
     // TODO: implement initState
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await this.initialFunc();
-      setState(() { });
+      setState(() {});
     });
 
     super.initState();
@@ -32,12 +32,12 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   void showInSnackBar(String value) {
-    _scaffoldKey.currentState.showSnackBar(new SnackBar(content: new Text(value)));
+    _scaffoldKey.currentState
+        .showSnackBar(new SnackBar(content: new Text(value)));
   }
 
   initialFunc() async {
-    _con.up= widget.up;
-    // await _con.getUserData();
+    _con.up = widget.up;
     await _con.getOfficeLocation();
     await _con.getOfficeNetwork();
   }
@@ -50,13 +50,6 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        // leading: IconButton(
-        //   icon: const Icon(
-        //     Icons.list_alt,
-        //     color: Colors.blue,
-        //   ),
-        //   onPressed: () {},
-        // ),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -168,11 +161,17 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                                   style: TextStyle(fontSize: 20),
                                 ),
                               ),
-                              SizedBox(height: 10,),
-                              _con.up.entry_time != null ? Text('${_con.up.entry_time}',
-                                style: TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold),) :Text ("Attendance not counted yet")
+                              SizedBox(
+                                height: 10,
+                              ),
+                              _con.up.entry_time != null
+                                  ? Text(
+                                      '${_con.up.entry_time}',
+                                      style: TextStyle(
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.bold),
+                                    )
+                                  : Text("Attendance not counted yet")
                             ],
                           ),
                         ),
@@ -187,8 +186,11 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                                 onPressed: () async {
                                   //print(_con.location.radius);
                                   print(_con.network.ssid);
-                                  await _con.Entry(_con.up.attendance_type,
-                                      _con.location, _con.network, _scaffoldKey);
+                                  await _con.Entry(
+                                      _con.up.attendance_type,
+                                      _con.location,
+                                      _con.network,
+                                      _scaffoldKey);
                                   await _con.getUserData();
                                   setState(() {});
                                 },
@@ -215,12 +217,17 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                                   style: TextStyle(fontSize: 20),
                                 ),
                               ),
-                              SizedBox(height: 10,),
-                              _con.up.exit_time != null ?
-                              Text('${_con.up.exit_time}',
-                                style: TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold),) :Text("You have not exited yet")
+                              SizedBox(
+                                height: 10,
+                              ),
+                              _con.up.exit_time != null
+                                  ? Text(
+                                      '${_con.up.exit_time}',
+                                      style: TextStyle(
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.bold),
+                                    )
+                                  : Text("You have not exited yet")
                             ],
                           ),
                         ),
@@ -233,9 +240,16 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                                   borderRadius: BorderRadius.circular(60)),
                               child: FlatButton(
                                 onPressed: () async {
-                                  await _con.Exit(_con.up.attendance_type, _scaffoldKey);
-                                  await _con.getUserData();
-                                  setState(() {});
+                                  if(_con.up.entry_time == null){
+                                    _scaffoldKey?.currentState?.showSnackBar(SnackBar(
+                                        content: Text("You have no entry attendance yet")));
+                                  }else{
+                                    await _con.Exit(
+                                        _con.up.attendance_type, _scaffoldKey);
+                                    await _con.getUserData();
+                                    setState(() {});
+                                  }
+
                                 },
                                 child: Text("Exit"),
                               ),
@@ -250,12 +264,9 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                     child: FlatButton(
                       onPressed: () async {
                         await _con.getUserData();
-                        await _con.getOfficeLocation(id:_con.up.location_id);
-                        await _con.getOfficeNetwork(id:_con.up.network_id);
-                        setState(() {
-
-
-                        });
+                        await _con.getOfficeLocation(id: _con.up.location_id);
+                        await _con.getOfficeNetwork(id: _con.up.network_id);
+                        setState(() {});
                       },
                       child: Text("Refresh"),
                     ),

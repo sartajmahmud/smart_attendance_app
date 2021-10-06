@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:smart_attendance/Configs/Server.dart';
 import 'package:smart_attendance/Models/User.dart';
 import 'dart:convert';
 import 'dart:io';
@@ -8,7 +9,8 @@ import 'package:smart_attendance/Models/UserProfile.dart';
 import 'package:intl/intl.dart';
 
 ValueNotifier<User> currentUser = new ValueNotifier(User());
-String ServerUrl = "http://192.168.1.8:8080/api";
+
+String ServerUrl = getServerUrl();
 
 Future<User> login(User user) async {
   final String url = '$ServerUrl/login';
@@ -61,7 +63,8 @@ void setCurrentUser(jsonString) async {
   try {
     if (json.decode(jsonString) != null) {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setString('current_user', json.encode(json.decode(jsonString)));
+      await prefs.setString(
+          'current_user', json.encode(json.decode(jsonString)));
     }
   } catch (e) {
     print("this is current user catch");
@@ -74,7 +77,8 @@ Future<User> getCurrentUser() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   //prefs.clear();
   if (currentUser.value.auth == null && prefs.containsKey('current_user')) {
-    currentUser.value = User.fromJSON(json.decode(await prefs.get('current_user')));
+    currentUser.value =
+        User.fromJSON(json.decode(await prefs.get('current_user')));
     currentUser.value.auth = true;
   } else {
     currentUser.value.auth = false;
@@ -89,7 +93,6 @@ Future<void> logout() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.remove('current_user');
 }
-
 
 Future<UserProfile> getUserProfile() async {
   final String url = '$ServerUrl/homescreendata/${currentUser.value.id}';
@@ -111,18 +114,14 @@ Future<UserProfile> getUserProfile() async {
 }
 
 Future<String> entryAttendance() async {
-
   DateTime now = DateTime.now();
   String formattedDate = DateFormat('y-M-d kk:mm:ss').format(now);
   Map toMap() {
-
     var map = new Map<String, dynamic>();
     map['user_id'] = currentUser.value.id;
     map['entry_time'] = formattedDate;
     return map;
   }
-
-
 
   final String url = '$ServerUrl/entry';
   print("This is entry body ${json.encode(toMap())}");
@@ -139,18 +138,14 @@ Future<String> entryAttendance() async {
 }
 
 Future<String> exitAttendance() async {
-
   DateTime now = DateTime.now();
   String formattedDate = DateFormat('y-M-d kk:mm:ss').format(now);
   Map toMap() {
-
     var map = new Map<String, dynamic>();
     map['user_id'] = currentUser.value.id;
     map['exit_time'] = formattedDate;
     return map;
   }
-
-
 
   final String url = '$ServerUrl/exit';
   print("This is exit body ${json.encode(toMap())}");

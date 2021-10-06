@@ -5,17 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:smart_attendance/Models/UserProfile.dart';
+import 'package:smart_attendance/Repositories/SettingsRepostiory.dart';
 import 'package:smart_attendance/Repositories/UserRepository.dart';
 import 'package:smart_attendance/Views/splash_screen.dart';
 
+import '../Views/home_screen.dart';
+
 class SplashScreenController extends ControllerMVC {
-  //ValueNotifier<Map<String, double>> progress = new ValueNotifier(new Map());
-  //GlobalKey<ScaffoldState> scaffoldKey;
   final FirebaseMessaging firebaseMessaging = FirebaseMessaging();
 
-  SplashScreenController() {
-   // this.scaffoldKey = new GlobalKey<ScaffoldState>();
-  }
+  SplashScreenController() {}
   UserProfile up;
   Future<void> getUserData() async {
     up = await getUserProfile();
@@ -24,18 +23,11 @@ class SplashScreenController extends ControllerMVC {
   @override
   void initState() {
     super.initState();
-    firebaseMessaging.requestNotificationPermissions(const IosNotificationSettings(sound: true, badge: true, alert: true));
+    firebaseMessaging.requestNotificationPermissions(
+        const IosNotificationSettings(sound: true, badge: true, alert: true));
     configureFirebase(firebaseMessaging);
     firebaseMessaging.getToken().then((value) => print(value));
-
-    // Timer(Duration(seconds: 20), () {
-    //   scaffoldKey?.currentState?.showSnackBar(const SnackBar(
-    //     content: Text("Verify your internet connection"),
-    //   ));
-    // });
   }
-
-
 
   void configureFirebase(FirebaseMessaging _firebaseMessaging) {
     try {
@@ -53,26 +45,9 @@ class SplashScreenController extends ControllerMVC {
   }
 
   Future notificationOnResume(Map<String, dynamic> message) async {
-
     try {
-      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => SplashScreen()));
-      // if (message['data']['id'] == "orders") {
-      //   if(currentUser.value.apiToken!=null){
-      //     Navigator.pushReplacementNamed('/Pages',arguments: 2);
-      //   }
-      //   else{
-      //     settingRepo.navigatorKey.currentState.pushReplacementNamed('/Login');
-      //   }
-      //   // settingRepo.navigatorKey.currentState.pushReplacementNamed('/Pages', arguments: 2);
-      // } else if (message['data']['id'] == "messages") {
-      //   if(currentUser.value.apiToken!=null){
-      //     settingRepo.navigatorKey.currentState.pushReplacementNamed('/Pages',arguments: 0);
-      //   }
-      //   else{
-      //     settingRepo.navigatorKey.currentState.pushReplacementNamed('/Login');
-      //   }
-      //   // settingRepo.navigatorKey.currentState.pushReplacementNamed('/Pages', arguments: 0);
-      // }
+      Navigator.push(context,
+          MaterialPageRoute(builder: (BuildContext context) => SplashScreen()));
     } catch (e) {
       print(e);
     }
@@ -80,45 +55,22 @@ class SplashScreenController extends ControllerMVC {
 
   Future notificationOnLaunch(Map<String, dynamic> message) async {
     try {
-      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => SplashScreen()));
-     // // if (messageId != message['google.message_id']) {
-     //    //await settingRepo.saveMessageId(message['google.message_id']);
-     //    if (message['data']['id'] == "orders") {
-     //      //if(currentUser.value.apiToken!=null){
-     //       // settingRepo.navigatorKey.currentState.pushReplacementNamed('/Pages',arguments: 2);
-     //     // }
-     //     // else{
-     //        //settingRepo.navigatorKey.currentState.pushReplacementNamed('/Login');
-     //     // }
-     //      //   settingRepo.navigatorKey.currentState.pushReplacementNamed('/Pages', arguments: 2);
-     //    } else if (message['data']['id'] == "messages") {
-     //      //if(currentUser.value.apiToken!=null){
-     //        // Navigator.pushReplacement('/Pages');
-     //      /
-     //      else{
-     //        // Navigator.pushReplacement('/Pages');
-     //      }
-     //      // settingRepo.navigatorKey.currentState.pushReplacementNamed('/Pages', arguments: 0);
-     //    }
-     //  }
+      Navigator.push(context,
+          MaterialPageRoute(builder: (BuildContext context) => SplashScreen()));
     } catch (e) {
       print(e);
     }
   }
 
   Future notificationOnMessage(Map<String, dynamic> message) async {
-    print(message['notification']['title']);
-    // List parts = message['notification']['title'].toString().split(' ');
-    // print(parts);
-    // if(parts[0] == 'Your'){
-    //   // Navigator.pushReplacement('/Pages');
-    // }
+    await getUserData();
     Fluttertoast.showToast(
       msg: message['notification']['title'],
       toastLength: Toast.LENGTH_LONG,
       gravity: ToastGravity.TOP,
       timeInSecForIosWeb: 6,
     );
+    navigatorKey.currentState.push(
+        MaterialPageRoute(builder: (BuildContext context) => HomeScreen(up)));
   }
-
 }
