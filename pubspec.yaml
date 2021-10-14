@@ -37,8 +37,10 @@ dependencies:
   google_maps_flutter: ^1.0.6
   location: 3.0.2
   flutter_spinkit: "^4.1.2"
-
-
+  background_locator: ^1.4.0+1
+  path_provider: ^1.6.24
+  location_permissions: ^3.0.0+1
+  toggle_switch: ^0.1.8
 dev_dependencies:
   flutter_test:
     sdk: flutter

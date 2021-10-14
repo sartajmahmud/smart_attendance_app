@@ -12,7 +12,7 @@ import 'package:smart_attendance/Repositories/LocationRepository.dart';
 class HomeScreenController extends ControllerMVC {
   HomeScreenController();
   OfficeLocation location;
-
+  int RiderStatus;
   Network network;
 
   getOfficeLocation({int id}) async {
@@ -26,6 +26,13 @@ class HomeScreenController extends ControllerMVC {
   UserProfile up;
   Future<void> getUserData() async {
     up = await getUserProfile();
+  }
+
+  Future<void> updateStatus()async{
+    //final response=await entryAttendance();
+    setState((){
+      //this.RiderStatus=response;
+    });
   }
 
   getOfficeNetwork({int id}) async {

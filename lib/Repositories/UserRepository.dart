@@ -113,7 +113,11 @@ Future<UserProfile> getUserProfile() async {
   }
 }
 
-Future<String> entryAttendance() async {
+Future<String> entryAttendance({User user}) async {
+  if(user!=null){
+    print('User found in entry attendance func');
+  }
+
   DateTime now = DateTime.now();
   String formattedDate = DateFormat('y-M-d kk:mm:ss').format(now);
   Map toMap() {

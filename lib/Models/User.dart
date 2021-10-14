@@ -7,7 +7,8 @@ class User {
   int location_id;
   int network_id;
   String device_token;
-
+  String latitude;
+  String longitude;
   bool auth;
 
   User();

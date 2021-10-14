@@ -5,6 +5,7 @@ class UserProfile {
   int network_id;
   String entry_time;
   String exit_time;
+  String status;
 
   UserProfile.fromJSON(Map<String, dynamic> jsonMap) {
     try {
