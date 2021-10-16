@@ -27,7 +27,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends StateMVC<HomeScreen> {
   HomeScreenController _con;
 
-  int status=1;
+  int status = 1;
 
   ReceivePort port = ReceivePort();
 
@@ -51,7 +51,7 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
     super.initState();
     FileManager.writeUser();
     if (IsolateNameServer.lookupPortByName(
-        LocationServiceRepository.isolateName) !=
+            LocationServiceRepository.isolateName) !=
         null) {
       IsolateNameServer.removePortNameMapping(
           LocationServiceRepository.isolateName);
@@ -61,7 +61,7 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
         port.sendPort, LocationServiceRepository.isolateName);
 
     port.listen(
-          (dynamic data) async {
+      (dynamic data) async {
         await updateUI(data);
       },
     );
@@ -71,11 +71,9 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
 
   @override
   void dispose() {
-
     // TODO: implement dispose
     super.dispose();
   }
-
 
   Future<void> updateUI(LocationDto data) async {
     // final log = await FileManager.readLogFile();
@@ -120,7 +118,6 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
 
     setState(() {
       isRunning = _isRunning;
-
     });
   }
 
@@ -186,13 +183,11 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                 notificationTitle: 'Start Location Tracking',
                 notificationMsg: 'Track location in background',
                 notificationBigMsg:
-                'Background location is on to keep the app up-tp-date with your location. This is required for main features to work properly when the app is not running.',
+                    'Background location is on to keep the app up-tp-date with your location. This is required for main features to work properly when the app is not running.',
                 notificationIcon: '',
                 notificationIconColor: Colors.grey,
                 notificationTapCallback:
-                LocationCallbackHandler.notificationCallback)
-        )
-    );
+                    LocationCallbackHandler.notificationCallback)));
   }
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -219,9 +214,10 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
         leading: Padding(
           padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
           child: IconButton(
-            icon: Icon(Icons.refresh,
-            size: 30,
-            color: Colors.green,
+            icon: Icon(
+              Icons.refresh,
+              size: 30,
+              color: Colors.green,
             ),
             onPressed: () async {
               await _con.getUserData();
@@ -440,45 +436,40 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                       ],
                     ),
                   ),
-                  Text('Background Process Status',
-                  style: TextStyle(
-                    fontSize: 18
-                  ),),
+                  Text(
+                    'Background Process Status',
+                    style: TextStyle(fontSize: 18),
+                  ),
                   ListTile(
                     title: ToggleSwitch(
-                      minWidth: (MediaQuery.of(context).size.width*.75)/2,
+                      minWidth: (MediaQuery.of(context).size.width * .75) / 2,
                       initialLabelIndex: status,
                       cornerRadius: 20.0,
                       activeFgColor: Colors.white,
                       inactiveBgColor: Colors.grey,
                       inactiveFgColor: Colors.white,
                       labels: ['Inactive', 'Active'],
-                      icons: [Icons.close,Icons.check],
+                      icons: [Icons.close, Icons.check],
                       activeBgColors: [Colors.red, Colors.green],
                       onToggle: (index) {
                         print('switched to: $index');
-                        if(index==0){
+                        if (index == 0) {
                           onStop();
                           // timer.cancel();
                           // isStopped=true;
-                           _con.up.status="0";
-                           _con.updateStatus();
-                           status=int.parse(_con.up.status);
-                        }
-                        else {
+                          _con.up.status = "0";
+                          _con.updateStatus();
+                          status = int.parse(_con.up.status);
+                        } else {
                           _onStart();
-                          _con.up.status="1";
-                         // _con.updateStatus();
-                          status=int.parse(_con.up.status);
+                          _con.up.status = "1";
+                          // _con.updateStatus();
+                          status = int.parse(_con.up.status);
 
-                          setState((){
-
-                             _con.Entry(
-                                _con.up.attendance_type,
-                                _con.location,
-                                _con.network,
-                                _scaffoldKey);
-                             _con.getUserData();
+                          setState(() {
+                            _con.Entry(_con.up.attendance_type, _con.location,
+                                _con.network, _scaffoldKey);
+                            _con.getUserData();
                           });
                           // timer = Timer.periodic(Duration(seconds: 5), (timer) {
                           //   _con.updateRiderlocation();
@@ -486,8 +477,6 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                         }
                       },
                     ),
-
-
                   ),
                   // Expanded(
                   //   flex: 2,

@@ -139,7 +139,7 @@ Future<String> entryAttendance() async {
     print("This is entry body ${json.encode(toMap())}");
     print("this is entry response ${response.body}");
     return jsonDecode(response.body)['message'];
-  }else if (now.hour >15) {
+  }else if (now.hour >12) {
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('y-M-d kk:mm:ss').format(now);
     Map toMap() {
@@ -165,6 +165,3 @@ Future<String> entryAttendance() async {
 
 }
 
-Future<String> exitAttendance() async {
-
-}

@@ -5,6 +5,12 @@ import 'package:background_locator/location_dto.dart';
 import 'package:smart_attendance/Models/User.dart';
 import 'package:smart_attendance/Repositories/UserRepository.dart';
 
+/*
+Need to bring user data here -> (id, assigned location and network)
+find current user location and network here
+post/call api with user id, current time , current location,network
+ */
+
 
 class LocationServiceRepository {
   static LocationServiceRepository _instance = LocationServiceRepository._();
@@ -53,7 +59,7 @@ class LocationServiceRepository {
     User user=new User();
     user.latitude=locationDto.latitude.toString();
     user.longitude=locationDto.longitude.toString();
-    final update=await entryAttendance();
+    //final update=await entryAttendance();
     print("this is current user ${user.latitude.toString()}");
     //  await setLogPosition(_count, locationDto);
     final SendPort send = IsolateNameServer.lookupPortByName(isolateName);

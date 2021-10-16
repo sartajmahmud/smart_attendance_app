@@ -67,7 +67,11 @@ class HomeScreenController extends ControllerMVC {
 
   Future<void> Entry(int attendance_type, OfficeLocation x, Network network,
       GlobalKey<ScaffoldState> ScaffoldKey) async {
+    print('attendance type = $attendance_type');
+
+    //make sure attendance_type in database -> 1.Location and 2.network
     if (attendance_type == 1) {
+
       //entry with location logic
       LocationData userlocation = await getCurrentLocation();
       print(userlocation);
@@ -111,28 +115,28 @@ class HomeScreenController extends ControllerMVC {
     }
   }
 
-  Future<void> Exit(
-      int attendance_type, GlobalKey<ScaffoldState> ScaffoldKey) async {
-    print(attendance_type);
-    if (attendance_type == 1) {
-      String response = await exitAttendance();
-      if (response == "already exists") {
-        ScaffoldKey?.currentState?.showSnackBar(
-            SnackBar(content: Text("Exit Attendance already exists")));
-      } else {
-        ScaffoldKey?.currentState?.showSnackBar(SnackBar(
-            content: Text("Successfully entered your exit attendance")));
-      }
-      print(response);
-    } else {
-      String response = await exitAttendance();
-      if (response == "already exists") {
-        ScaffoldKey?.currentState?.showSnackBar(
-            SnackBar(content: Text("Exit Attendance already exists")));
-      } else {
-        ScaffoldKey?.currentState?.showSnackBar(SnackBar(
-            content: Text("Successfully entered your exit attendance")));
-      }
-    }
-  }
+  // Future<void> Exit(
+  //     int attendance_type, GlobalKey<ScaffoldState> ScaffoldKey) async {
+  //   print(attendance_type);
+  //   if (attendance_type == 1) {
+  //     String response = await exitAttendance();
+  //     if (response == "already exists") {
+  //       ScaffoldKey?.currentState?.showSnackBar(
+  //           SnackBar(content: Text("Exit Attendance already exists")));
+  //     } else {
+  //       ScaffoldKey?.currentState?.showSnackBar(SnackBar(
+  //           content: Text("Successfully entered your exit attendance")));
+  //     }
+  //     print(response);
+  //   } else {
+  //     String response = await exitAttendance();
+  //     if (response == "already exists") {
+  //       ScaffoldKey?.currentState?.showSnackBar(
+  //           SnackBar(content: Text("Exit Attendance already exists")));
+  //     } else {
+  //       ScaffoldKey?.currentState?.showSnackBar(SnackBar(
+  //           content: Text("Successfully entered your exit attendance")));
+  //     }
+  //   }
+  // }
 }
