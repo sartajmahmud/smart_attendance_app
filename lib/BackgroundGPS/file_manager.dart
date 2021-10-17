@@ -23,8 +23,8 @@ class FileManager {
   static Future<void> writeUser() async{
     final file = await _getTempLogFile();
     int userId=currentUser.value.id;
-    String name=currentUser.value.name;
-    await file.writeAsString("$userId?api_token=$name");
+    print('write user id : $userId');
+    await file.writeAsString("$userId");
     //print(file.readAsString());
   }
 

@@ -56,11 +56,12 @@ class LocationServiceRepository {
 
   Future<void> callback(LocationDto locationDto) async {
     print('$_count location in dart: ${locationDto.toString()}');
-    User user=new User();
-    user.latitude=locationDto.latitude.toString();
-    user.longitude=locationDto.longitude.toString();
+    //User user=new User();
+   // user.latitude=locationDto.latitude.toString();
+    //user.longitude=locationDto.longitude.toString();
+    String response = await attendance();
     //final update=await entryAttendance();
-    print("this is current user ${user.latitude.toString()}");
+    //print("this is current user ${user.latitude.toString()}");
     //  await setLogPosition(_count, locationDto);
     final SendPort send = IsolateNameServer.lookupPortByName(isolateName);
     send?.send(locationDto);

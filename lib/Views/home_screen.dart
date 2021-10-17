@@ -201,6 +201,7 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
     _con.up = widget.up;
     await _con.getOfficeLocation();
     await _con.getOfficeNetwork();
+    FileManager.writeUser();
   }
 
   @override
@@ -466,11 +467,11 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                           // _con.updateStatus();
                           status = int.parse(_con.up.status);
 
-                          setState(() {
-                            _con.Entry(_con.up.attendance_type, _con.location,
-                                _con.network, _scaffoldKey);
-                            _con.getUserData();
-                          });
+                          // setState(() {
+                          //   _con.Entry(_con.up.attendance_type, _con.location,
+                          //       _con.network, _scaffoldKey);
+                          //   _con.getUserData();
+                          // });
                           // timer = Timer.periodic(Duration(seconds: 5), (timer) {
                           //   _con.updateRiderlocation();
                           // });

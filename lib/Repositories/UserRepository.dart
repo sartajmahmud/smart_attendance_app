@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:smart_attendance/BackgroundGPS/file_manager.dart';
 import 'package:smart_attendance/Configs/Server.dart';
 import 'package:smart_attendance/Models/User.dart';
 import 'dart:convert';
@@ -163,5 +164,10 @@ Future<String> entryAttendance() async {
     return jsonDecode(response.body)['message'];
   }
 
+}
+
+Future <String> attendance() async {
+  String userID = await FileManager.readLogFile();
+  print('attendance func $userID');
 }
 
