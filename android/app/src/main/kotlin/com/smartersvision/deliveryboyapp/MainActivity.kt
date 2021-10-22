@@ -1,4 +1,4 @@
-package com.foodaholic.rider_app
+package com.csjunkie.smart_attendance
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

@@ -1,4 +1,4 @@
-package com.foodaholic.rider_app
+package com.csjunkie.smart_attendance
 import io.flutter.plugin.common.PluginRegistry
 import io.flutter.plugins.firebasemessaging.FirebaseMessagingPlugin
 

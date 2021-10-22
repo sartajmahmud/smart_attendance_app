@@ -1,5 +1,9 @@
-name: foodaholic_rider_app
-description: deliveryboy
+name: smart_attendance
+description: A new Flutter application.
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -11,43 +15,34 @@ description: deliveryboy
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.2.0
+version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
-module:
-  androidX: true
+  sdk: ">=2.7.0 <3.0.0"
+
 dependencies:
   flutter:
     sdk: flutter
-  flutter_localizations:
-    sdk: flutter
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: 0.1.2
-  google_maps_flutter: 0.5.27
-  mvc_pattern: 5.1.1
-  global_configuration: 1.5.0
-  http: 0.12.1
-  html: 0.14.0+3
-  shared_preferences: 0.5.7
-  flutter_html: 0.11.1
-  location: 3.0.2
-  url_launcher: 5.4.5
-  firebase_messaging: 6.0.13
-  cached_network_image: 2.2.0
+  cupertino_icons: ^1.0.0
+  wifi_info_flutter: 1.0.4
+  http: 0.12.2
+  firebase_messaging: 7.0.3
   fluttertoast: 4.0.1
-  map_launcher: ^1.1.1
-  vector_math: any
-  geodesy: ^0.3.2
-  toggle_switch: ^0.1.8
-  geolocator: ^6.2.0
+  mvc_pattern: 6.3.0
+  shared_preferences: ^0.5.12+2
+  google_maps_flutter: ^1.0.6
+  location: 3.0.2
+  flutter_spinkit: "^4.1.2"
   background_locator: ^1.4.0+1
   path_provider: ^1.6.24
   location_permissions: ^3.0.0+1
-  syncfusion_flutter_datepicker: ^18.4.44-beta
-
+  toggle_switch: ^0.1.8
+  flutter_geofence: ^0.4.0
+  connectivity_plus: ^0.8.1
 
 dev_dependencies:
   flutter_test:
@@ -66,8 +61,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/cfg/
-    - assets/img/
+  - assets/
+  #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -80,40 +75,17 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  fonts:
-  - family: Comfortaa
-    fonts:
-      - asset: assets/fonts/Comfortaa-VariableFont_wght.ttf
-  - family: Harabara
-    fonts:
-      - asset: assets/fonts/Harabara.ttf
-  - family: Poppins
-    fonts:
-      - asset: assets/fonts/Poppins-Thin.ttf
-        weight: 100
-      - asset: assets/fonts/Poppins-ExtraLight.ttf
-        weight: 200
-      - asset: assets/fonts/Poppins-Light.ttf
-        weight: 300
-      - asset: assets/fonts/Poppins-Regular.ttf
-        weight: 400
-      - asset: assets/fonts/Poppins-Medium.ttf
-        weight: 500
-      - asset: assets/fonts/Poppins-SemiBold.ttf
-        weight: 600
-      - asset: assets/fonts/Poppins-Bold.ttf
-        weight: 700
-      - asset: assets/fonts/Poppins-ExtraBold.ttf
-        weight: 800
-      - asset: assets/fonts/Poppins-Black.ttf
-        weight: 900
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
   #   - family: Trajan Pro
   #     fonts:
-  #       - asset: assets/fonts/TrajanPro.ttf
-  #       - asset: assets/fonts/TrajanPro_Bold.ttf
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #
   # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-assets/fonts/#from-packages
-flutter_intl:
-  enabled: true
+  # see https://flutter.dev/custom-fonts/#from-packages

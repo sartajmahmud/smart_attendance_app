@@ -1,4 +1,4 @@
-package com.foodaholic.rider_app
+package com.csjunkie.smart_attendance
 
 import io.flutter.app.FlutterApplication
 import io.flutter.plugin.common.PluginRegistry
@@ -15,6 +15,7 @@ import io.flutter.app.FlutterActivity
 import io.flutter.view.FlutterMain
 import rekab.app.background_locator.IsolateHolderService
 import io.flutter.plugins.pathprovider.PathProviderPlugin
+import io.flutter.plugins.wifi_info_flutter.WifiInfoFlutterPlugin
 
 class Application : FlutterApplication(), PluginRegistrantCallback {
     override fun onCreate() {
@@ -47,6 +48,9 @@ class Application : FlutterApplication(), PluginRegistrantCallback {
     }
 
     override fun registerWith(registry: PluginRegistry?) {
+        if (!registry!!.hasPlugin("io.flutter.plugins.wifi_info_flutter.WifiInfoFlutterPlugin")) {
+            WifiInfoFlutterPlugin.registerWith(registry.registrarFor("io.flutter.plugins.wifi_info_flutter.WifiInfoFlutterPlugin"))
+        }
         if (!registry!!.hasPlugin("io.flutter.plugins.pathprovider")) {
             PathProviderPlugin.registerWith(registry.registrarFor("io.flutter.plugins.pathprovider"))
         }
