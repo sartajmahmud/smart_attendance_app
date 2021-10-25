@@ -43,7 +43,7 @@ dependencies:
   toggle_switch: ^0.1.8
   flutter_geofence: ^0.4.0
   connectivity_plus: ^0.8.1
-
+  web_socket_channel: ^1.2.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

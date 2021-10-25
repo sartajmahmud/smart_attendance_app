@@ -29,9 +29,9 @@ class HomeScreenController extends ControllerMVC {
   }
 
   Future<void> updateStatus()async{
-    final response=await entryAttendance();
+    //final response=await entryAttendance();
     setState((){
-      this.RiderStatus=response;
+      this.RiderStatus='';
     });
   }
 

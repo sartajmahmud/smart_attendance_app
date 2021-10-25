@@ -61,7 +61,7 @@ class LocationServiceRepository {
    // user.latitude=locationDto.latitude.toString();
     //user.longitude=locationDto.longitude.toString();
     // var wifiName = await WifiInfo().getWifiName();
-    String response = await attendance(locationDto.latitude, locationDto.longitude);
+    //String response = await attendance(locationDto.latitude, locationDto.longitude);
     //final update=await entryAttendance();
     //print("this is current user ${user.latitude.toString()}");
     //  await setLogPosition(_count, locationDto);

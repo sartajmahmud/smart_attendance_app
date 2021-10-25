@@ -28,7 +28,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends StateMVC<HomeScreen> {
   HomeScreenController _con;
 
-  int status = 1;
+  int status = 0;
 
   ReceivePort port = ReceivePort();
 
@@ -176,7 +176,7 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
         autoStop: false,
         androidSettings: AndroidSettings(
             accuracy: LocationAccuracy.NAVIGATION,
-            interval: 5,
+            interval: 10,
             distanceFilter: 0,
             client: LocationClient.google,
             androidNotificationSettings: AndroidNotificationSettings(
