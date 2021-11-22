@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
-import '../Controllers/UserController.dart';
-import '../Views/SignUpScreen.dart';
-import '../Views/ForgetPasswordScreen.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import '../Controllers/UserController.dart';
+import 'ForgetPasswordOTPScreen.dart';
+import 'login_screen.dart';
 
-import 'DashboardScreen.dart';
-
-class LoginScreen extends StatefulWidget {
+class ForgetPasswordScreen extends StatefulWidget {
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _ForgetPasswordScreenState createState() => _ForgetPasswordScreenState();
 }
 
-class _LoginScreenState extends StateMVC<LoginScreen> {
+class _ForgetPasswordScreenState extends StateMVC<ForgetPasswordScreen> {
   UserController _con;
-
-  _LoginScreenState() : super(UserController()) {
+  final myController = TextEditingController();
+  _ForgetPasswordScreenState() : super(UserController()) {
     _con = controller;
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,17 +47,6 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                     ),
                   ),
                 ),
-                //  const Expanded(
-                //     flex: 1,
-                //     child: Text(
-                //       "Smart Attendance System",
-                //       textAlign: TextAlign.center,
-                //       style: TextStyle(
-                //         fontSize: 20,
-                //         color: Colors.white,
-                //       ),
-                //     ),
-                //   ),
                 Expanded(
                   flex: 7,
                   child: Form(
@@ -76,43 +64,17 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                             alignment: Alignment.centerLeft,
                             height: 60.0,
                             child: TextFormField(
+                              controller: myController,
                               style: const TextStyle(
                                 color: Colors.black,
                               ),
-                              keyboardType: TextInputType.emailAddress,
-                              onChanged: (input) => _con.user.email = input,
+                              keyboardType: TextInputType.phone,
+                              onChanged: (input) => _con.user.phone = input,
                               decoration: const InputDecoration(
                                 contentPadding: EdgeInsets.only(top: 14.0),
-                                hintText: 'Email',
+                                hintText: '01XXXXXXXXX',
                                 prefixIcon:
-                                Icon(Icons.email, color: Color(0xFFbf1e2e)),
-                                border: InputBorder.none,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 60, right: 60),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.0),
-                              color: Colors.white,
-                            ),
-                            alignment: Alignment.centerLeft,
-                            height: 60.0,
-                            child: TextFormField(
-                              style: const TextStyle(
-                                color: Colors.black,
-                              ),
-                              keyboardType: TextInputType.text,
-                              onChanged: (input) => _con.user.password = input,
-                              obscureText: true,
-                              decoration: const InputDecoration(
-                                contentPadding: EdgeInsets.only(top: 14.0),
-                                hintText: 'Password',
-                                prefixIcon: Icon(Icons.lock_outline,
-                                    color: Color(0xFFbf1e2e)),
+                                Icon(Icons.phone, color: Color(0xFFbf1e2e)),
                                 border: InputBorder.none,
                               ),
                             ),
@@ -127,11 +89,17 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                             child: RaisedButton(
                               elevation: 5.0,
                               onPressed: () async {
-                                print('${_con.user.email}');
-                                print('${_con.user.password}');
-                                _con.login();
-                                // print(currentUser.value.name);
-                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => DashboardScreen()));
+                                //check for duplicate account
+                                //if duplicate found got to otp screen
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            ForgetPasswordOTPScreen(
+                                                myController.text
+                                                    .toString(),
+                                                _con)));
+                                //else phone number does not exist
                               },
                               padding: const EdgeInsets.all(15.0),
                               shape: RoundedRectangleBorder(
@@ -139,7 +107,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                               ),
                               color: Colors.white,
                               child: const Text(
-                                'LOGIN',
+                                'Verify',
                                 style: TextStyle(
                                   color: Color(0xFFbf1e2e),
                                   letterSpacing: 1.5,
@@ -158,12 +126,12 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (BuildContext context) =>
-                                        ForgetPasswordScreen())),
+                                        LoginScreen())),
                             child: RichText(
                               text: const TextSpan(
                                 children: [
                                   TextSpan(
-                                    text: 'Forgot Password?',
+                                    text: 'Back to Login',
                                     style: TextStyle(
                                         fontSize: 15,
                                         color: Colors.white,
@@ -174,38 +142,6 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 15),
-                        Container(
-                          alignment: Alignment.center,
-                          child: GestureDetector(
-                            onTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        SignUpScreen())),
-                            child: RichText(
-                              text: const TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: 'Don\'t have an Account? ',
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  TextSpan(
-                                    text: 'Sign Up',
-                                    style: TextStyle(
-                                        decoration: TextDecoration.underline,
-                                        fontSize: 15,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        )
                       ],
                     ),
                   ),

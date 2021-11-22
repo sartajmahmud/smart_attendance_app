@@ -1,10 +1,6 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import 'package:smart_attendance/Controllers/splash_screen_controller.dart';
-import 'package:smart_attendance/Repositories/UserRepository.dart';
-import 'package:smart_attendance/Views/home_screen.dart';
-import 'package:smart_attendance/Views/login_screen.dart';
+import '../Controllers/splash_screen_controller.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -18,32 +14,6 @@ class _SplashScreenState extends StateMVC<SplashScreen> {
     _con = controller;
   }
 
-  @override
-  void initState() {
-    initialFunc();
-    // TODO: implement initState
-    super.initState();
-  }
-
-  initialFunc() async {
-    WidgetsFlutterBinding.ensureInitialized();
-
-    await getCurrentUser();
-    await Firebase.initializeApp().then((value) async {
-      if (currentUser.value.name != null) {
-        await _con.getUserData();
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (BuildContext context) => HomeScreen(_con.up)));
-      } else {
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (BuildContext context) => LoginScreen()));
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {

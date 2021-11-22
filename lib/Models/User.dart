@@ -3,6 +3,8 @@ class User {
   String name;
   String password;
   String email;
+  String phone;
+  String mobile;
   int attendance_type;
   int location_id;
   int network_id;

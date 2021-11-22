@@ -4,11 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import 'package:smart_attendance/Models/UserProfile.dart';
-import 'package:smart_attendance/Repositories/SettingsRepostiory.dart';
-import 'package:smart_attendance/Repositories/UserRepository.dart';
-import 'package:smart_attendance/Views/splash_screen.dart';
-
+import '../Models/UserProfile.dart';
+import '../Repositories/SettingsRepostiory.dart';
+import '../Repositories/UserRepository.dart';
+import '../Views/splash_screen.dart';
 import '../Views/home_screen.dart';
 
 class SplashScreenController extends ControllerMVC {
@@ -23,10 +22,12 @@ class SplashScreenController extends ControllerMVC {
   @override
   void initState() {
     super.initState();
-    firebaseMessaging.requestNotificationPermissions(
-        const IosNotificationSettings(sound: true, badge: true, alert: true));
+    firebaseMessaging.requestNotificationPermissions(const IosNotificationSettings(sound: true, badge: true, alert: true));
     configureFirebase(firebaseMessaging);
-    firebaseMessaging.getToken().then((value) => print(value));
+    firebaseMessaging.getToken().then((value) {
+      print(value);
+      Navigator.pushReplacementNamed(context, '/login');
+    });
   }
 
   void configureFirebase(FirebaseMessaging _firebaseMessaging) {
