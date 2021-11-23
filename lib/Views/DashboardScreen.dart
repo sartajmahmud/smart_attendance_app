@@ -19,11 +19,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   List<NavigatorItem> navigatorItems = [
     NavigatorItem("Sellers", "assets/icons/seller.svg", 0, SellerScreen()),
-    NavigatorItem("Sales Order", "assets/icons/POS.svg", 1, SalesOrderScreen()),
-    NavigatorItem("Inventory", "assets/icons/inventory.svg", 2, AccountScreen()),
+    NavigatorItem("Sales Order", "assets/icons/sales-order.svg", 1, SalesOrderScreen()),
+   // NavigatorItem("Inventory", "assets/icons/inventory.svg", 2, AccountScreen()),
     // NavigatorItem(
     //     "Favourite", "assets/icons/favourite_icon.svg", 3, FavouriteScreen()),
-    NavigatorItem("Account", "assets/icons/account_icon.svg", 3, AccountScreen()),
+    NavigatorItem("Account", "assets/icons/account_icon.svg", 2, AccountScreen()),
   ];
 
   @override

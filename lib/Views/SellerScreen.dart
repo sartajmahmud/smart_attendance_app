@@ -1,7 +1,5 @@
-
 import 'package:flutter/material.dart';
-import 'package:smart_attendance/Widgets/SellerCardWidget.dart';
-
+import '../Widgets/SellerCardWidget.dart';
 import 'app_text.dart';
 
 class SellerScreen extends StatefulWidget {
