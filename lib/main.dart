@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:smart_attendance/Views/AddNewSalesOrder.dart';
+import 'package:smart_attendance/Views/AddNewSellerScreen.dart';
 import 'package:smart_attendance/Views/DashboardScreen.dart';
 import 'Repositories/SettingsRepostiory.dart';
 import 'Views/ForgetPasswordScreen.dart';
@@ -22,7 +24,9 @@ void main() async {
           '/login': (context) => LoginScreen(),
           '/signup': (context) => SignUpScreen(),
           '/forgetPass': (context) => ForgetPasswordScreen(),
-          '/dashboard': (context) => DashboardScreen()
+          '/dashboard': (context) => DashboardScreen(),
+          '/addNewSeller': (context) => AddNewSellerScreen(),
+          '/addNewSalesOrder': (context) => AddNewSalesOrder(),
         },
   )
   );

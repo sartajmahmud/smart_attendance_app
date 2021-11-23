@@ -12,10 +12,10 @@ import '../BackgroundGPS/location_service_repository.dart';
 import 'package:background_locator/location_dto.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import 'package:smart_attendance/Controllers/HomeScreenController.dart';
-import 'package:smart_attendance/Models/UserProfile.dart';
-import 'package:smart_attendance/Repositories/UserRepository.dart';
-import 'package:smart_attendance/Views/login_screen.dart';
+import '../Controllers/HomeScreenController.dart';
+import '../Models/UserProfile.dart';
+import '../Repositories/UserRepository.dart';
+import 'login_screen.dart';
 import 'dart:ui';
 
 class HomeScreen extends StatefulWidget {

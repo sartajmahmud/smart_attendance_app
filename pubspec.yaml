@@ -45,7 +45,7 @@ dependencies:
   connectivity_plus: ^0.8.1
   web_socket_channel: ^1.2.0
   global_configuration: 1.6.0
-
+  flutter_svg: 0.18.0
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +67,7 @@ flutter:
   - assets/
   - assets/cfg/
   - assets/images/
+  - assets/icons/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
