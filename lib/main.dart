@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:smart_attendance/Views/SellerDetailsScreen.dart';
+import 'Views/SalesOrderDetailsScreen.dart';
+import 'Views/NoInternetScreen.dart';
 import 'Views/AddNewSalesOrder.dart';
 import 'Views/AddNewSellerScreen.dart';
 import 'Views/DashboardScreen.dart';
@@ -33,6 +36,9 @@ void main() async {
           '/notificationDetailsScreen': (context) => NotificationDetailsScreen(),
           '/notificationsScreen': (context) => NotificationsScreen(),
           '/userDetailsScreen': (context) => UserDetailsScreen(),
+          '/noInternet': (context) => NoInternetScreen(),
+          '/salesOrderDetails': (context) => SalesOrderDetailsScreen(),
+          '/sellerDetails': (context) => SellerDetailsScreen(),
         },
   )
   );

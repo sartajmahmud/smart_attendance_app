@@ -12,6 +12,7 @@ import '../BackgroundGPS/file_manager.dart';
 import '../BackgroundGPS/location_callback_handler.dart';
 import '../BackgroundGPS/location_service_repository.dart';
 import '../Controllers/splash_screen_controller.dart';
+import 'dart:io';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -30,11 +31,9 @@ class _SplashScreenState extends StateMVC<SplashScreen> {
   LocationDto lastLocation;
   DateTime lastTimeLocation;
 
-
   _SplashScreenState() : super(SplashScreenController()) {
     _con = controller;
   }
-
 
   @override
   void initState() {
@@ -47,7 +46,7 @@ class _SplashScreenState extends StateMVC<SplashScreen> {
     super.initState();
     FileManager.writeUser();
     if (IsolateNameServer.lookupPortByName(
-        LocationServiceRepository.isolateName) !=
+            LocationServiceRepository.isolateName) !=
         null) {
       IsolateNameServer.removePortNameMapping(
           LocationServiceRepository.isolateName);
@@ -57,7 +56,7 @@ class _SplashScreenState extends StateMVC<SplashScreen> {
         port.sendPort, LocationServiceRepository.isolateName);
 
     port.listen(
-          (dynamic data) async {
+      (dynamic data) async {
         await updateUI(data);
       },
     );
@@ -179,11 +178,11 @@ class _SplashScreenState extends StateMVC<SplashScreen> {
                 notificationTitle: 'Start Location Tracking',
                 notificationMsg: 'Track location in background',
                 notificationBigMsg:
-                'Background location is on to keep the app up-tp-date with your location. This is required for main features to work properly when the app is not running.',
+                    'Background location is on to keep the app up-tp-date with your location. This is required for main features to work properly when the app is not running.',
                 notificationIcon: '',
                 notificationIconColor: Colors.grey,
                 notificationTapCallback:
-                LocationCallbackHandler.notificationCallback)));
+                    LocationCallbackHandler.notificationCallback)));
   }
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -194,10 +193,19 @@ class _SplashScreenState extends StateMVC<SplashScreen> {
   }
 
   initialFunc() async {
-    FileManager.writeUser();
-    Future.delayed(Duration(milliseconds: 5000), () {
-      _onStart();
-    });
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        print('connected');
+        FileManager.writeUser();
+        Future.delayed(Duration(milliseconds: 5000), () {
+          _onStart();
+        });
+      }
+    } on SocketException catch (_) {
+      print('not connected');
+      Navigator.pushNamed(context, '/noInternet');
+    }
   }
 
   @override
@@ -208,6 +216,7 @@ class _SplashScreenState extends StateMVC<SplashScreen> {
       ),
     );
   }
+
   Widget splashScreenIcon() {
     String iconPath = "assets/images/bizol_logo.png";
     return Image.asset(

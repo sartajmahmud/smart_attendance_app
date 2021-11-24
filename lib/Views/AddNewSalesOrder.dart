@@ -1,7 +1,9 @@
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:searchable_dropdown/searchable_dropdown.dart';
 import '../Widgets/app_button.dart';
 import 'app_text.dart';
+import 'package:intl/intl.dart';
 
 class AddNewSalesOrder extends StatefulWidget {
   const AddNewSalesOrder();
@@ -11,7 +13,7 @@ class AddNewSalesOrder extends StatefulWidget {
 }
 
 class _AddNewSalesOrderState extends State<AddNewSalesOrder> {
-
+  /// get list of sellers and products from controller
   int itemCount = 1;
   var _sellerName;
   var _sellers = [
@@ -32,7 +34,6 @@ class _AddNewSalesOrderState extends State<AddNewSalesOrder> {
     "BIZOL Allround 10W-40"
   ];
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,6 +46,7 @@ class _AddNewSalesOrderState extends State<AddNewSalesOrder> {
             fontWeight: FontWeight.w600,
             padding: EdgeInsets.symmetric(vertical: 30),
             onPressed: () {
+              ///post to add new sales order and redirect to sales order list screen
             },
           ),
         ),
@@ -81,8 +83,9 @@ class _AddNewSalesOrderState extends State<AddNewSalesOrder> {
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 10),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AppText(text:'Select Seller'),
+              AppText(text: 'Select Seller'),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SearchableDropdown.single(
@@ -111,25 +114,22 @@ class _AddNewSalesOrderState extends State<AddNewSalesOrder> {
                   value: _sellerName,
                   hint: "Select Seller",
                   searchHint: "Select Seller",
-                  onChanged: (newValue) {
-                  },
+                  onChanged: (newValue) {},
                   isExpanded: true,
                 ),
               ),
+              BasicDateField(),
+              AppText(text: 'Reference'),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(),
+              ),
               Row(
                 children: [
-                  Expanded(
-                      flex: 7,
-                      child: AppText(text:'Item Name')),
-                  Expanded(
-                      flex: 2,
-                      child: AppText(text:'Quantity')),
-                  Expanded(
-                      flex: 1,
-                      child: Text('')),
-                  Expanded(
-                      flex: 1,
-                      child: Text('')),
+                  Expanded(flex: 7, child: AppText(text: 'Item Name')),
+                  Expanded(flex: 2, child: AppText(text: 'Quantity')),
+                  Expanded(flex: 1, child: Text('')),
+                  Expanded(flex: 1, child: Text('')),
                 ],
               ),
               // Row(
@@ -192,17 +192,16 @@ class _AddNewSalesOrderState extends State<AddNewSalesOrder> {
               // ),
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height-290,
-                child: ListView.builder
-                  (
+                height: MediaQuery.of(context).size.height - 290,
+                child: ListView.builder(
                     itemCount: itemCount,
                     itemBuilder: (BuildContext ctxt, int index) {
-                      return  Row(
+                      return Row(
                         children: [
                           Expanded(
                               flex: 7,
                               child: Padding(
-                                padding: const EdgeInsets.fromLTRB(0,5,10,5),
+                                padding: const EdgeInsets.fromLTRB(0, 5, 10, 5),
                                 child: SearchableDropdown.single(
                                   items: _products.map((cat) {
                                     return DropdownMenuItem(
@@ -216,7 +215,10 @@ class _AddNewSalesOrderState extends State<AddNewSalesOrder> {
                                           }
                                         },
                                         child: Container(
-                                          width: MediaQuery.of(context).size.width - 65,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                              65,
                                           child: new Text(
                                             cat,
                                             overflow: TextOverflow.ellipsis,
@@ -229,61 +231,89 @@ class _AddNewSalesOrderState extends State<AddNewSalesOrder> {
                                   value: _productName,
                                   hint: "Select Product",
                                   searchHint: "Select Product",
-                                  onChanged: (newValue) {
-                                  },
+                                  onChanged: (newValue) {},
                                   isExpanded: true,
                                 ),
                               )),
                           Expanded(
                               flex: 2,
                               child: Padding(
-                                padding: const EdgeInsets.fromLTRB(0,5,0,5),
+                                padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
                                 child: TextField(
                                   controller: TextEditingController(text: "1"),
                                   decoration: new InputDecoration(
                                     enabledBorder: const OutlineInputBorder(
-                                      borderSide: const BorderSide(color: Colors.grey, width: 1.0),
+                                      borderSide: const BorderSide(
+                                          color: Colors.grey, width: 1.0),
                                     ),
                                     border: new OutlineInputBorder(
-                                        borderSide: new BorderSide(color: Colors.teal)
-                                    ),
+                                        borderSide:
+                                            new BorderSide(color: Colors.teal)),
                                   ),
                                 ),
                               )),
                           Expanded(
                               flex: 1,
-                              child: index == itemCount-1 ? IconButton(
-                                onPressed: (){
-                                  setState(() {
-                                    itemCount++;
-                                    print(itemCount);
-                                  });
-                                },
-                                icon: Icon(Icons.add),
-                              ): Container()
-                          ),
+                              child: index == itemCount - 1
+                                  ? IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          itemCount++;
+                                          print(itemCount);
+                                        });
+                                      },
+                                      icon: Icon(Icons.add),
+                                    )
+                                  : Container()),
                           Expanded(
                               flex: 1,
-                              child: index == itemCount-1 ? IconButton(
-                                onPressed: (){
-                                  setState(() {
-                                    itemCount--;
-                                    print(itemCount);
-                                  });
-                                },
-                                icon: Icon(Icons.remove),
-                              ): Container()
-                          ) ,
+                              child: index == itemCount - 1
+                                  ? IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          if (itemCount != 1){
+                                            itemCount--;
+                                          }
+
+                                          print(itemCount);
+                                        });
+                                      },
+                                      icon: Icon(Icons.remove),
+                                    )
+                                  : Container()),
                         ],
                       );
-                    }
-                ),
+                    }),
               ),
-
             ],
           ),
         ),
       ),
     );
+  }
+}
+
+class BasicDateField extends StatelessWidget {
+  final format = DateFormat("yyyy-MM-dd");
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+      AppText(text:'Expected Delivery Date'),
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: DateTimeField(
+          format: format,
+          onShowPicker: (context, currentValue) {
+            return showDatePicker(
+                context: context,
+                firstDate: DateTime(1900),
+                initialDate: currentValue ?? DateTime.now(),
+                lastDate: DateTime(2100));
+          },
+        ),
+      ),
+    ]);
   }
 }
