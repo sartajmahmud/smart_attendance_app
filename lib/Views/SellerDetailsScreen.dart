@@ -42,8 +42,18 @@ class _SellerDetailsScreenState extends State<SellerDetailsScreen> {
           ),
         ),
       ),
-      body: Container(
-        child: Text('Seller Detail'),
+      body: Column(
+        children: [
+          Container(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Image.asset(
+                  'assets/images/Banner_mobil.jpg',
+                  scale: 1,
+                  fit: BoxFit.fitWidth,
+                ),
+              ))
+        ],
       ),
     );
   }
