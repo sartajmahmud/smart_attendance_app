@@ -1,20 +1,19 @@
-
 import 'package:flutter/material.dart';
 
 import 'app_text.dart';
 
-class SellerDetailsScreen extends StatefulWidget {
-  const SellerDetailsScreen();
+class AddNewSalesVisit extends StatefulWidget {
+  const AddNewSalesVisit();
 
   @override
-  _SellerDetailsScreenState createState() => _SellerDetailsScreenState();
+  _AddNewSalesVisitState createState() => _AddNewSalesVisitState();
 }
 
-class _SellerDetailsScreenState extends State<SellerDetailsScreen> {
+class _AddNewSalesVisitState extends State<AddNewSalesVisit> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar:AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
@@ -36,26 +35,11 @@ class _SellerDetailsScreenState extends State<SellerDetailsScreen> {
             horizontal: 25,
           ),
           child: AppText(
-            text: "Seller Details",
+            text: "Add New Sales Visit",
             fontWeight: FontWeight.bold,
             fontSize: 20,
           ),
         ),
-      ),
-      body: Column(
-        children: [
-          Container(
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Image.asset(
-                  'assets/images/Banner_mobil.jpg',
-                  scale: 1,
-                  fit: BoxFit.fitWidth,
-                ),
-              )),
-          AppText(text:'ABC Company'),
-
-        ],
       ),
     );
   }

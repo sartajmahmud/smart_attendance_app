@@ -1,8 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:smart_attendance/Views/SalesOrderScreen.dart';
-import 'package:smart_attendance/Views/SellerScreen.dart';
+import 'SalesOrderScreen.dart';
+import 'SalesVisitScreen.dart';
+import 'SellerScreen.dart';
 import 'AccountScreen.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -20,10 +21,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
   List<NavigatorItem> navigatorItems = [
     NavigatorItem("Sellers", "assets/icons/seller.svg", 0, SellerScreen()),
     NavigatorItem("Sales Order", "assets/icons/sales-order.svg", 1, SalesOrderScreen()),
-   // NavigatorItem("Inventory", "assets/icons/inventory.svg", 2, AccountScreen()),
+    NavigatorItem("Sales Visit", "assets/icons/salesVisit.svg", 2, SalesVisitScreen()),
     // NavigatorItem(
     //     "Favourite", "assets/icons/favourite_icon.svg", 3, FavouriteScreen()),
-    NavigatorItem("Account", "assets/icons/account_icon.svg", 2, AccountScreen()),
+    NavigatorItem("Account", "assets/icons/account_icon.svg", 3, AccountScreen()),
   ];
 
   @override
