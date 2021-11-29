@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:smart_attendance/Views/AddNewSalesVisit.dart';
-import 'package:smart_attendance/Views/AttendanceScreen.dart';
-import 'package:smart_attendance/Views/SellerDetailsScreen.dart';
+import 'Views/AddNewSalesVisit.dart';
+import 'Views/AttendanceScreen.dart';
+import 'Views/SellerDetailsScreen.dart';
 import 'Views/SalesOrderDetailsScreen.dart';
 import 'Views/NoInternetScreen.dart';
 import 'Views/AddNewSalesOrder.dart';

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import 'app_text.dart';
@@ -49,45 +48,49 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                 context: context,
                 builder: (context) {
                   return Dialog(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
                     elevation: 16,
                     child: Padding(
                       padding: const EdgeInsets.all(15),
                       child: Container(
-                        height: MediaQuery.of(context).size.height*.3,
-                        width: MediaQuery.of(context).size.width*.5,
+                        height: MediaQuery.of(context).size.height * .25,
+                        width: MediaQuery.of(context).size.width * .5,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text('Are you sure you want to give attendance manually?',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 20
-                              ),),
+                              child: Text(
+                                'Are you sure you want to give attendance manually?',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 20),
+                              ),
                             ),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: FlatButton(
-                                      onPressed: (){}, child: Text("Yes"),
-                                  color: Colors.green,),
+                                    onPressed: () {},
+                                    child: Text("Yes"),
+                                    color: Colors.green,
+                                  ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: FlatButton(onPressed: (){
-                                    Navigator.pop(context);
-                                  }, child: Text("No"),
-                                    color: Colors.red,),
+                                  child: FlatButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text("No"),
+                                    color: Colors.red,
+                                  ),
                                 ),
                               ],
-                            )
-
-
+                            ),
                           ],
                         ),
                       ),
@@ -101,6 +104,11 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
           ),
         ],
       ),
+      body: ListView.builder(itemBuilder: (BuildContext context, int index) {
+        return Container(
+          child: Text('date'),
+        );
+      }, itemCount: 2,),
     );
   }
 }

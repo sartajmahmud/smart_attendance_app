@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'app_text.dart';
 
@@ -45,7 +46,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
           children: [
             Container(
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height*.3,
+              height: MediaQuery.of(context).size.height*.25,
               decoration: BoxDecoration(
                 //color: Colors.grey
               ),
@@ -60,44 +61,14 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                     padding: const EdgeInsets.fromLTRB(0,5,0,0),
                     child: AppText(text: 'User Name',),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          flex:1,
-                          child: Icon(Icons.account_balance_wallet,
-                            color: Colors.blue,size: 28,),
-                        ),
-                        Expanded(
-                          flex: 4,
-                          child: Text('Wallet Balance',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 18
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Text('\৳12.96',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 18
-                            ),),
-                        )
-                      ],
-                    ),
-                  )
+
                 ],
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Material(
-                elevation: 10,
+                elevation: 4,
                 child: Container(
                   child: Column(
                     children: [
@@ -146,6 +117,58 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                                     ),),
                                   SizedBox(height: 5,),
                                   Text('test@email.com'),
+                                ],
+                              ),
+                            ),
+                            Expanded(flex:1,child: IconButton(icon: Icon(Icons.edit,size: 28,), onPressed: (){})),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(flex:1,child: Icon(Icons.date_range,
+                              color: Colors.blue,size: 28,)),
+                            Expanded(
+                              flex: 4,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Date of Birth',
+                                    style: TextStyle(
+                                        color: Colors.blue,
+                                        fontSize: 18
+                                    ),),
+                                  SizedBox(height: 5,),
+                                  Text('10/02/1990'),
+                                ],
+                              ),
+                            ),
+                            Expanded(flex:1,child: IconButton(icon: Icon(Icons.edit,size: 28,), onPressed: (){})),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(flex:1,child: Icon(Icons.location_on,
+                              color: Colors.blue,size: 28,)),
+                            Expanded(
+                              flex: 4,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Default Location',
+                                    style: TextStyle(
+                                        color: Colors.blue,
+                                        fontSize: 18
+                                    ),),
+                                  SizedBox(height: 5,),
+                                  Text('Uttara, Dhaka'),
                                 ],
                               ),
                             ),

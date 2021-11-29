@@ -23,7 +23,7 @@ class _SalesVisitScreenState extends State<SalesVisitScreen> {
             horizontal: 25,
           ),
           child: AppText(
-            text: "Sales Visits",
+            text: "Your Sales Visits",
             fontWeight: FontWeight.bold,
             fontSize: 20,
           ),
