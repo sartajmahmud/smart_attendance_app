@@ -39,6 +39,62 @@ class _SalesVisitScreenState extends State<SalesVisitScreen> {
           ),
         ],
       ),
+      body: Container(
+        child: ListView.builder(
+            itemCount: 2,
+            itemBuilder: (BuildContext context, int index) {
+              return Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Material(
+                  elevation: 5,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(
+                      18,
+                    ),
+                    child: InkWell(
+                      onTap: (){
+                        Navigator.pushNamed(context, '/salesOrderDetails');
+                      },
+                      child: Container(
+                        height: 100,
+                        width: MediaQuery.of(context).size.width * .8,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            width: 1,
+                            color: Color(0xffE2E2E2),
+                          ),
+
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              AppText(
+                                text: 'Sales Visit No: 1234',
+                                fontWeight: FontWeight.w300,
+                                fontSize: 15,
+                              ),
+                              AppText(
+                                text: 'ABC Company',
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text('Visit Date: 29/09/21'),
+                                  //Text('Order Date: 23/09/21')
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            }),
+      ),
     );
   }
 }

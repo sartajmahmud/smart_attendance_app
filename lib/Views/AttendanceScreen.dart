@@ -104,9 +104,26 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
           ),
         ],
       ),
-      body: ListView.builder(itemBuilder: (BuildContext context, int index) {
-        return Container(
-          child: Text('date'),
+      body: ListView.builder(
+        itemBuilder: (BuildContext context, int index) {
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Material(
+            elevation: 5,
+            child: Container(
+              padding:  const EdgeInsets.all(8.0),
+              height: 40,
+              width: MediaQuery.of(context).size.width,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                    Text('Attendance ID #1234'),
+                    Text('02:17 PM 11/30/21')
+                ],
+              ),
+            ),
+          ),
         );
       }, itemCount: 2,),
     );
