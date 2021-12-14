@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:searchable_dropdown/searchable_dropdown.dart';
-
 import 'app_text.dart';
 
 class AddNewSalesVisit extends StatefulWidget {
@@ -26,7 +25,7 @@ class _AddNewSalesVisitState extends State<AddNewSalesVisit> {
   var _selectedProductCategory;
   var _productCategory = [
     "Car Engine Oil",
-    "Motorcycle Engine Oil",
+    "Motorcycle Oil",
     "Grease",
     "Coolant",
   ];

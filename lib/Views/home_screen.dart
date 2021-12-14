@@ -200,8 +200,6 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
 
   initialFunc() async {
     _con.up = widget.up;
-    await _con.getOfficeLocation();
-    await _con.getOfficeNetwork();
     FileManager.writeUser();
   }
 
@@ -223,8 +221,6 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
             ),
             onPressed: () async {
               await _con.getUserData();
-              await _con.getOfficeLocation(id: _con.up.location_id);
-              await _con.getOfficeNetwork(id: _con.up.network_id);
               setState(() {});
               var wifiName = await WifiInfo().getWifiName();
               print(wifiName);
