@@ -2,8 +2,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:smart_attendance/Models/User.dart';
-import 'package:smart_attendance/Models/UserProfile.dart';
 import 'package:smart_attendance/Repositories/UserRepository.dart';
+import 'package:smart_attendance/Views/DashboardScreen.dart';
 import 'package:smart_attendance/Views/home_screen.dart';
 import '../Repositories/UserRepository.dart' as repository;
 import 'package:flutter/material.dart';
@@ -24,20 +24,15 @@ class UserController extends ControllerMVC {
     });
   }
 
-  UserProfile up;
-  Future<void> getUserData() async {
-    up = await getUserProfile();
-  }
 
   Future<void> login() async {
     spinkit;
     await repository.login(user).then((value) async {
       if (value != null) {
-        await getUserData();
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (BuildContext context) => HomeScreen(up)));
+                builder: (BuildContext context) => DashboardScreen()));
       }
     }).catchError((e) async {
       print(e);
@@ -52,11 +47,10 @@ class UserController extends ControllerMVC {
           if (value != null) {
             print(value.name);
             print(value.id);
-            await getUserData();
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                    builder: (BuildContext context) => HomeScreen(up)));
+                    builder: (BuildContext context) => DashboardScreen()));
           }
         })
         .catchError((e) {})

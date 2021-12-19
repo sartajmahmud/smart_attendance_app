@@ -122,7 +122,7 @@ class _SignUpScreenState extends StateMVC<SignUpScreen> {
                                 color: Colors.black,
                               ),
                               keyboardType: TextInputType.phone,
-                              //onChanged: (input) => _con.user.phone = input,
+                              onChanged: (input) => _con.user.phoneNumber = input,
                               decoration: const InputDecoration(
                                 contentPadding: EdgeInsets.only(top: 14.0),
                                 hintText: '01XXXXXXXXX',
@@ -169,18 +169,18 @@ class _SignUpScreenState extends StateMVC<SignUpScreen> {
                             child: RaisedButton(
                               elevation: 5.0,
                               onPressed: () async {
-                                print('${_con.user.name}');
-                                print('${_con.user.email}');
-                                print('${_con.user.password}');
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            SignUpOTPScreen(
-                                                myController.text
-                                                    .toString(),
-                                                _con)));
-                                //await _con.register();
+                                // print('${_con.user.name}');
+                                // print('${_con.user.email}');
+                                // print('${_con.user.password}');
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (BuildContext context) =>
+                                //             SignUpOTPScreen(
+                                //                 myController.text
+                                //                     .toString(),
+                                //                 _con)));
+                                await _con.register();
                               },
                               padding: const EdgeInsets.all(15.0),
                               shape: RoundedRectangleBorder(

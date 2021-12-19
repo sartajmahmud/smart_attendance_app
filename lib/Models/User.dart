@@ -1,16 +1,11 @@
 class User {
   int id;
+  int role_id;
   String name;
   String password;
   String email;
-  String phone;
-  String mobile;
-  int attendance_type;
-  int location_id;
-  int network_id;
+  String phoneNumber;
   String device_token;
-  String latitude;
-  String longitude;
   bool auth;
 
   User();
@@ -25,11 +20,10 @@ class User {
   User.fromJSON(Map<String, dynamic> jsonMap) {
     try {
       id = jsonMap['id'];
+      role_id = jsonMap['role_id'];
       name = jsonMap['name'];
       email = jsonMap['email'];
-      attendance_type = jsonMap['attendance_type'];
-      location_id = jsonMap['location_id'];
-      network_id = jsonMap['network_id'];
+      phoneNumber = jsonMap['phoneNumber'];
       device_token = jsonMap['device_token'];
     } catch (e) {
       print(e);
@@ -38,7 +32,7 @@ class User {
 
   Map loginMap() {
     var map = new Map<String, dynamic>();
-    map['email'] = email;
+    map['phoneNumber'] = phoneNumber;
     map['password'] = password;
     if (device_token != null) {
       map["device_token"] = device_token;
@@ -51,10 +45,12 @@ class User {
     var map = new Map<String, dynamic>();
     map['name'] = name;
     map['email'] = email;
+    map['phoneNumber'] = phoneNumber;
     map['password'] = password;
     if (device_token != null) {
       map["device_token"] = device_token;
     }
+    map['role_id'] = 3;
 
     return map;
   }

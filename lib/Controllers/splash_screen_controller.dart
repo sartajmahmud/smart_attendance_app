@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import '../Models/UserProfile.dart';
 import '../Repositories/SettingsRepostiory.dart';
 import '../Repositories/UserRepository.dart';
 import '../Views/splash_screen.dart';
@@ -14,10 +13,6 @@ class SplashScreenController extends ControllerMVC {
   final FirebaseMessaging firebaseMessaging = FirebaseMessaging();
 
   SplashScreenController() {}
-  UserProfile up;
-  Future<void> getUserData() async {
-    up = await getUserProfile();
-  }
 
   @override
   void initState() {
@@ -64,7 +59,6 @@ class SplashScreenController extends ControllerMVC {
   }
 
   Future notificationOnMessage(Map<String, dynamic> message) async {
-    await getUserData();
     Fluttertoast.showToast(
       msg: message['notification']['title'],
       toastLength: Toast.LENGTH_LONG,
@@ -72,6 +66,6 @@ class SplashScreenController extends ControllerMVC {
       timeInSecForIosWeb: 6,
     );
     navigatorKey.currentState.push(
-        MaterialPageRoute(builder: (BuildContext context) => HomeScreen(up)));
+        MaterialPageRoute(builder: (BuildContext context) => HomeScreen()));
   }
 }

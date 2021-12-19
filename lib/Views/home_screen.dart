@@ -4,7 +4,6 @@ import 'package:background_locator/background_locator.dart';
 import 'package:background_locator/settings/android_settings.dart';
 import 'package:background_locator/settings/ios_settings.dart';
 import 'package:background_locator/settings/locator_settings.dart';
-import 'package:toggle_switch/toggle_switch.dart';
 import 'package:wifi_info_flutter/wifi_info_flutter.dart';
 import '../BackgroundGPS/file_manager.dart';
 import '../BackgroundGPS/location_callback_handler.dart';
@@ -13,14 +12,12 @@ import 'package:background_locator/location_dto.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../Controllers/HomeScreenController.dart';
-import '../Models/UserProfile.dart';
 import '../Repositories/UserRepository.dart';
 import 'login_screen.dart';
 import 'dart:ui';
 
 class HomeScreen extends StatefulWidget {
-  UserProfile up;
-  HomeScreen(this.up);
+  HomeScreen();
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -199,7 +196,6 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
   }
 
   initialFunc() async {
-    _con.up = widget.up;
     FileManager.writeUser();
   }
 
@@ -220,7 +216,6 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
               color: Colors.green,
             ),
             onPressed: () async {
-              await _con.getUserData();
               setState(() {});
               var wifiName = await WifiInfo().getWifiName();
               print(wifiName);
@@ -287,7 +282,7 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                             height: 5,
                           ),
                           Text(
-                            "${_con.up.name}",
+                            "",
                             style: TextStyle(
                                 fontSize: 24, fontWeight: FontWeight.bold),
                           )
@@ -295,190 +290,9 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                       ),
                     ),
                   ),
-                  Expanded(
-                      flex: 1,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Your Attendance Type',
-                            style: TextStyle(fontSize: 20),
-                          ),
 
-                          _con.up.attendance_type == 2
-                              ? Text(
-                                  'Network Based',
-                                  style: TextStyle(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold),
-                                )
-                              : Text(
-                                  'Location Based',
-                                  style: TextStyle(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                        ],
-                      )),
-                  Expanded(
-                    flex: 1,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 3,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Center(
-                                child: Text(
-                                  'Todays Entry Time',
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                              ),
-                              _con.up.entry_time != null
-                                  ? Text(
-                                      '${_con.up.entry_time}',
-                                      style: TextStyle(
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.bold),
-                                    )
-                                  : Text("Attendance not counted yet")
-                            ],
-                          ),
-                        ),
-                        // Expanded(
-                        //   flex: 1,
-                        //   child: Center(
-                        //     child: Container(
-                        //       decoration: BoxDecoration(
-                        //           color: Colors.green,
-                        //           borderRadius: BorderRadius.circular(60)),
-                        //       child: FlatButton(
-                        //         onPressed: () async {
-                        //           //print(_con.location.radius);
-                        //           print(_con.network.ssid);
-                        //           await _con.Entry(
-                        //               _con.up.attendance_type,
-                        //               _con.location,
-                        //               _con.network,
-                        //               _scaffoldKey);
-                        //           await _con.getUserData();
-                        //           setState(() {});
-                        //         },
-                        //         child: Text("Entry"),
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 3,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Center(
-                                child: Text(
-                                  'Todays Exit Time',
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                              ),
-                              _con.up.exit_time != null
-                                  ? Text(
-                                      '${_con.up.exit_time}',
-                                      style: TextStyle(
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.bold),
-                                    )
-                                  : Text("You have not exited yet")
-                            ],
-                          ),
-                        ),
-                        // Expanded(
-                        //   flex: 1,
-                        //   child: Center(
-                        //     child: Container(
-                        //       decoration: BoxDecoration(
-                        //           color: Colors.red,
-                        //           borderRadius: BorderRadius.circular(60)),
-                        //       child: FlatButton(
-                        //         onPressed: () async {
-                        //           if(_con.up.entry_time == null){
-                        //             _scaffoldKey?.currentState?.showSnackBar(SnackBar(
-                        //                 content: Text("You have no entry attendance yet")));
-                        //           }else{
-                        //             await _con.Exit(
-                        //                 _con.up.attendance_type, _scaffoldKey);
-                        //             await _con.getUserData();
-                        //             setState(() {});
-                        //           }
-                        //
-                        //         },
-                        //         child: Text("Exit"),
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    flex:1,
-                    child: Column(
-                      children: [
-                        Text(
-                          'Background Process Status',
-                          style: TextStyle(fontSize: 18),
-                        ),
-                        ListTile(
-                          title: Center(
-                            child: ToggleSwitch(
-                              minWidth: (MediaQuery.of(context).size.width * .7) / 2,
-                              initialLabelIndex: status,
-                              cornerRadius: 20.0,
-                              activeFgColor: Colors.white,
-                              inactiveBgColor: Colors.grey,
-                              inactiveFgColor: Colors.white,
-                              labels: ['Inactive', 'Active'],
-                              icons: [Icons.close, Icons.check],
-                              activeBgColors: [Colors.red, Colors.green],
-                              onToggle: (index) {
-                                print('switched to: $index');
-                                if (index == 0) {
-                                  onStop();
-                                  // timer.cancel();
-                                  // isStopped=true;
-                                  _con.up.status = "0";
-                                  _con.updateStatus();
-                                  status = int.parse(_con.up.status);
-                                } else {
-                                  _onStart();
-                                  _con.up.status = "1";
-                                  // _con.updateStatus();
-                                  status = int.parse(_con.up.status);
 
-                                  // setState(() {
-                                  //   _con.Entry(_con.up.attendance_type, _con.location,
-                                  //       _con.network, _scaffoldKey);
-                                  //   _con.getUserData();
-                                  // });
-                                  // timer = Timer.periodic(Duration(seconds: 5), (timer) {
-                                  //   _con.updateRiderlocation();
-                                  // });
-                                }
-                              },
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+
 
                   // Expanded(
                   //   flex: 2,

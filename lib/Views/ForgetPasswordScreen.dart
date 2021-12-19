@@ -69,7 +69,7 @@ class _ForgetPasswordScreenState extends StateMVC<ForgetPasswordScreen> {
                                 color: Colors.black,
                               ),
                               keyboardType: TextInputType.phone,
-                              onChanged: (input) => _con.user.phone = input,
+                              onChanged: (input) => _con.user.phoneNumber = input,
                               decoration: const InputDecoration(
                                 contentPadding: EdgeInsets.only(top: 14.0),
                                 hintText: '01XXXXXXXXX',

@@ -56,7 +56,7 @@ class _ForgetPasswordOTPScreenState extends State<ForgetPasswordOTPScreen> {
 
 
   void moveToNextScreen(context) {
-    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ConfirmPasswordScreen(widget.user.user.mobile) ));
+    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ConfirmPasswordScreen(widget.user.user.phoneNumber) ));
   }
 
   @override

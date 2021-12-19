@@ -1,16 +1,11 @@
 import 'package:location/location.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import '../Models/UserProfile.dart';
 import '../Repositories/UserRepository.dart';
 
 class HomeScreenController extends ControllerMVC {
   HomeScreenController();
   String RiderStatus;
 
-  UserProfile up;
-  Future<void> getUserData() async {
-    up = await getUserProfile();
-  }
 
   Future<void> updateStatus()async{
     //final response=await entryAttendance();

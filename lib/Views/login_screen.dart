@@ -79,13 +79,13 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                               style: const TextStyle(
                                 color: Colors.black,
                               ),
-                              keyboardType: TextInputType.emailAddress,
-                              onChanged: (input) => _con.user.email = input,
+                              keyboardType: TextInputType.phone,
+                              onChanged: (input) => _con.user.phoneNumber = input,
                               decoration: const InputDecoration(
                                 contentPadding: EdgeInsets.only(top: 14.0),
-                                hintText: 'Email',
+                                hintText: 'Phonenumber',
                                 prefixIcon:
-                                Icon(Icons.email, color: Color(0xFFbf1e2e)),
+                                Icon(Icons.phone, color: Color(0xFFbf1e2e)),
                                 border: InputBorder.none,
                               ),
                             ),
@@ -129,9 +129,9 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                               onPressed: () async {
                                 //print('${_con.user.email}');
                                 //print('${_con.user.password}');
-                                //_con.login();
+                                _con.login();
                                 // print(currentUser.value.name);
-                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => DashboardScreen()));
+                                //Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => DashboardScreen()));
                               },
                               padding: const EdgeInsets.all(15.0),
                               shape: RoundedRectangleBorder(

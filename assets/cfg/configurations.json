@@ -1,4 +1,4 @@
 {
-  "base_url": "http://test-ecom.com/",
-  "api_base_url": "http://test-ecom.com/api/"
+  "base_url": "http://192.168.0.112:8000/",
+  "api_base_url": "http://192.168.0.112:8000/api/"
 }

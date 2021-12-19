@@ -1,14 +1,12 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:smart_attendance/BackgroundGPS/file_manager.dart';
-import 'package:smart_attendance/Configs/Server.dart';
-import 'package:smart_attendance/Models/User.dart';
+import '../BackgroundGPS/file_manager.dart';
+import '../Configs/Server.dart';
+import '../Models/User.dart';
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
-import 'package:smart_attendance/Models/UserProfile.dart';
 import 'package:intl/intl.dart';
 import 'package:wifi_info_flutter/wifi_info_flutter.dart';
 ValueNotifier<User> currentUser = new ValueNotifier(User());
@@ -16,7 +14,7 @@ ValueNotifier<User> currentUser = new ValueNotifier(User());
 String ServerUrl = getServerUrl();
 
 Future<User> login(User user) async {
-  final String url = '$ServerUrl/login';
+  final String url = '$ServerUrl/mobilelogin';
   print("This is login body ${json.encode(user.loginMap())}");
   final client = new http.Client();
   final response = await client.post(
@@ -39,7 +37,7 @@ Future<User> login(User user) async {
 }
 
 Future<User> register(User user) async {
-  final String url = '$ServerUrl/register';
+  final String url = '$ServerUrl/mobilesignup';
   final client = new http.Client();
   print("This is Register body ${json.encode(user.signUpMap())}");
   final response = await client.post(
@@ -97,24 +95,6 @@ Future<void> logout() async {
   await prefs.remove('current_user');
 }
 
-Future<UserProfile> getUserProfile() async {
-  final String url = '$ServerUrl/homescreendata/${currentUser.value.id}';
-  print(url);
-  final client = new http.Client();
-  final response = await client.get(
-    url,
-    headers: {HttpHeaders.contentTypeHeader: 'application/json'},
-  );
-
-  print("This is UserProfile $url");
-  print("this is UserProfile response ${response.body}");
-  if (response.statusCode == 200) {
-    return UserProfile.fromJSON(json.decode(response.body));
-  } else {
-    print(response.body.toString());
-    throw new Exception(response.body);
-  }
-}
 
 Future<String> entryAttendance() async {
   //print(currentUser.value.id);
