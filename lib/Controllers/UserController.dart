@@ -1,10 +1,8 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import 'package:smart_attendance/Models/User.dart';
-import 'package:smart_attendance/Repositories/UserRepository.dart';
-import 'package:smart_attendance/Views/DashboardScreen.dart';
-import 'package:smart_attendance/Views/home_screen.dart';
+import '../Models/User.dart';
+import '../Views/DashboardScreen.dart';
 import '../Repositories/UserRepository.dart' as repository;
 import 'package:flutter/material.dart';
 

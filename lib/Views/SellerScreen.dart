@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mvc_pattern/mvc_pattern.dart';
+import '../Controllers/SellerController.dart';
 import '../Widgets/SellerCardWidget.dart';
 import 'app_text.dart';
 
@@ -9,7 +11,11 @@ class SellerScreen extends StatefulWidget {
   _SellerScreenState createState() => _SellerScreenState();
 }
 
-class _SellerScreenState extends State<SellerScreen> {
+class _SellerScreenState extends StateMVC<SellerScreen> {
+  SellerController _con;
+  _SellerScreenState() : super(SellerController()) {
+    _con = controller;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
