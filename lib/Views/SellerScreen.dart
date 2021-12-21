@@ -17,6 +17,12 @@ class _SellerScreenState extends StateMVC<SellerScreen> {
     _con = controller;
   }
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    //_con.getAssignedSeller();
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -48,22 +54,20 @@ class _SellerScreenState extends StateMVC<SellerScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SellerCardWidget(
-                  'ABC Company', 'assets/images/Banner_mobil.jpg', 'Uttara, Dhaka', false
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SellerCardWidget(
-                  'ABC Company', 'assets/images/Banner_mobil.jpg', 'Uttara, Dhaka', false
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SellerCardWidget(
-                  'ABC Company', 'assets/images/Banner_mobil.jpg', 'Uttara, Dhaka', false
+            Container(
+              height: 250.0,
+              width: MediaQuery.of(context).size.width,
+              child: new ListView.builder(
+                itemCount: _con.assignedSeller.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SellerCardWidget(
+                                _con.assignedSeller[index].seller.name, _con.assignedSeller[index].seller.media.url, _con.assignedSeller[index].seller.address, false
+                            ),
+                          );
+                },
+                //scrollDirection: Axis.horizontal,
               ),
             ),
           ],

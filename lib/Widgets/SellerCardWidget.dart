@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_attendance/Models/Media.dart';
 import '../Views/app_text.dart';
 
 class SellerCardWidget extends StatefulWidget {
@@ -20,6 +21,7 @@ class _SellerCardWidgetState extends State<SellerCardWidget> {
       },
       child: Container(
         height: 200,
+        width: MediaQuery.of(context).size.width*.9,
         decoration: BoxDecoration(
           border: Border.all(
             width: 5,
@@ -37,7 +39,7 @@ class _SellerCardWidgetState extends State<SellerCardWidget> {
               Expanded(
                   flex: 2,
                   child: Container(
-                      child: Image.asset(
+                      child: Image.network(
                     widget.imagepath,
                     scale: 1,
                     fit: BoxFit.fitWidth,

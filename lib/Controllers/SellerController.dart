@@ -5,17 +5,15 @@ import '../Models/Seller.dart';
 
 class SellerController extends ControllerMVC{
 
-  Seller seller = new Seller();
-
   SellerController(){
    getAssignedSeller();
   }
 
-  List assignedSeller = [];
+  List<AssignedSeller>assignedSeller = [];
   void getAssignedSeller() async {
     final Stream<AssignedSeller> stream = await getAssignedSellers();
     stream.listen((AssignedSeller _slide) {
-      print('AssignedSeller'+_slide.seller.name);
+      print('AssignedSeller '+_slide.seller.inventory.product.name);
       setState(() => assignedSeller.add(_slide));
     }, onError: (a) {
       print(a);

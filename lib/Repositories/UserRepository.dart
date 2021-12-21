@@ -27,8 +27,8 @@ Future<User> login(User user) async {
   print("this is login response ${response.body}");
   if (response.statusCode == 200) {
     setCurrentUser(response.body);
-    currentUser.value = User.fromJSON(json.decode(response.body));
-    print(currentUser.value.name);
+    currentUser.value = User.fromJSON(json.decode(response.body)["data"]);
+    print("name  " + currentUser.value.id.toString());
   } else {
     print(response.body.toString());
     throw new Exception(response.body);

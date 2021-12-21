@@ -6,7 +6,7 @@ class Inventory{
   int seller_id;
   int product_id;
   int quantity;
-  Seller seller;
+  //Seller seller;
   Product product;
 
 
@@ -15,7 +15,7 @@ class Inventory{
       seller_id = jsonMap['seller_id'];
       product_id = jsonMap['product_id'];
       quantity = jsonMap['quantity'];
-      seller = jsonMap['seller'] != null ? Seller.fromJSON(jsonMap['seller']) : Seller.fromJSON({});
+      //seller = jsonMap['seller'] != null ? Seller.fromJSON(jsonMap['seller']) : Seller.fromJSON({});
       product = jsonMap['product'] != null ? Product.fromJSON(jsonMap['product']) : Product.fromJSON({});
     } catch (e) {
       print(CustomTrace(StackTrace.current, message: e));
