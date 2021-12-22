@@ -54,4 +54,10 @@ class User {
 
     return map;
   }
+
+  Map DuplicateACMap(){
+    var map = new Map<String, dynamic>();
+    map['phoneNumber']=phoneNumber;
+    return map;
+  }
 }

@@ -1,7 +1,6 @@
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../Models/AssignedSeller.dart';
 import '../Repositories/SellerRepository.dart';
-import '../Models/Seller.dart';
 
 class SellerController extends ControllerMVC{
 
@@ -10,6 +9,7 @@ class SellerController extends ControllerMVC{
   }
 
   List<AssignedSeller>assignedSeller = [];
+
   void getAssignedSeller() async {
     final Stream<AssignedSeller> stream = await getAssignedSellers();
     stream.listen((AssignedSeller _slide) {

@@ -20,6 +20,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _con.scaffoldKey,
       backgroundColor: Colors.deepOrangeAccent,
       body: SingleChildScrollView(
         child: Container(

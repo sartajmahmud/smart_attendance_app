@@ -9,12 +9,12 @@ import 'UserRepository.dart' as userRepo;
 
 Future<Stream<SalesOrder>> getSalesOrders() async {
   User _user = userRepo.currentUser.value;
-  Uri uri = Helper.getUri('api/assignedsellers/'+_user.id.toString());
+  Uri uri = Helper.getUri('api/salesorders/'+_user.id.toString());
   print(uri.toString());
   try {
     final client = new http.Client();
     final streamedRest = await client.send(http.Request('get', uri));
-    print("this is assignedsellers $uri");
+    print("this is salesorder $uri");
     return streamedRest.stream
         .transform(utf8.decoder)
         .transform(json.decoder)

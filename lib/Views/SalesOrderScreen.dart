@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mvc_pattern/mvc_pattern.dart';
+import '../Controllers/OrderController.dart';
 import 'app_text.dart';
 
 class SalesOrderScreen extends StatefulWidget {
@@ -8,7 +10,11 @@ class SalesOrderScreen extends StatefulWidget {
   _SalesOrderScreenState createState() => _SalesOrderScreenState();
 }
 
-class _SalesOrderScreenState extends State<SalesOrderScreen> {
+class _SalesOrderScreenState extends StateMVC<SalesOrderScreen> {
+  OrderController _con;
+  _SalesOrderScreenState() : super(OrderController()) {
+    _con = controller;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +46,7 @@ class _SalesOrderScreenState extends State<SalesOrderScreen> {
       ),
       body: Container(
         child: ListView.builder(
-            itemCount: 2,
+            itemCount: _con.salesOrders.length,
             itemBuilder: (BuildContext context, int index) {
               return Padding(
                 padding: const EdgeInsets.all(10.0),
@@ -70,18 +76,18 @@ class _SalesOrderScreenState extends State<SalesOrderScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               AppText(
-                                text: 'Sales Order No: 1234',
+                                text: 'Sales Order No: ${_con.salesOrders[index].id}',
                                 fontWeight: FontWeight.w300,
                                 fontSize: 15,
                               ),
                               AppText(
-                                text: 'ABC Company',
+                                text: _con.salesOrders[index].seller.name,
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text('Delivery Date: 29/09/21'),
-                                  Text('Order Date: 23/09/21')
+                                  Text('Delivery Date: ${(_con.salesOrders[index].delivery_date.split(' '))[0]}'),
+                                  Text('Order Date: ${(_con.salesOrders[index].order_date.split(' '))[0]}')
                                 ],
                               )
                             ],

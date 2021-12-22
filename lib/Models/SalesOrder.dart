@@ -1,3 +1,7 @@
+import 'package:smart_attendance/Models/Seller.dart';
+
+import 'SalesOrderItem.dart';
+
 import 'Product.dart';
 import '../helpers/custom_trace.dart';
 
@@ -8,7 +12,8 @@ class SalesOrder {
   String reference;
   String order_date;
   String delivery_date;
-  List<Product> products;
+  Seller seller;
+  List<SalesOrderItem> salesOrderItems;
   SalesOrder();
 
   SalesOrder.fromJSON(Map<String, dynamic> jsonMap) {
@@ -18,14 +23,15 @@ class SalesOrder {
       salesman_id = jsonMap['salesman_id'];
       reference = jsonMap['reference'];
       order_date = jsonMap['order_date'];
-      products = jsonMap['products'] != null &&
-              (jsonMap['products'] as List).length > 0
-          ? List.from(jsonMap['products'])
-              .map((element) => Product.fromJSON(element))
+      delivery_date = jsonMap['delivery_date'];
+      salesOrderItems = jsonMap['sales_order_item'] != null &&
+              (jsonMap['sales_order_item'] as List).length > 0
+          ? List.from(jsonMap['sales_order_item'])
+              .map((element) => SalesOrderItem.fromJSON(element))
               .toSet()
               .toList()
           : [];
-      //seller = jsonMap['seller'] != null ? Seller.fromJSON(jsonMap['seller']) : Seller.fromJSON({});
+      seller = jsonMap['seller'] != null ? Seller.fromJSON(jsonMap['seller']) : Seller.fromJSON({});
       //product = jsonMap['product'] != null ? Product.fromJSON(jsonMap['product']) : Product.fromJSON({});
     } catch (e) {
       print(CustomTrace(StackTrace.current, message: e));
