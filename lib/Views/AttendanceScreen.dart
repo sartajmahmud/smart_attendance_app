@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:smart_attendance/Controllers/AttendanceController.dart';
 
 import 'app_text.dart';
 
@@ -9,7 +11,14 @@ class AttendanceScreen extends StatefulWidget {
   _AttendanceScreenState createState() => _AttendanceScreenState();
 }
 
-class _AttendanceScreenState extends State<AttendanceScreen> {
+class _AttendanceScreenState extends StateMVC<AttendanceScreen> {
+
+  AttendanceController _con;
+  _AttendanceScreenState() : super(AttendanceController()) {
+    _con = controller;
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,14 +127,14 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                    Text('Attendance ID #1234'),
-                    Text('02:17 PM 11/30/21')
+                    Text('Attendance ID #${_con.attedances[index].id}'),
+                    Text('${(_con.attedances[index].time.split('.'))[0].replaceAll('T', ' ')}')
                 ],
               ),
             ),
           ),
         );
-      }, itemCount: 2,),
+      }, itemCount: _con.attedances.length,),
     );
   }
 }

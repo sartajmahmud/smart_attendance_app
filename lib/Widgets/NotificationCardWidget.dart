@@ -1,7 +1,9 @@
+import '../Models/Notification.dart';
 import 'package:flutter/material.dart';
 
 class NotificationCardWidget extends StatefulWidget {
-  const NotificationCardWidget();
+  var notification;
+  NotificationCardWidget(this.notification);
 
   @override
   _NotificationCardWidgetState createState() => _NotificationCardWidgetState();
@@ -33,7 +35,7 @@ class _NotificationCardWidgetState extends State<NotificationCardWidget> {
             children: [
               Expanded(
                 flex: 4,
-                child: Center(child: Text('Discount on Pick up orders!',
+                child: Center(child: Text(widget.notification.message,
                 style: TextStyle(
                   fontSize: 20,
                 ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:mvc_pattern/mvc_pattern.dart';
+import '../Controllers/VisitController.dart';
 import 'app_text.dart';
 
 class SalesVisitScreen extends StatefulWidget {
@@ -9,7 +10,12 @@ class SalesVisitScreen extends StatefulWidget {
   _SalesVisitScreenState createState() => _SalesVisitScreenState();
 }
 
-class _SalesVisitScreenState extends State<SalesVisitScreen> {
+class _SalesVisitScreenState extends StateMVC<SalesVisitScreen> {
+  VisitController _con;
+  _SalesVisitScreenState() : super(VisitController()) {
+    _con = controller;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +47,7 @@ class _SalesVisitScreenState extends State<SalesVisitScreen> {
       ),
       body: Container(
         child: ListView.builder(
-            itemCount: 2,
+            itemCount: _con.salesVisits.length,
             itemBuilder: (BuildContext context, int index) {
               return Padding(
                 padding: const EdgeInsets.all(10.0),
@@ -71,18 +77,18 @@ class _SalesVisitScreenState extends State<SalesVisitScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               AppText(
-                                text: 'Sales Visit No: 1234',
+                                text: 'Sales Visit No: ${_con.salesVisits[index].id}',
                                 fontWeight: FontWeight.w300,
                                 fontSize: 15,
                               ),
                               AppText(
-                                text: 'ABC Company',
+                                text: _con.salesVisits[index].seller_id.toString(),
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
+                                 // Text('Visit Date: ${(_con.salesVisits[index].}'),
                                   Text('Visit Date: 29/09/21'),
-                                  //Text('Order Date: 23/09/21')
                                 ],
                               )
                             ],

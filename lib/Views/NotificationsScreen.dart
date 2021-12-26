@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mvc_pattern/mvc_pattern.dart';
+import '../Controllers/NotificationController.dart';
 import '../Widgets/NotificationCardWidget.dart';
 import 'app_text.dart';
 
@@ -9,7 +11,13 @@ class NotificationsScreen extends StatefulWidget {
   _NotificationsScreenState createState() => _NotificationsScreenState();
 }
 
-class _NotificationsScreenState extends State<NotificationsScreen> {
+class _NotificationsScreenState extends StateMVC<NotificationsScreen> {
+
+  NotificationController _con;
+  _NotificationsScreenState() : super(NotificationController()) {
+    _con = controller;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,13 +49,17 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           ),
         ),
       ),
-      body: Container(
-        child: Column(
-          children: [
-            NotificationCardWidget(),
-          ],
-        ),
-      ),
+      body:ListView.builder(
+        itemBuilder: (BuildContext context, int index) {
+          return NotificationCardWidget(_con.notifications[index]);
+        }, itemCount: _con.notifications.length,)
+      // Container(
+      //   child: Column(
+      //     children: [
+      //       NotificationCardWidget(),
+      //     ],
+      //   ),
+      // ),
     );
   }
 }
