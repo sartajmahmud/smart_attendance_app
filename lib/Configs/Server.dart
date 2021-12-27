@@ -1,5 +1,5 @@
 
-String ServerUrl = "http://192.168.1.4:8080/api";
+String ServerUrl = "http://192.168.0.112:8000/api";
 
 String getServerUrl(){
   return ServerUrl;

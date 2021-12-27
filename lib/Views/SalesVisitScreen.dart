@@ -82,7 +82,7 @@ class _SalesVisitScreenState extends StateMVC<SalesVisitScreen> {
                                 fontSize: 15,
                               ),
                               AppText(
-                                text: _con.salesVisits[index].seller_id.toString(),
+                                text: _con.salesVisits[index].seller.name,
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

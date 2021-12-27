@@ -1,3 +1,5 @@
+import 'package:smart_attendance/Models/Seller.dart';
+
 import '../helpers/custom_trace.dart';
 
 class SalesVisit{
@@ -6,6 +8,7 @@ class SalesVisit{
   int seller_id;
   String contact_person;
   String contact_detail;
+  Seller seller;
 
   SalesVisit();
 
@@ -17,7 +20,7 @@ class SalesVisit{
       salesman_id = jsonMap['salesman_id'];
       contact_person = jsonMap['contact_person'];
       contact_detail = jsonMap['contact_detail'];
-
+      seller = seller = jsonMap['seller'] != null ? Seller.fromJSON(jsonMap['seller']) : Seller.fromJSON({});
     } catch (e) {
       print(CustomTrace(StackTrace.current, message: e));
     }
