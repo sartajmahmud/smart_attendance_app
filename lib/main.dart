@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'Views/AddNewConveyanceBill.dart';
+import 'Views/ConveyanceBillScreen.dart';
 import 'Views/AddNewSalesVisit.dart';
 import 'Views/AttendanceScreen.dart';
+import 'Views/ConveyanceBillDetailsScreen.dart';
 import 'Views/SellerDetailsScreen.dart';
 import 'Views/SalesOrderDetailsScreen.dart';
 import 'Views/NoInternetScreen.dart';
@@ -43,6 +46,9 @@ void main() async {
           '/sellerDetails': (context) => SellerDetailsScreen(),
           '/attendanceScreen': (context) => AttendanceScreen(),
           '/addNewSalesVisit': (context) => AddNewSalesVisit(),
+          '/conveyanceBillScreen': (context) => ConveyanceBillScreen(),
+          '/addNewConveyanceBill': (context) => AddNewConveyanceBill(),
+          '/conveyanceBillDetailsScreen': (context) => ConveyanceBillDetailsScreen(),
         },
   )
   );

@@ -127,6 +127,10 @@ class AccountScreen extends StatelessWidget {
             Navigator.pushNamed(context, '/notificationsScreen');
             //Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => NotificationsScreen()));
             break;
+          case 'Conveyance Bill':
+            Navigator.pushNamed(context, '/conveyanceBillScreen');
+            //Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => NotificationsScreen()));
+            break;
         }
       },
       child: Container(
@@ -169,6 +173,7 @@ List<AccountItem> accountItems = [
   //AccountItem("Orders", "assets/icons/orders_icon.svg"),
   AccountItem("My Details", "assets/icons/details_icon.svg"),
   AccountItem("Attendance", "assets/icons/attendance.svg"),
+  AccountItem("Conveyance Bill", "assets/icons/bill.svg"),
   // AccountItem("Delivery Access", "assets/icons/account_icons/delivery_icon.svg"),
   //AccountItem("Payment Methods", "assets/icons/account_icons/payment_icon.svg"),
   //AccountItem("Promo Card", "assets/icons/account_icons/promo_icon.svg"),
