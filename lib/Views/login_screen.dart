@@ -130,9 +130,9 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                               onPressed: () async {
                                 //print('${_con.user.email}');
                                 //print('${_con.user.password}');
-                                _con.login();
+                                //_con.login();
                                 // print(currentUser.value.name);
-                                //Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => DashboardScreen()));
+                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => DashboardScreen()));
                               },
                               padding: const EdgeInsets.all(15.0),
                               shape: RoundedRectangleBorder(
