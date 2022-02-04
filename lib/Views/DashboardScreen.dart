@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:smart_attendance/Views/AnalyticsScreen.dart';
+import 'package:smart_attendance/Views/ConveyanceBillScreen.dart';
+import 'package:smart_attendance/Views/DashboardScreen2.dart';
 import 'SalesOrderScreen.dart';
 import 'SalesVisitScreen.dart';
 import 'SellerScreen.dart';
@@ -20,13 +22,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
 
   List<NavigatorItem> navigatorItems = [
-    NavigatorItem("Dashboard", "assets/icons/dashboard.svg", 0, AnalyticsScreen()),
+    NavigatorItem("Dashboard", "assets/icons/dashboard.svg", 0, MenuDashboardPage()),
     NavigatorItem("Sellers", "assets/icons/seller.svg", 1, SellerScreen()),
     NavigatorItem("Sales Order", "assets/icons/sales-order.svg", 2, SalesOrderScreen()),
     NavigatorItem("Sales Visit", "assets/icons/salesVisit.svg", 3, SalesVisitScreen()),
+    NavigatorItem("C.B.", "assets/icons/bill.svg", 4, ConveyanceBillScreen()),
     // NavigatorItem(
     //     "Favourite", "assets/icons/favourite_icon.svg", 3, FavouriteScreen()),
-    NavigatorItem("Account", "assets/icons/account_icon.svg", 4, AccountScreen()),
+    NavigatorItem("Account", "assets/icons/account_icon.svg", 5, AccountScreen()),
   ];
 
   @override
