@@ -2,8 +2,7 @@ import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:searchable_dropdown/searchable_dropdown.dart';
-import 'package:smart_attendance/Widgets/app_button.dart';
-
+import '../Widgets/app_button.dart';
 import 'app_text.dart';
 
 class AddNewConveyanceBill extends StatefulWidget {
@@ -14,15 +13,7 @@ class AddNewConveyanceBill extends StatefulWidget {
 }
 
 class _AddNewConveyanceBillState extends State<AddNewConveyanceBill> {
-
   int itemCount = 1;
-  var _sellerName;
-  var _sellers = [
-    "ABC Company",
-    "XYZ Company",
-    "EFG Company",
-    "HIJ Company",
-  ];
   var _productName;
   var _products = [
     "BIZOL Moto 5W-40",
@@ -186,22 +177,25 @@ class _AddNewConveyanceBillState extends State<AddNewConveyanceBill> {
               // ),
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height *.75,
+                height: MediaQuery.of(context).size.height * .75,
                 child: ListView.builder(
                     itemCount: itemCount,
-                    itemBuilder: (BuildContext ctxt, int index) {
+                    itemBuilder: (BuildContext context, int index) {
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           children: [
                             Padding(
                               padding: const EdgeInsets.symmetric(vertical: 10),
-                              child: AppText(text: 'Bill Entry # ${index+1}'),
+                              child: AppText(text: 'Bill Entry # ${index + 1}'),
                             ),
                             Row(
                               children: [
-                                Expanded(flex: 7, child: AppText(text: 'Bill Type')),
-                                Expanded(flex: 2, child: AppText(text: 'Amount')),
+                                Expanded(
+                                    flex: 7, child: AppText(text: 'Bill Type')),
+                                Expanded(
+                                    flex: 2,
+                                    child: AppText(text: 'Taka (BDT)')),
                                 Expanded(flex: 1, child: Text('')),
                                 Expanded(flex: 1, child: Text('')),
                               ],
@@ -211,7 +205,8 @@ class _AddNewConveyanceBillState extends State<AddNewConveyanceBill> {
                                 Expanded(
                                     flex: 7,
                                     child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(0, 5, 10, 5),
+                                      padding: const EdgeInsets.fromLTRB(
+                                          0, 5, 10, 5),
                                       child: SearchableDropdown.single(
                                         items: _products.map((cat) {
                                           return DropdownMenuItem(
@@ -226,12 +221,13 @@ class _AddNewConveyanceBillState extends State<AddNewConveyanceBill> {
                                               },
                                               child: Container(
                                                 width: MediaQuery.of(context)
-                                                    .size
-                                                    .width -
+                                                        .size
+                                                        .width -
                                                     65,
                                                 child: new Text(
                                                   cat,
-                                                  overflow: TextOverflow.ellipsis,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
                                                 ),
                                               ),
                                             ),
@@ -248,17 +244,22 @@ class _AddNewConveyanceBillState extends State<AddNewConveyanceBill> {
                                 Expanded(
                                     flex: 2,
                                     child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                                      padding:
+                                          const EdgeInsets.fromLTRB(0, 5, 0, 5),
                                       child: TextField(
-                                        controller: TextEditingController(text: "1"),
+                                        controller:
+                                            TextEditingController(text: "1"),
                                         decoration: new InputDecoration(
-                                          enabledBorder: const OutlineInputBorder(
+                                          enabledBorder:
+                                              const OutlineInputBorder(
                                             borderSide: const BorderSide(
                                                 color: Colors.grey, width: 1.0),
                                           ),
                                           border: new OutlineInputBorder(
-                                              borderSide:
-                                              new BorderSide(color: Colors.teal)),
+                                              borderSide: new BorderSide(
+                                                  color: Colors.teal
+                                              )
+                                          ),
                                         ),
                                       ),
                                     )),
@@ -266,66 +267,79 @@ class _AddNewConveyanceBillState extends State<AddNewConveyanceBill> {
                                     flex: 1,
                                     child: index == itemCount - 1
                                         ? IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          itemCount++;
-                                          print(itemCount);
-                                        });
-                                      },
-                                      icon: Icon(Icons.add),
-                                    )
+                                            onPressed: () {
+                                              setState(() {
+                                                itemCount++;
+                                                print(itemCount);
+                                              });
+                                            },
+                                            icon: Icon(Icons.add),
+                                          )
                                         : Container()),
                                 Expanded(
                                     flex: 1,
                                     child: index == itemCount - 1
                                         ? IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          if (itemCount != 1){
-                                            itemCount--;
-                                          }
+                                            onPressed: () {
+                                              setState(() {
+                                                if (itemCount != 1) {
+                                                  itemCount--;
+                                                }
 
-                                          print(itemCount);
-                                        });
-                                      },
-                                      icon: Icon(Icons.remove),
-                                    )
-                                        : Container()),
+                                                print(itemCount);
+                                              });
+                                            },
+                                            icon: Icon(Icons.remove),
+                                          )
+                                        : Container()
+                                ),
                               ],
                             ),
                             Row(
                               children: [
-                                Expanded(flex: 2, child: Column(
-                                  children: [
-                                    BasicDateField('Date'),
-                                  ],
-                                )),
-                                Expanded(flex: 3, child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    AppText(text: 'Note'),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: TextField(
-                                        decoration: new InputDecoration(
-                                          enabledBorder: const OutlineInputBorder(
-                                            borderSide: const BorderSide(
-                                                color: Colors.grey, width: 1.0),
+                                Expanded(
+                                    flex: 2,
+                                    child: Column(
+                                      children: [
+                                        BasicDateField('Date'),
+                                      ],
+                                    )),
+                                Expanded(
+                                    flex: 3,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        AppText(text: 'Note'),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: TextField(
+                                            decoration: new InputDecoration(
+                                              enabledBorder:
+                                                  const OutlineInputBorder(
+                                                borderSide: const BorderSide(
+                                                    color: Colors.grey,
+                                                    width: 1.0
+                                                ),
+                                              ),
+                                              border: new OutlineInputBorder(
+                                                  borderSide: new BorderSide(
+                                                      color: Colors.teal
+                                                  )
+                                              ),
+                                            ),
                                           ),
-                                          border: new OutlineInputBorder(
-                                              borderSide:
-                                              new BorderSide(color: Colors.teal)),
                                         ),
-                                      ),
-                                    ),
-                                  ],
-                                )),
+                                      ],
+                                    )
+                                ),
                               ],
                             )
                           ],
                         ),
                       );
-                    }),
+                    }
+                    ),
               ),
             ],
           ),
@@ -344,7 +358,7 @@ class BasicDateField extends StatelessWidget {
     return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          AppText(text:title),
+          AppText(text: title),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: DateTimeField(
@@ -354,10 +368,12 @@ class BasicDateField extends StatelessWidget {
                     context: context,
                     firstDate: DateTime(1900),
                     initialDate: currentValue ?? DateTime.now(),
-                    lastDate: DateTime(2100));
+                    lastDate: DateTime(2100)
+                );
               },
             ),
           ),
-        ]);
+        ]
+    );
   }
 }

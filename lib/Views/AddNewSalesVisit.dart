@@ -15,7 +15,6 @@ class _AddNewSalesVisitState extends State<AddNewSalesVisit> {
     "Automotive/Corporate",
     "Dealer/Retailer",
   ];
-  var _sellerName;
   var _sellers = [
     "ABC Company",
     "XYZ Company",

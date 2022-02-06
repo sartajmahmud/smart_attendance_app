@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:smart_attendance/Widgets/OtpScreen.dart';
+import '../Widgets/OtpScreen.dart';
 import '../Controllers/UserController.dart';
 
 

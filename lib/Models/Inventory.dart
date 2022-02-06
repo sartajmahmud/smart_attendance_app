@@ -1,6 +1,5 @@
 import '../helpers/custom_trace.dart';
 import 'Product.dart';
-import 'Seller.dart';
 
 class Inventory{
   int seller_id;

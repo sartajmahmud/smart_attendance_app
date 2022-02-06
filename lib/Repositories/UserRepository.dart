@@ -10,6 +10,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:wifi_info_flutter/wifi_info_flutter.dart';
+
 ValueNotifier<User> currentUser = new ValueNotifier(User());
 
 String ServerUrl = getServerUrl();
@@ -171,7 +172,7 @@ Future<String> entryAttendance() async {
     print("this is exit response ${response.body}");
     return jsonDecode(response.body)['message'];
   }
-
+ return '';
 }
 
 Future <String> attendance(double latitude, double longitude, {String wifiName}) async {

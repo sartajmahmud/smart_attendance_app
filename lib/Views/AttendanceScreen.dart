@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import 'package:smart_attendance/Controllers/AttendanceController.dart';
-
+import '../Controllers/AttendanceController.dart';
 import 'app_text.dart';
 
 class AttendanceScreen extends StatefulWidget {

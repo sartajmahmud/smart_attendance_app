@@ -1,6 +1,4 @@
-
 import 'package:flutter/material.dart';
-
 import 'app_text.dart';
 
 class SalesOrderDetailsScreen extends StatefulWidget {

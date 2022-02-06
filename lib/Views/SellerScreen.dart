@@ -18,7 +18,6 @@ class _SellerScreenState extends StateMVC<SellerScreen> {
   }
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     //_con.getAssignedSeller();
   }

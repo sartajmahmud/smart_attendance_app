@@ -1,8 +1,5 @@
-import 'package:smart_attendance/Models/Seller.dart';
-
+import 'Seller.dart';
 import 'SalesOrderItem.dart';
-
-import 'Product.dart';
 import '../helpers/custom_trace.dart';
 
 class SalesOrder {

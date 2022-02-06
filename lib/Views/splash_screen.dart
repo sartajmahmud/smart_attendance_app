@@ -37,7 +37,6 @@ class _SplashScreenState extends StateMVC<SplashScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await this.initialFunc();
       setState(() {});
@@ -66,7 +65,6 @@ class _SplashScreenState extends StateMVC<SplashScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
   }
 

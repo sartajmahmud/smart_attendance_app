@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
-import 'package:smart_attendance/Repositories/UserRepository.dart';
+import '../Repositories/UserRepository.dart';
 
 class FileManager {
 

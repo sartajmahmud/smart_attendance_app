@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../Repositories/SettingsRepostiory.dart';
-import '../Repositories/UserRepository.dart';
 import '../Views/splash_screen.dart';
 import '../Views/home_screen.dart';
 

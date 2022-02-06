@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:smart_attendance/Models/Media.dart';
 import '../Views/app_text.dart';
 
 class SellerCardWidget extends StatefulWidget {

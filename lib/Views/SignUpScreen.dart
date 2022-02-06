@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import 'package:smart_attendance/Controllers/UserController.dart';
-import 'ForgetPasswordOTPScreen.dart';
-import 'SignUpOTPScreen.dart';
+import '../Controllers/UserController.dart';
 import 'login_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
