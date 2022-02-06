@@ -44,14 +44,14 @@ class _MenuDashboardPageState extends State<MenuDashboardPage>
       companyName: 'XYZ Company',
       ammount: 20000,
       income: true,
-      icon: Icons.receipt,
+      icon: Icons.call_received,
     ),
     new TransactionDetails(
       item: 'Sale',
       companyName: 'ZYX Company',
       ammount: 300000,
       income: true,
-      icon: Icons.receipt,
+      icon: Icons.monetization_on,
     ),
   ];
 
@@ -61,21 +61,21 @@ class _MenuDashboardPageState extends State<MenuDashboardPage>
       companyName: 'Apple',
       ammount: 65000,
       income: true,
-      icon: Icons.receipt,
+      icon: Icons.call_received,
     ),
     new TransactionDetails(
       item: 'Collection',
       companyName: 'StarBucks',
       ammount: 5000,
       income: true,
-      icon: Icons.receipt,
+      icon: Icons.call_received,
     ),
     new TransactionDetails(
       item: 'Sale',
       companyName: 'ABL',
       ammount: 195000,
       income: true,
-      icon: Icons.receipt,
+      icon: Icons.monetization_on,
     ),
   ];
 
@@ -159,61 +159,61 @@ class _MenuDashboardPageState extends State<MenuDashboardPage>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      Container(
-                        alignment: Alignment.topLeft,
-                        width: 0.3 * screenWidth,
-                        margin: EdgeInsets.only(
-                          top: 50,
-                          bottom: 10,
-                        ),
-                        child: ListView(
-                          shrinkWrap: true,
-                          physics: ClampingScrollPhysics(),
-                          children: <Widget>[
-                            SizedBox(
-                              height: 0.3 * screenWidth,
-                              width: 0.3 * screenWidth,
-                              child: Container(
-                                alignment: Alignment.topLeft,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(
-                                      image: AssetImage('assets/dp.jpg')),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(bottom: 10),
-                        child: ListView(
-                          padding: EdgeInsets.all(0),
-                          shrinkWrap: true,
-                          physics: ClampingScrollPhysics(),
-                          children: <Widget>[
-                            Text(
-                              'Bibash Adhikari',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              'San Franciso, CA',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.grey,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      // Container(
+                      //   alignment: Alignment.topLeft,
+                      //   width: 0.3 * screenWidth,
+                      //   margin: EdgeInsets.only(
+                      //     top: 50,
+                      //     bottom: 10,
+                      //   ),
+                      //   child: ListView(
+                      //     shrinkWrap: true,
+                      //     physics: ClampingScrollPhysics(),
+                      //     children: <Widget>[
+                      //       SizedBox(
+                      //         height: 0.3 * screenWidth,
+                      //         width: 0.3 * screenWidth,
+                      //         child: Container(
+                      //           alignment: Alignment.topLeft,
+                      //           decoration: BoxDecoration(
+                      //             shape: BoxShape.circle,
+                      //             image: DecorationImage(
+                      //                 image: AssetImage('assets/dp.jpg')),
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
+                      // Container(
+                      //   margin: EdgeInsets.only(bottom: 10),
+                      //   child: ListView(
+                      //     padding: EdgeInsets.all(0),
+                      //     shrinkWrap: true,
+                      //     physics: ClampingScrollPhysics(),
+                      //     children: <Widget>[
+                      //       Text(
+                      //         'Bibash Adhikari',
+                      //         style: TextStyle(
+                      //           fontSize: 20,
+                      //           fontWeight: FontWeight.bold,
+                      //           color: Colors.white,
+                      //         ),
+                      //       ),
+                      //       SizedBox(
+                      //         height: 5,
+                      //       ),
+                      //       Text(
+                      //         'San Franciso, CA',
+                      //         style: TextStyle(
+                      //           fontSize: 14,
+                      //           fontWeight: FontWeight.w600,
+                      //           color: Colors.grey,
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),
@@ -227,19 +227,28 @@ class _MenuDashboardPageState extends State<MenuDashboardPage>
                         active: true,
                       ),
                       menuItem(
-                        title: "Messages",
+                        title: "Sellers",
                         iconData: Icons.chat_bubble_outline,
                       ),
-                      menuItem(
-                        title: "Utility Bills",
-                        iconData: Icons.receipt,
+                      InkWell(
+                        onTap: (){
+                          print('Sales Orders');
+                        },
+                        child: menuItem(
+                          title: "Sales Orders",
+                          iconData: Icons.receipt,
+                        ),
                       ),
                       menuItem(
-                        title: "Funds Transfer",
+                        title: "Sales Visits",
                         iconData: Icons.swap_horiz,
                       ),
                       menuItem(
-                        title: "Branches",
+                        title: "Conveyance Bills",
+                        iconData: Icons.developer_board,
+                      ),
+                      menuItem(
+                        title: "Account",
                         iconData: Icons.developer_board,
                       ),
                     ],
@@ -248,10 +257,10 @@ class _MenuDashboardPageState extends State<MenuDashboardPage>
                 SizedBox(
                   height: 70,
                 ),
-                menuItem(
-                  title: "Logout",
-                  iconData: Icons.exit_to_app,
-                ),
+                // menuItem(
+                //   title: "Logout",
+                //   iconData: Icons.exit_to_app,
+                // ),
               ],
             ),
           ),
@@ -382,9 +391,6 @@ class _MenuDashboardPageState extends State<MenuDashboardPage>
                   fontSize: 24,
                 ),
               ),
-              SizedBox(
-                height: 10,
-              ),
               new LinearPercentIndicator(
                 //width: MediaQuery.of(context).size.width - 150,
                 animation: true,
@@ -395,41 +401,29 @@ class _MenuDashboardPageState extends State<MenuDashboardPage>
                 linearStrokeCap: LinearStrokeCap.roundAll,
                 progressColor: Colors.green,
               ),
-              SizedBox(
-                height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-                  Expanded(
-                    flex: 6,
-                    child: Container(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            '$achieved% of $title target $target Taka',
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 10,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          // Text(
-                          //   '$achieved% of $title target $target',
-                          //   style: TextStyle(
-                          //     color: Colors.white,
-                          //     fontWeight: FontWeight.bold,
-                          //     fontSize: 12,
-                          //   ),
-                          // ),
-                        ],
+              Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      '$achieved% of $title target $target Taka',
+                      style: TextStyle(
+                        color: Colors.white70,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
-                  ),
-                ],
+                    // Text(
+                    //   '$achieved% of $title target $target',
+                    //   style: TextStyle(
+                    //     color: Colors.white,
+                    //     fontWeight: FontWeight.bold,
+                    //     fontSize: 12,
+                    //   ),
+                    // ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -464,7 +458,7 @@ class _MenuDashboardPageState extends State<MenuDashboardPage>
             TransactionDetails _transaction = transactionList[index];
             return Container(
               margin: EdgeInsets.only(
-                bottom: 20,
+                bottom: 10,
               ),
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -494,15 +488,15 @@ class _MenuDashboardPageState extends State<MenuDashboardPage>
                     fontSize: 16,
                   ),
                 ),
-                subtitle: Text(
-                  "${_transaction.companyName}",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
+                // subtitle: Text(
+                //   "${_transaction.companyName}",
+                //   style: TextStyle(
+                //     fontWeight: FontWeight.w600,
+                //   ),
+                // ),
                 trailing: Text(
                   (_transaction.income)
-                      ? "+${_transaction.ammount} Taka"
+                      ? "${_transaction.ammount} Taka"
                       : " -${_transaction.ammount} Taka",
                   style: TextStyle(
                     fontSize: 18,
@@ -524,7 +518,7 @@ class _MenuDashboardPageState extends State<MenuDashboardPage>
       duration: duration,
       top: 0,
       bottom: 0,
-      left: isCollapsed ? 0 : 0.5 * screenWidth,
+      left: isCollapsed ? 0 : 0.3 * screenWidth,
       width: screenWidth,
       child: ScaleTransition(
         scale: _scaleAnimation,
@@ -542,8 +536,7 @@ class _MenuDashboardPageState extends State<MenuDashboardPage>
                     children: <Widget>[
                       Container(
                         padding: const EdgeInsets.only(
-                          top: 20,
-                          bottom: 20,
+                          top: 10,
                         ),
                         decoration: BoxDecoration(
                           color: Colors.white70,
@@ -561,27 +554,27 @@ class _MenuDashboardPageState extends State<MenuDashboardPage>
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  // IconButton(
-                                  //   icon: Icon(
-                                  //     Icons.drag_handle,
-                                  //     color: Colors.black87,
-                                  //   ),
-                                  //   onPressed: () {
-                                  //     setState(() {
-                                  //       if (isCollapsed) {
-                                  //         mainBorderRadius = 30;
-                                  //         statusIconColor = Brightness.light;
-                                  //         _controller.forward();
-                                  //       } else {
-                                  //         _controller.reverse();
-                                  //         mainBorderRadius = 0;
-                                  //         statusIconColor = Brightness.dark;
-                                  //       }
-                                  //       isCollapsed = !isCollapsed;
-                                  //     });
-                                  //   },
-                                  // ),
-                                  SizedBox(),
+                                  IconButton(
+                                    icon: Icon(
+                                      Icons.menu,
+                                      color: Colors.black87,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        if (isCollapsed) {
+                                          mainBorderRadius = 30;
+                                          statusIconColor = Brightness.light;
+                                          _controller.forward();
+                                        } else {
+                                          _controller.reverse();
+                                          mainBorderRadius = 0;
+                                          statusIconColor = Brightness.dark;
+                                        }
+                                        isCollapsed = !isCollapsed;
+                                      });
+                                    },
+                                  ),
+                                  //SizedBox(),
                                   Text(
                                     "Dashboard",
                                     style: TextStyle(
@@ -597,14 +590,14 @@ class _MenuDashboardPageState extends State<MenuDashboardPage>
                                   //   ),
                                   //   onPressed: () {},
                                   // ),
-                                  SizedBox()
+                                  SizedBox(width: 50,)
                                 ],
                               ),
                             ),
                             SizedBox(height: 10),
                             Container(
                               height: (MediaQuery.of(context).size.width - 30) *
-                                  .4,
+                                  .34,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.only(
                                   bottomLeft: Radius.circular(20),
