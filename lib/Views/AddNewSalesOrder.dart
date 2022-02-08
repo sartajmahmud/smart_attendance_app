@@ -119,15 +119,19 @@ class _AddNewSalesOrderState extends State<AddNewSalesOrder> {
                 ),
               ),
               BasicDateField(),
-              AppText(text: 'Reference'),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: TextField(),
+                child: TextField(
+                  decoration: new InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: "Reference",
+                      hintText: "Reference"),
+                ),
               ),
               Row(
                 children: [
                   Expanded(flex: 7, child: AppText(text: 'Item Name')),
-                  Expanded(flex: 2, child: AppText(text: 'Quantity')),
+                  Expanded(flex: 2, child: AppText(text: ' ')),
                   Expanded(flex: 1, child: Text('')),
                   Expanded(flex: 1, child: Text('')),
                 ],
@@ -242,14 +246,7 @@ class _AddNewSalesOrderState extends State<AddNewSalesOrder> {
                                 child: TextField(
                                   controller: TextEditingController(text: "1"),
                                   decoration: new InputDecoration(
-                                    enabledBorder: const OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          color: Colors.grey, width: 1.0),
-                                    ),
-                                    border: new OutlineInputBorder(
-                                        borderSide:
-                                            new BorderSide(color: Colors.teal)),
-                                  ),
+                                    border: OutlineInputBorder(), labelText: "Quantity", hintText: "Quantity",),
                                 ),
                               )),
                           Expanded(
@@ -300,11 +297,13 @@ class BasicDateField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-      AppText(text:'Expected Delivery Date'),
       Padding(
         padding: const EdgeInsets.all(8.0),
         child: DateTimeField(
+          initialValue: DateTime.now(),
           format: format,
+          decoration: new InputDecoration(
+            border: OutlineInputBorder(), labelText: "Date", hintText: "Date",),
           onShowPicker: (context, currentValue) {
             return showDatePicker(
                 context: context,

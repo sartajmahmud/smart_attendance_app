@@ -38,12 +38,11 @@ class _AddNewConveyanceBillState extends State<AddNewConveyanceBill> {
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
         child: Container(
-          height: 95,
+          height: 70,
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: AppButton(
-            label: "Confirm",
+            label: "Save",
             fontWeight: FontWeight.w600,
-            padding: EdgeInsets.symmetric(vertical: 30),
             onPressed: () {
               ///post to add new sales order and redirect to sales order list screen
             },

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'SalesOrderScreen.dart';
 
 final Color backgroundColor = Color(0xFF2d2d39);
 
@@ -233,6 +234,7 @@ class _MenuDashboardPageState extends State<MenuDashboardPage>
                       InkWell(
                         onTap: (){
                           print('Sales Orders');
+                          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => SalesOrderScreen()));
                         },
                         child: menuItem(
                           title: "Sales Orders",

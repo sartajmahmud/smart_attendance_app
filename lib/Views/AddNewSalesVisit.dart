@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:searchable_dropdown/searchable_dropdown.dart';
+import 'package:smart_attendance/Widgets/app_button.dart';
 import 'app_text.dart';
 
 class AddNewSalesVisit extends StatefulWidget {
@@ -15,7 +16,7 @@ class _AddNewSalesVisitState extends State<AddNewSalesVisit> {
     "Automotive/Corporate",
     "Dealer/Retailer",
   ];
-  var _sellerName;
+  var _selectedSellerName;
   var _sellers = [
     "ABC Company",
     "XYZ Company",
@@ -34,39 +35,168 @@ class _AddNewSalesVisitState extends State<AddNewSalesVisit> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar:AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-        leading: GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Container(
-            padding: EdgeInsets.only(left: 25),
-            child: Icon(
-              Icons.arrow_back_ios,
-              color: Colors.black,
+    return DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+            bottom: const TabBar(
+              tabs: [
+                Tab(text: 'New Client',),
+                Tab(text: 'Existing Client',),
+              ],
             ),
+            title: const Text('Add New Sales Visit'),
+          ),
+          body: TabBarView(
+            children: [
+              newSalesVisit(),
+              existingSalesVisit(),
+            ],
           ),
         ),
-        title: Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: 25,
+      );
+  }
+
+  Widget existingSalesVisit(){
+    return Scaffold(
+      bottomNavigationBar: BottomAppBar(
+        child: Container(
+          height: 70,
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: AppButton(
+            label: "Submit",
+            fontWeight: FontWeight.w600,
+            onPressed: () {
+              ///post to add new sales order and redirect to sales order list screen
+            },
           ),
-          child: AppText(
-            text: "Add New Sales Visit",
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SearchableDropdown.single(
+                  items: visitedClientCategory.map((cat) {
+                    return DropdownMenuItem(
+                      child: InkWell(
+                        onTap: () {
+                          if (cat != _selectedClientCategory) {
+                            setState(() {
+                              _selectedClientCategory = cat;
+                              Navigator.pop(context);
+                            });
+                          }
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width - 65,
+                          child: new Text(
+                            cat,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ),
+                      value: cat,
+                    );
+                  }).toList(),
+                  value: _selectedClientCategory,
+                  hint: "Select Client Category",
+                  searchHint: "Select Client Category",
+                  onChanged: (newValue) {},
+                  isExpanded: true,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SearchableDropdown.single(
+                  items: _sellers.map((cat) {
+                    return DropdownMenuItem(
+                      child: InkWell(
+                        onTap: () {
+                          if (cat != _selectedSellerName) {
+                            setState(() {
+                              _selectedSellerName = cat;
+                              Navigator.pop(context);
+                            });
+                          }
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width - 65,
+                          child: new Text(
+                            cat,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ),
+                      value: cat,
+                    );
+                  }).toList(),
+                  value: _selectedSellerName,
+                  hint: "Select Client",
+                  searchHint: "Select Client",
+                  onChanged: (newValue) {},
+                  isExpanded: true,
+                ),
+              ),
+            ],
+          ),
+        ),
+        ),
+      ),
+    );
+  }
+
+  Widget newSalesVisit(){
+    return Scaffold(
+      // appBar:AppBar(
+      //   backgroundColor: Colors.transparent,
+      //   elevation: 0,
+      //   centerTitle: true,
+      //   automaticallyImplyLeading: false,
+      //   leading: GestureDetector(
+      //     onTap: () {
+      //       Navigator.pop(context);
+      //     },
+      //     child: Container(
+      //       padding: EdgeInsets.only(left: 25),
+      //       child: Icon(
+      //         Icons.arrow_back_ios,
+      //         color: Colors.black,
+      //       ),
+      //     ),
+      //   ),
+      //   title: Container(
+      //     padding: EdgeInsets.symmetric(
+      //       horizontal: 25,
+      //     ),
+      //     child: AppText(
+      //       text: "Add New Sales Visit",
+      //       fontWeight: FontWeight.bold,
+      //       fontSize: 20,
+      //     ),
+      //   ),
+      // ),
+      bottomNavigationBar: BottomAppBar(
+        child: Container(
+          height: 70,
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: AppButton(
+            label: "Submit",
+            fontWeight: FontWeight.w600,
+            onPressed: () {
+              ///post to add new sales order and redirect to sales order list screen
+            },
           ),
         ),
       ),
       body: SingleChildScrollView(
         child: Container(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
             child: Column(
               children: [
                 AppText(text: 'Select Seller'),
@@ -102,20 +232,32 @@ class _AddNewSalesVisitState extends State<AddNewSalesVisit> {
                     isExpanded: true,
                   ),
                 ),
-                AppText(text: 'Name of The Visited Client'),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: TextField(),
+                  child: TextField(
+                    decoration: new InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: "Name of The Visited Client",
+                        hintText: "Name of The Visited Client"),
+                  ),
                 ),
-                AppText(text: 'Name of the contact person'),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: TextField(),
+                  child: TextField(
+                    decoration: new InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: "Name of the contact person",
+                        hintText: "Name of the contact person"),
+                  ),
                 ),
-                AppText(text: 'Client Contact Details'),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: TextField(),
+                  child: TextField(
+                    decoration: new InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: "Client Contact Details",
+                        hintText: "Client Contact Details"),
+                  ),
                 ),
                 AppText(text: 'Business with Existing Brand'),
                 Container(
@@ -125,19 +267,19 @@ class _AddNewSalesVisitState extends State<AddNewSalesVisit> {
                     itemCount: _sellers.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                      childAspectRatio: 3
+                        childAspectRatio: 3
                     ),
                     itemBuilder: (BuildContext context, int index) {
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: new CheckboxListTile(
                           title: Text(_sellers[index]),
-                            value: _checked,
-                            onChanged: (val){
+                          value: _checked,
+                          onChanged: (val){
                             setState(() {
                               _checked = val;
                             });
-                            },
+                          },
                           activeColor: Colors.green,
                           checkColor: Colors.black,
                         ),
@@ -192,6 +334,7 @@ class _AddNewSalesVisitState extends State<AddNewSalesVisit> {
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(_productCategory[index]),
                             Container(
